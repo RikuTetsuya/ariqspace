@@ -290,6 +290,9 @@
       <a href="#projects" class="bg-ink text-mist font-display font-700 text-sm px-8 py-4 rounded-full hover:bg-accent transition-all duration-250 hover:-translate-y-1 shadow-lg hover:shadow-accent/30 nav-link">
         Lihat Proyek
       </a>
+      <a href="https://ariqspace.my.id/blog" class="bg-white text-ink font-display font-600 text-sm px-8 py-4 rounded-full border-2 border-mist-dark hover:border-accent hover:text-accent transition-all duration-250 nav-link">
+        Blog
+      </a>
       <a href="#connect" class="bg-white text-ink font-display font-600 text-sm px-8 py-4 rounded-full border-2 border-mist-dark hover:border-accent hover:text-accent transition-all duration-250 nav-link">
         Hubungi Saya
       </a>
@@ -1239,7 +1242,37 @@
     });
   });
   
-  
+  // Blokir keyboard shortcut
+  document.addEventListener('keydown', function(e) {
+    // Ctrl+U (view source)
+    if (e.ctrlKey && e.key === 'u') {
+      e.preventDefault();
+      return false;
+    }
+    // Ctrl+Shift+I / Ctrl+Shift+J (DevTools)
+    if (e.ctrlKey && e.shiftKey && 
+        (e.key === 'i' || e.key === 'I' || 
+        e.key === 'j' || e.key === 'J')) {
+      e.preventDefault();
+      return false;
+    }
+    // F12
+    if (e.key === 'F12') {
+      e.preventDefault();
+      return false;
+    }
+    // Ctrl+S (save page)
+    if (e.ctrlKey && e.key === 's') {
+      e.preventDefault();
+      return false;
+    }
+  });
+
+  // Blokir klik kanan
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    return false;
+  });
 </script>
 </body>
 </html>
