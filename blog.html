@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ariq's Blog — Dev Notes & More</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          display: ['Syne', 'sans-serif'],
+          body: ['DM Sans', 'sans-serif'],
+          mono: ['DM Mono', 'monospace'],
+        },
+        colors: {
+          ink: '#0c0c14',
+          'ink-soft': '#1a1a2e',
+          accent: '#6c63ff',
+          'accent-light': '#a89dff',
+          spark: '#ff6b6b',
+          lime: '#b5ff6d',
+          mist: '#f0effa',
+          'mist-dark': '#e4e2f8',
+        },
+        animation: {
+          fadeUp: 'fadeUp 0.6s ease both',
+          scaleIn: 'scaleIn 0.4s ease both',
+          ticker: 'ticker 32s linear infinite',
+          floatY: 'floatY 6s ease-in-out infinite',
+        },
+        keyframes: {
+          fadeUp: { from:{ opacity:'0', transform:'translateY(24px)' }, to:{ opacity:'1', transform:'translateY(0)' } },
+          scaleIn: { from:{ opacity:'0', transform:'scale(0.93)' }, to:{ opacity:'1', transform:'scale(1)' } },
+          ticker: { from:{ transform:'translateX(0)' }, to:{ transform:'translateX(-50%)' } },
+          floatY: { '0%,100%':{ transform:'translateY(0)' }, '50%':{ transform:'translateY(-10px)' } },
+        }
+      }
+    }
+  }
+</script>
+<style>
+  * { cursor: none !important; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+
+  #cursor-dot {
+    position: fixed; width: 8px; height: 8px;
+    background: #6c63ff; border-radius: 50%;
+    pointer-events: none; z-index: 9999;
+    transform: translate(-50%,-50%);
+    transition: background 0.2s, width 0.2s, height 0.2s;
+  }
+  #cursor-ring {
+    position: fixed; width: 36px; height: 36px;
+    border: 1.5px solid rgba(108,99,255,0.6); border-radius: 50%;
+    pointer-events: none; z-index: 9998;
+    transform: translate(-50%,-50%);
+    transition: width 0.25s ease, height 0.25s ease, border-color 0.2s;
+  }
+  #cursor-label {
+    position: fixed; pointer-events: none; z-index: 9999;
+    font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 500;
+    color: white; background: #6c63ff; padding: 4px 10px;
+    border-radius: 100px; white-space: nowrap; opacity: 0;
+    transform: translate(-50%,-50%) scale(0.8);
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  body.cursor-hover #cursor-ring { width: 60px; height: 60px; border-color: rgba(108,99,255,0.25); }
+  body.cursor-hover #cursor-dot { background: #ff6b6b; width: 10px; height: 10px; }
+  body.cursor-link #cursor-label { opacity: 1; transform: translate(-50%,-200%) scale(1); }
+  body.cursor-link #cursor-ring { width: 50px; height: 50px; border-color: rgba(181,255,109,0.7); border-width: 2px; }
+  body.cursor-link #cursor-dot { background: #b5ff6d; }
+
+  body::before {
+    content: ''; position: fixed; inset: 0; z-index: 9990;
+    pointer-events: none; opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  body { font-family: 'DM Sans', sans-serif; background: #f0effa; color: #0c0c14; }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #e4e2f8; }
+  ::-webkit-scrollbar-thumb { background: #6c63ff; border-radius: 10px; }
+
+  .grad-text {
+    background: linear-gradient(135deg, #6c63ff 0%, #ff6b6b 60%, #b5ff6d 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .ink-section { background: #0c0c14; }
+
+  nav { transition: box-shadow 0.3s; }
+  nav.scrolled { box-shadow: 0 4px 40px rgba(0,0,0,0.08); }
+
+  /* BLOG CARDS */
+  .blog-card { transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s; }
+  .blog-card:hover { transform: translateY(-6px); }
+
+  .cat-tag { transition: all 0.2s; }
+  .cat-tag:hover { transform: translateY(-2px); }
+  .cat-tag.active { background: #0c0c14; color: white; border-color: #0c0c14; }
+
+  /* Featured card */
+  .featured-card {
+    background: linear-gradient(135deg, #0c0c14 0%, #1a1a2e 100%);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .featured-card:hover { transform: translateY(-6px); box-shadow: 0 24px 60px rgba(108,99,255,0.2); }
+
+  /* Search input */
+  .search-wrap { position: relative; }
+  .search-wrap input { transition: border-color 0.2s, box-shadow 0.2s; }
+  .search-wrap input:focus { outline: none; border-color: #6c63ff; box-shadow: 0 0 0 3px rgba(108,99,255,0.12); }
+
+  /* Category colors */
+  .cat-tech { background: #ede9ff; color: #6c63ff; border-color: #c4b5fd; }
+  .cat-arsitektur { background: #fff3e0; color: #d97706; border-color: #fcd34d; }
+  .cat-personal { background: #ffeef0; color: #ff6b6b; border-color: #fca5a5; }
+  .cat-design { background: #edfff0; color: #16a34a; border-color: #86efac; }
+
+  /* Post detail overlay */
+  #post-overlay {
+    position: fixed; inset: 0; z-index: 1000;
+    background: rgba(12,12,20,0.7); backdrop-filter: blur(8px);
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+    display: flex; align-items: flex-start; justify-content: center;
+    padding: 60px 16px 40px;
+    overflow-y: auto;
+  }
+  #post-overlay.open { opacity: 1; pointer-events: all; }
+  #post-modal {
+    background: #f0effa; border-radius: 32px; width: 100%; max-width: 760px;
+    transform: translateY(30px) scale(0.97);
+    transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+    overflow: hidden; position: relative;
+  }
+  #post-overlay.open #post-modal { transform: translateY(0) scale(1); }
+
+  .reading-content h2 { font-family:'Syne',sans-serif; font-weight:700; font-size:1.3rem; margin:1.8rem 0 0.7rem; color:#0c0c14; }
+  .reading-content h3 { font-family:'Syne',sans-serif; font-weight:600; font-size:1.1rem; margin:1.5rem 0 0.5rem; color:#0c0c14; }
+  .reading-content p { margin-bottom:1rem; line-height:1.8; color:#374151; }
+  .reading-content code { font-family:'DM Mono',monospace; background:#e4e2f8; padding:2px 7px; border-radius:6px; font-size:0.85em; color:#6c63ff; }
+  .reading-content pre { background:#0c0c14; border-radius:16px; padding:20px; margin:1.2rem 0; overflow-x:auto; }
+  .reading-content pre code { background:none; color:#b5ff6d; font-size:0.82rem; padding:0; }
+  .reading-content ul { list-style:none; padding:0; margin-bottom:1rem; }
+  .reading-content ul li { padding: 4px 0 4px 20px; position:relative; color:#374151; line-height:1.7; }
+  .reading-content ul li::before { content:'✦'; position:absolute; left:0; color:#6c63ff; font-size:0.7rem; top:7px; }
+  .reading-content blockquote { border-left:3px solid #6c63ff; padding:10px 20px; margin:1.2rem 0; background:#ede9ff; border-radius:0 12px 12px 0; }
+  .reading-content blockquote p { color:#6c63ff; font-style:italic; margin:0; }
+
+  .hero-bg-blob {
+    position: absolute; border-radius: 50%;
+    filter: blur(80px); pointer-events: none; z-index: 0;
+  }
+
+  /* hidden util */
+  .post-item { transition: opacity 0.25s, transform 0.25s; }
+  .post-item.hidden-post { opacity: 0; pointer-events: none; position: absolute; }
+
+  /* Ticker */
+  .ticker-inner:hover { animation-play-state: paused; }
+
+  /* Read time bar */
+  .read-bar { height: 3px; background: linear-gradient(90deg, #6c63ff, #ff6b6b, #b5ff6d); border-radius: 100px; }
+
+  /* Stagger animations */
+  .stagger-1 { animation-delay: 0.1s; }
+  .stagger-2 { animation-delay: 0.2s; }
+  .stagger-3 { animation-delay: 0.3s; }
+  .stagger-4 { animation-delay: 0.4s; }
+  .stagger-5 { animation-delay: 0.5s; }
+</style>
+</head>
+<body class="overflow-x-hidden">
+
+<!-- CUSTOM CURSOR -->
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+<div id="cursor-label">baca</div>
+
+<!-- POST DETAIL OVERLAY -->
+<div id="post-overlay">
+  <div id="post-modal">
+    <!-- Top accent bar -->
+    <div id="modal-accent-bar" class="h-1.5 w-full"></div>
+    <!-- Close -->
+    <button onclick="closePost()" class="absolute top-5 right-5 z-10 w-10 h-10 bg-mist rounded-full flex items-center justify-center hover:bg-accent hover:text-white transition-all duration-200">
+      <i class="bi bi-x-lg text-sm"></i>
+    </button>
+    <!-- Content -->
+    <div class="p-8 md:p-12">
+      <!-- Meta -->
+      <div class="flex flex-wrap gap-2 items-center mb-5" id="modal-meta"></div>
+      <!-- Title -->
+      <h1 id="modal-title" class="font-display font-800 text-3xl md:text-4xl tracking-tight leading-tight mb-3"></h1>
+      <!-- Subtitle -->
+      <p id="modal-subtitle" class="font-body text-gray-500 text-base mb-6 leading-relaxed"></p>
+      <!-- Author bar -->
+      <div class="flex items-center gap-3 pb-6 border-b border-mist-dark mb-8">
+        <div class="w-9 h-9 rounded-full bg-gradient-to-br from-ink to-accent flex items-center justify-center text-white text-xs font-display font-700">A</div>
+        <div>
+          <p class="font-display font-700 text-sm">Ariq B. Suwarno</p>
+          <p id="modal-date" class="font-mono text-xs text-gray-400"></p>
+        </div>
+        <div id="modal-readtime" class="ml-auto font-mono text-xs text-gray-400"></div>
+      </div>
+      <!-- Body -->
+      <div id="modal-body" class="reading-content font-body text-base"></div>
+      <!-- Footer -->
+      <div class="mt-10 pt-6 border-t border-mist-dark flex flex-wrap gap-2">
+        <span class="font-mono text-xs text-gray-400 mr-2 self-center">Tags:</span>
+        <div id="modal-tags" class="flex flex-wrap gap-2"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav" class="fixed top-0 w-full z-50 px-6 lg:px-14 py-4 flex items-center justify-between bg-mist/90 backdrop-blur-xl border-b border-accent/10">
+  <div class="flex items-center gap-3">
+    <a href="#" class="flex items-center gap-2.5 nav-link">
+      <span style="width:10px;height:10px;border-radius:50%;background:crimson;display:inline-block"></span>
+      <span style="width:10px;height:10px;border-radius:50%;background:orange;display:inline-block"></span>
+      <span style="width:10px;height:10px;border-radius:50%;background:green;display:inline-block"></span>
+      <span class="font-display font-700 text-ink text-base ml-1">Blog</span>
+    </a>
+    <span class="font-mono text-xs text-gray-400 hidden md:block">/ ariq.dev</span>
+  </div>
+  <div class="hidden md:flex gap-7">
+    <a href="#" class="font-body text-sm font-medium text-gray-500 hover:text-accent transition-colors nav-link" onclick="filterCat('all'); return false;">Semua</a>
+    <a href="#" class="font-body text-sm font-medium text-gray-500 hover:text-accent transition-colors nav-link" onclick="filterCat('tech'); return false;">Tech</a>
+    <a href="#" class="font-body text-sm font-medium text-gray-500 hover:text-accent transition-colors nav-link" onclick="filterCat('arsitektur'); return false;">Arsitektur</a>
+    <a href="#" class="font-body text-sm font-medium text-gray-500 hover:text-accent transition-colors nav-link" onclick="filterCat('personal'); return false;">Personal</a>
+  </div>
+  <a href="/" class="bg-ink text-mist text-sm font-display font-700 px-5 py-2.5 rounded-full hover:bg-accent transition-all duration-200 hover:-translate-y-0.5 nav-link">← Portfolio</a>
+</nav>
+
+<!-- HERO -->
+<section class="relative min-h-[60vh] flex flex-col items-center justify-center text-center pt-28 pb-16 px-6 overflow-hidden">
+  <div class="hero-bg-blob w-[500px] h-[500px] bg-accent/12 top-[-80px] left-[-150px]"></div>
+  <div class="hero-bg-blob w-[350px] h-[350px] bg-spark/8 bottom-[0] right-[-80px]"></div>
+  <div class="hero-bg-blob w-[250px] h-[250px] bg-lime/12 top-[40%] right-[15%]"></div>
+
+  <span class="absolute top-[22%] left-[9%] text-xl opacity-15 animate-floatY" style="animation-delay:0s">📝</span>
+  <span class="absolute top-[30%] right-[11%] text-xl opacity-12 animate-floatY" style="animation-delay:1.5s">💡</span>
+  <span class="absolute bottom-[20%] left-[14%] text-lg opacity-12 animate-floatY" style="animation-delay:3s">✦</span>
+
+  <div class="relative z-10 flex flex-col items-center">
+    <div class="inline-flex items-center gap-2 bg-accent/10 border border-accent/25 text-accent text-xs font-display font-700 px-5 py-2 rounded-full mb-7 animate-fadeUp stagger-1">
+      <span class="w-1.5 h-1.5 bg-lime rounded-full animate-pulse"></span>
+      Dev notes, arsitektur, & cerita di balik kode
+    </div>
+
+    <h1 class="font-display font-800 text-5xl lg:text-7xl tracking-[-3px] leading-[1.0] mb-5 animate-fadeUp stagger-2">
+      <span class="grad-text">Tulisan</span> dari<br>Seorang Builder
+    </h1>
+    <p class="font-body text-gray-500 text-lg max-w-md mb-8 animate-fadeUp stagger-3">
+      Catatan belajar, eksplorasi teknologi, sketsa arsitektur, dan hal-hal yang menginspirasi.
+    </p>
+
+    <!-- SEARCH BAR -->
+    <div class="search-wrap w-full max-w-lg animate-fadeUp stagger-4">
+      <i class="bi bi-search absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 text-sm pointer-events-none z-10"></i>
+      <input
+        id="searchInput"
+        type="text"
+        placeholder="Cari artikel, topik, atau teknologi..."
+        oninput="handleSearch(this.value)"
+        class="w-full pl-12 pr-5 py-4 bg-white border-2 border-mist-dark rounded-2xl font-body text-sm text-ink placeholder-gray-400 shadow-sm"
+      />
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES FILTER -->
+<div class="max-w-5xl mx-auto px-6 mb-10">
+  <div class="flex flex-wrap gap-2.5" id="catFilters">
+    <button onclick="filterCat('all')" data-cat="all" class="cat-tag active font-display font-700 text-xs px-5 py-2.5 rounded-full bg-white border-2 border-mist-dark text-gray-600">
+      ✦ Semua
+    </button>
+    <button onclick="filterCat('tech')" data-cat="tech" class="cat-tag font-display font-700 text-xs px-5 py-2.5 rounded-full bg-white border-2 border-mist-dark text-gray-600">
+      ⚡ Tech & Coding
+    </button>
+    <button onclick="filterCat('arsitektur')" data-cat="arsitektur" class="cat-tag font-display font-700 text-xs px-5 py-2.5 rounded-full bg-white border-2 border-mist-dark text-gray-600">
+      🏛 Arsitektur
+    </button>
+    <button onclick="filterCat('personal')" data-cat="personal" class="cat-tag font-display font-700 text-xs px-5 py-2.5 rounded-full bg-white border-2 border-mist-dark text-gray-600">
+      🌿 Personal
+    </button>
+    <button onclick="filterCat('design')" data-cat="design" class="cat-tag font-display font-700 text-xs px-5 py-2.5 rounded-full bg-white border-2 border-mist-dark text-gray-600">
+      🎨 Design
+    </button>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="max-w-5xl mx-auto px-6 pb-28">
+
+  <!-- FEATURED POST -->
+  <div id="featured-section" class="mb-10">
+    <span class="font-mono text-xs font-500 tracking-widest text-accent uppercase mb-5 block">— Artikel Terbaru</span>
+    <div id="featured-post" class="featured-card rounded-3xl p-8 md:p-10 border border-white/10 relative overflow-hidden group cursor-pointer blog-card"
+      onclick="openPost(0)">
+      <div class="absolute top-0 right-0 w-64 h-64 bg-accent/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute bottom-0 left-0 w-48 h-48 bg-spark/8 rounded-full blur-2xl pointer-events-none"></div>
+      <div class="relative z-10 flex flex-col md:flex-row gap-8 items-start">
+        <div class="flex-1">
+          <div class="flex flex-wrap gap-2 mb-5">
+            <span class="font-mono text-xs bg-accent/20 text-accent-light border border-accent/30 px-3 py-1 rounded-full">⚡ Tech & Coding</span>
+            <span class="font-mono text-xs bg-white/5 text-white/50 border border-white/10 px-3 py-1 rounded-full">📅 30 Mar 2026</span>
+            <span class="font-mono text-xs bg-lime/10 text-lime border border-lime/20 px-3 py-1 rounded-full">★ Featured</span>
+          </div>
+          <h2 class="font-display font-800 text-2xl md:text-3xl text-white leading-tight mb-4 group-hover:text-accent-light transition-colors">
+            Mengapa Saya Pilih Laravel di 2026 (Bukan Node.js)
+          </h2>
+          <p class="font-body text-gray-400 text-sm leading-relaxed mb-6 max-w-xl">
+            Setelah setahun mencoba berbagai stack, saya kembali ke Laravel. Ini bukan karena tren — tapi karena developer experience yang belum tertandingi untuk web app yang serius.
+          </p>
+          <div class="flex items-center gap-4">
+            <div class="flex items-center gap-2.5">
+              <div class="w-7 h-7 rounded-full bg-gradient-to-br from-ink to-accent flex items-center justify-center text-white text-xs font-display font-700">A</div>
+              <span class="font-body text-xs text-gray-400">Ariq B. Suwarno</span>
+            </div>
+            <span class="text-gray-600">·</span>
+            <span class="font-mono text-xs text-gray-500">8 menit baca</span>
+            <span class="ml-auto font-display font-700 text-xs text-accent-light group-hover:text-lime transition-colors">Baca →</span>
+          </div>
+        </div>
+        <div class="w-full md:w-52 h-36 md:h-auto md:aspect-square bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center text-6xl flex-shrink-0">
+          🚀
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- POSTS GRID -->
+  <div class="mb-5 flex items-center justify-between">
+    <span class="font-mono text-xs font-500 tracking-widest text-accent uppercase">— Semua Artikel</span>
+    <span id="count-label" class="font-mono text-xs text-gray-400">6 artikel</span>
+  </div>
+
+  <!-- No results -->
+  <div id="no-results" class="hidden text-center py-20">
+    <div class="text-5xl mb-4">🔍</div>
+    <p class="font-display font-700 text-xl text-gray-400">Artikel tidak ditemukan</p>
+    <p class="font-body text-sm text-gray-400 mt-2">Coba kata kunci lain atau reset filter.</p>
+    <button onclick="resetSearch()" class="mt-5 bg-ink text-white font-display font-700 text-sm px-6 py-3 rounded-full hover:bg-accent transition-all nav-link">Reset</button>
+  </div>
+
+  <div id="posts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+    <!-- POST 1 -->
+    <div class="post-item blog-card relative bg-white rounded-3xl border border-mist-dark shadow-sm hover:shadow-xl overflow-hidden cursor-pointer"
+      data-cat="tech" data-title="Mengapa Saya Pilih Laravel di 2026 (Bukan Node.js)" data-index="0"
+      onclick="openPost(0)">
+      <div class="h-1 w-full" style="background:linear-gradient(90deg,#6c63ff,#a89dff)"></div>
+      <div class="p-6">
+        <div class="flex justify-between items-start mb-4">
+          <span class="cat-tech font-mono text-xs px-3 py-1 rounded-full border">⚡ Tech</span>
+          <span class="font-mono text-xs text-gray-400">8 min</span>
+        </div>
+        <div class="text-3xl mb-3">🚀</div>
+        <h3 class="font-display font-700 text-base leading-tight mb-2 group-hover:text-accent">Mengapa Saya Pilih Laravel di 2026</h3>
+        <p class="font-body text-xs text-gray-500 leading-relaxed mb-4">Setelah setahun mencoba berbagai stack, saya kembali ke Laravel dan tidak menyesal.</p>
+        <div class="flex items-center gap-2 text-xs text-gray-400 font-mono">
+          <i class="bi bi-calendar3"></i> 30 Mar 2026
+        </div>
+      </div>
+    </div>
+
+    <!-- POST 2 -->
+    <div class="post-item blog-card relative bg-white rounded-3xl border border-mist-dark shadow-sm hover:shadow-xl overflow-hidden cursor-pointer"
+      data-cat="arsitektur" data-title="Ruang Hijau di Tengah Beton: Belajar dari Biophilic Design" data-index="1"
+      onclick="openPost(1)">
+      <div class="h-1 w-full" style="background:linear-gradient(90deg,#d97706,#fcd34d)"></div>
+      <div class="p-6">
+        <div class="flex justify-between items-start mb-4">
+          <span class="cat-arsitektur font-mono text-xs px-3 py-1 rounded-full border">🏛 Arsitektur</span>
+          <span class="font-mono text-xs text-gray-400">6 min</span>
+        </div>
+        <div class="text-3xl mb-3">🌿</div>
+        <h3 class="font-display font-700 text-base leading-tight mb-2">Ruang Hijau di Tengah Beton</h3>
+        <p class="font-body text-xs text-gray-500 leading-relaxed mb-4">Eksplorasi biophilic design dan bagaimana alam bisa masuk ke dalam bangunan modern.</p>
+        <div class="flex items-center gap-2 text-xs text-gray-400 font-mono">
+          <i class="bi bi-calendar3"></i> 25 Mar 2026
+        </div>
+      </div>
+    </div>
+
+    <!-- POST 3 -->
+    <div class="post-item blog-card relative bg-white rounded-3xl border border-mist-dark shadow-sm hover:shadow-xl overflow-hidden cursor-pointer"
+      data-cat="personal" data-title="Belajar Coding Sambil Kuliah Arsitektur: Mungkin Tidak?" data-index="2"
+      onclick="openPost(2)">
+      <div class="h-1 w-full" style="background:linear-gradient(90deg,#ff6b6b,#fca5a5)"></div>
+      <div class="p-6">
+        <div class="flex justify-between items-start mb-4">
+          <span class="cat-personal font-mono text-xs px-3 py-1 rounded-full border">🌿 Personal</span>
+          <span class="font-mono text-xs text-gray-400">5 min</span>
+        </div>
+        <div class="text-3xl mb-3">🎓</div>
+        <h3 class="font-display font-700 text-base leading-tight mb-2">Belajar Coding Sambil Kuliah Arsitektur</h3>
+        <p class="font-body text-xs text-gray-500 leading-relaxed mb-4">Dua dunia yang tampak berbeda, tapi ternyata saling melengkapi dengan cara yang mengejutkan.</p>
+        <div class="flex items-center gap-2 text-xs text-gray-400 font-mono">
+          <i class="bi bi-calendar3"></i> 20 Mar 2026
+        </div>
+      </div>
+    </div>
+
+    <!-- POST 4 -->
+    <div class="post-item blog-card relative bg-white rounded-3xl border border-mist-dark shadow-sm hover:shadow-xl overflow-hidden cursor-pointer"
+      data-cat="tech" data-title="Flutter vs React Native: Pilihan Saya untuk Mobile App 2026" data-index="3"
+      onclick="openPost(3)">
+      <div class="h-1 w-full" style="background:linear-gradient(90deg,#06b6d4,#a89dff)"></div>
+      <div class="p-6">
+        <div class="flex justify-between items-start mb-4">
+          <span class="cat-tech font-mono text-xs px-3 py-1 rounded-full border">⚡ Tech</span>
+          <span class="font-mono text-xs text-gray-400">7 min</span>
+        </div>
+        <div class="text-3xl mb-3">📱</div>
+        <h3 class="font-display font-700 text-base leading-tight mb-2">Flutter vs React Native 2026</h3>
+        <p class="font-body text-xs text-gray-500 leading-relaxed mb-4">Perbandingan jujur dari developer yang sudah mencoba keduanya di proyek nyata.</p>
+        <div class="flex items-center gap-2 text-xs text-gray-400 font-mono">
+          <i class="bi bi-calendar3"></i> 15 Mar 2026
+        </div>
+      </div>
+    </div>
+
+    <!-- POST 5 -->
+    <div class="post-item blog-card relative bg-white rounded-3xl border border-mist-dark shadow-sm hover:shadow-xl overflow-hidden cursor-pointer"
+      data-cat="design" data-title="Prinsip Desain yang Saya Pelajari dari Arsitektur" data-index="4"
+      onclick="openPost(4)">
+      <div class="h-1 w-full" style="background:linear-gradient(90deg,#16a34a,#b5ff6d)"></div>
+      <div class="p-6">
+        <div class="flex justify-between items-start mb-4">
+          <span class="cat-design font-mono text-xs px-3 py-1 rounded-full border">🎨 Design</span>
+          <span class="font-mono text-xs text-gray-400">4 min</span>
+        </div>
+        <div class="text-3xl mb-3">✏️</div>
+        <h3 class="font-display font-700 text-base leading-tight mb-2">Prinsip Desain dari Arsitektur</h3>
+        <p class="font-body text-xs text-gray-500 leading-relaxed mb-4">Ternyata banyak prinsip UI/UX yang berakar dari teori arsitektur klasik.</p>
+        <div class="flex items-center gap-2 text-xs text-gray-400 font-mono">
+          <i class="bi bi-calendar3"></i> 10 Mar 2026
+        </div>
+      </div>
+    </div>
+
+    <!-- POST 6 -->
+    <div class="post-item blog-card relative bg-white rounded-3xl border border-mist-dark shadow-sm hover:shadow-xl overflow-hidden cursor-pointer"
+      data-cat="tech" data-title="Git Workflow yang Saya Gunakan untuk Proyek Solo" data-index="5"
+      onclick="openPost(5)">
+      <div class="h-1 w-full" style="background:linear-gradient(90deg,#f97316,#fcd34d)"></div>
+      <div class="p-6">
+        <div class="flex justify-between items-start mb-4">
+          <span class="cat-tech font-mono text-xs px-3 py-1 rounded-full border">⚡ Tech</span>
+          <span class="font-mono text-xs text-gray-400">5 min</span>
+        </div>
+        <div class="text-3xl mb-3">🔧</div>
+        <h3 class="font-display font-700 text-base leading-tight mb-2">Git Workflow untuk Proyek Solo</h3>
+        <p class="font-body text-xs text-gray-500 leading-relaxed mb-4">Strategi branching dan commit convention yang membuat kode saya tetap rapi meski kerja sendiri.</p>
+        <div class="flex items-center gap-2 text-xs text-gray-400 font-mono">
+          <i class="bi bi-calendar3"></i> 5 Mar 2026
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER TICKER -->
+<div class="ink-section py-14 px-6 overflow-hidden">
+  <div class="ticker-inner flex gap-6 animate-ticker w-max mb-10">
+    <span class="font-display font-800 text-4xl text-white/10 whitespace-nowrap">Tech & Coding</span>
+    <span class="font-display font-800 text-4xl text-accent/30 whitespace-nowrap">✦</span>
+    <span class="font-display font-800 text-4xl text-white/10 whitespace-nowrap">Arsitektur</span>
+    <span class="font-display font-800 text-4xl text-spark/30 whitespace-nowrap">✦</span>
+    <span class="font-display font-800 text-4xl text-white/10 whitespace-nowrap">Personal</span>
+    <span class="font-display font-800 text-4xl text-lime/30 whitespace-nowrap">✦</span>
+    <span class="font-display font-800 text-4xl text-white/10 whitespace-nowrap">Design</span>
+    <span class="font-display font-800 text-4xl text-accent/30 whitespace-nowrap">✦</span>
+    <span class="font-display font-800 text-4xl text-white/10 whitespace-nowrap">Tech & Coding</span>
+    <span class="font-display font-800 text-4xl text-spark/30 whitespace-nowrap">✦</span>
+    <span class="font-display font-800 text-4xl text-white/10 whitespace-nowrap">Arsitektur</span>
+    <span class="font-display font-800 text-4xl text-lime/30 whitespace-nowrap">✦</span>
+    <span class="font-display font-800 text-4xl text-white/10 whitespace-nowrap">Personal</span>
+    <span class="font-display font-800 text-4xl text-accent/30 whitespace-nowrap">✦</span>
+    <span class="font-display font-800 text-4xl text-white/10 whitespace-nowrap">Design</span>
+    <span class="font-display font-800 text-4xl text-spark/30 whitespace-nowrap">✦</span>
+  </div>
+  <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+    <div>
+      <p class="font-display font-700 text-white text-lg">Ariq's Blog</p>
+      <p class="font-mono text-xs text-gray-500 mt-1">blog.ariq.dev</p>
+    </div>
+    <p class="font-mono text-xs text-gray-600">© 2026 Dr.Ar.iq — All rights reserved</p>
+    <a href="/" class="font-display font-700 text-sm text-accent hover:text-accent-light transition-colors nav-link">← Kembali ke Portfolio</a>
+  </div>
+</div>
+
+<!-- POST DATA & SCRIPTS -->
+<script>
+const posts = [
+  {
+    index: 0,
+    title: "Mengapa Saya Pilih Laravel di 2026 (Bukan Node.js)",
+    subtitle: "Setelah setahun mencoba berbagai stack, saya kembali ke Laravel. Ini bukan karena tren — tapi karena developer experience yang belum tertandingi.",
+    cat: "tech",
+    catLabel: "⚡ Tech & Coding",
+    catClass: "cat-tech",
+    date: "30 Maret 2026",
+    readTime: "8 menit baca",
+    accent: "linear-gradient(90deg,#6c63ff,#a89dff)",
+    tags: ["Laravel", "PHP", "Web Dev", "Backend"],
+    body: `
+      <h2>Latar Belakang</h2>
+      <p>Saya mulai belajar web development dengan PHP murni, lalu pindah ke Laravel. Di pertengahan 2025, saya sempat beralih ke ekosistem JavaScript — Express, Fastify, bahkan sempat menyentuh Bun. Hasilnya? Saya kembali ke Laravel.</p>
+
+      <h2>Kenapa Tidak Node.js?</h2>
+      <p>Bukan berarti Node.js buruk. Tapi untuk saya yang bekerja solo atau tim kecil, overhead setup Node.js terlalu besar:</p>
+      <ul>
+        <li>Pilihan framework yang terlalu banyak (Express? Fastify? Hono? NestJS?)</li>
+        <li>ORM yang belum semature Eloquent</li>
+        <li>Tidak ada "batteries included" yang konsisten</li>
+        <li>TypeScript yang bagus tapi butuh konfigurasi panjang</li>
+      </ul>
+
+      <h2>Keunggulan Laravel yang Tidak Terbantahkan</h2>
+      <p>Laravel hadir dengan semua yang dibutuhkan out-of-the-box:</p>
+      <ul>
+        <li>Eloquent ORM yang ekspresif dan intuitif</li>
+        <li>Artisan CLI untuk generate apapun dalam hitungan detik</li>
+        <li>Blade templating yang powerful tanpa overhead</li>
+        <li>Queue, Event, Notification — semuanya sudah built-in</li>
+      </ul>
+
+      <h2>Contoh Kode</h2>
+      <p>Contoh sederhana membuat endpoint dengan Eloquent:</p>
+      <pre><code>// Controller
+public function index()
+{
+    return User::with('posts')
+        ->latest()
+        ->paginate(10);
+}</code></pre>
+
+      <blockquote><p>"Don't use a tool because it's popular. Use it because it solves your problem the best."</p></blockquote>
+
+      <h2>Kesimpulan</h2>
+      <p>Laravel bukan pilihan yang "kuno" atau "ketinggalan zaman". Di 2026, Laravel 11 hadir dengan berbagai pembaruan signifikan yang menjadikannya tetap relevan dan kompetitif. Untuk saya, Laravel adalah pilihan pragmatis yang mengutamakan produktivitas.</p>
+      <p>Mungkin di masa depan saya akan kembali mencoba Node.js atau Go. Tapi untuk sekarang, <code>php artisan serve</code> adalah teman terbaik saya.</p>
+    `
+  },
+  {
+    index: 1,
+    title: "Ruang Hijau di Tengah Beton: Belajar dari Biophilic Design",
+    subtitle: "Eksplorasi biophilic design dan bagaimana elemen alam bisa diintegrasikan ke dalam bangunan modern tanpa kehilangan fungsinya.",
+    cat: "arsitektur",
+    catLabel: "🏛 Arsitektur",
+    catClass: "cat-arsitektur",
+    date: "25 Maret 2026",
+    readTime: "6 menit baca",
+    accent: "linear-gradient(90deg,#d97706,#fcd34d)",
+    tags: ["Arsitektur", "Biophilic", "Desain", "Ruang Hijau"],
+    body: `
+      <h2>Apa Itu Biophilic Design?</h2>
+      <p>Biophilic design adalah pendekatan arsitektur yang menghubungkan manusia dengan alam dalam lingkungan binaan. Kata "biophilic" berasal dari "biophilia" — kecintaan bawaan manusia terhadap alam dan makhluk hidup lainnya.</p>
+
+      <h2>Mengapa Ini Penting?</h2>
+      <p>Penelitian menunjukkan bahwa ruang dengan elemen alam dapat:</p>
+      <ul>
+        <li>Menurunkan tingkat stres hingga 37%</li>
+        <li>Meningkatkan produktivitas kerja</li>
+        <li>Mempercepat pemulihan pasien di rumah sakit</li>
+        <li>Meningkatkan kreativitas dan konsentrasi</li>
+      </ul>
+
+      <h2>Prinsip Utama</h2>
+      <p>Ada tiga dimensi utama dalam biophilic design:</p>
+      <ul>
+        <li><strong>Nature in the space</strong> — tanaman, air, cahaya alami, material organik langsung di ruangan</li>
+        <li><strong>Nature analogues</strong> — motif, tekstur, dan warna yang terinspirasi alam</li>
+        <li><strong>Nature of the space</strong> — konfigurasi ruang yang meniru pola alam (prospect-refuge, mystery, dll)</li>
+      </ul>
+
+      <blockquote><p>"Architecture should speak of its time and place, but yearn for timelessness." — Frank Gehry</p></blockquote>
+
+      <h2>Implementasi Sederhana</h2>
+      <p>Tidak perlu bangunan mewah. Biophilic design bisa diterapkan secara sederhana: bukaan jendela yang memaksimalkan cahaya alami, taman vertikal di koridor, material kayu dan batu alam pada finishing, serta aliran udara yang mengikuti pola angin setempat.</p>
+
+      <h2>Studi Kasus: Surabaya</h2>
+      <p>Di Surabaya yang panas dan padat, biophilic design menjadi kebutuhan, bukan sekadar estetika. Banyak bangunan baru mulai mengintegrasikan green roof dan shading alami untuk mengurangi beban AC sekaligus menciptakan ruang yang lebih manusiawi.</p>
+    `
+  },
+  {
+    index: 2,
+    title: "Belajar Coding Sambil Kuliah Arsitektur: Mungkin Tidak?",
+    subtitle: "Dua dunia yang tampak berbeda, tapi ternyata saling melengkapi dengan cara yang mengejutkan dan membuka peluang tak terduga.",
+    cat: "personal",
+    catLabel: "🌿 Personal",
+    catClass: "cat-personal",
+    date: "20 Maret 2026",
+    readTime: "5 menit baca",
+    accent: "linear-gradient(90deg,#ff6b6b,#fca5a5)",
+    tags: ["Personal", "Arsitektur", "Coding", "Student Life"],
+    body: `
+      <h2>Awalnya Terasa Gila</h2>
+      <p>Ketika saya memutuskan belajar web development di tengah-tengah kuliah arsitektur, hampir semua orang bertanya: "Kamu mau jadi apa sebenarnya?" Pertanyaan yang valid. Tapi justru di sana letak menariknya.</p>
+
+      <h2>Ternyata Banyak Kesamaan</h2>
+      <p>Arsitektur dan coding ternyata punya DNA yang sama:</p>
+      <ul>
+        <li>Keduanya adalah tentang <strong>problem solving</strong> dalam batasan tertentu</li>
+        <li>Keduanya mengutamakan <strong>struktur dan hierarki</strong></li>
+        <li>Keduanya membutuhkan <strong>iterasi dan revisi</strong> terus-menerus</li>
+        <li>Keduanya harus mempertimbangkan <strong>user experience</strong></li>
+      </ul>
+
+      <h2>Manajemen Waktu Adalah Segalanya</h2>
+      <p>Tantangan terbesar bukan kemampuan, tapi waktu. Studio arsitektur bisa menyita 12 jam sehari. Saya belajar coding di sela-sela studio, saat menunggu render 3D, atau di malam hari setelah deadline terpenuhi.</p>
+
+      <blockquote><p>"You don't have to be great to start, but you have to start to be great."</p></blockquote>
+
+      <h2>Apa yang Saya Dapat?</h2>
+      <p>Sekarang saya bisa membangun tools digital untuk kebutuhan arsitektur — visualisasi data, aplikasi manajemen proyek desain, hingga website untuk portofolio klien. Dua keahlian yang saling mengangkat.</p>
+
+      <h2>Pesan untuk Teman-teman</h2>
+      <p>Jangan takut untuk lintas disiplin. Di era sekarang, kemampuan hybrid justru menjadi nilai lebih. Arsitek yang bisa coding, developer yang paham desain — itu bukan anomali, itu masa depan.</p>
+    `
+  },
+  {
+    index: 3,
+    title: "Flutter vs React Native: Pilihan Saya untuk Mobile App 2026",
+    subtitle: "Perbandingan jujur dari developer yang sudah mencoba keduanya di proyek nyata, bukan hanya membaca dokumentasi.",
+    cat: "tech",
+    catLabel: "⚡ Tech & Coding",
+    catClass: "cat-tech",
+    date: "15 Maret 2026",
+    readTime: "7 menit baca",
+    accent: "linear-gradient(90deg,#06b6d4,#a89dff)",
+    tags: ["Flutter", "React Native", "Mobile", "Dart"],
+    body: `
+      <h2>Konteks Pengujian</h2>
+      <p>Saya mencoba Flutter untuk membangun aplikasi sederhana dan pernah menyentuh React Native untuk proyek kecil. Ini bukan benchmark formal — ini adalah pengalaman nyata di lapangan.</p>
+
+      <h2>Flutter: Kesan Pertama</h2>
+      <p>Dart membutuhkan waktu untuk terbiasa, tapi sekali paham, produktivitasnya luar biasa. Beberapa hal yang saya suka:</p>
+      <ul>
+        <li>Widget system yang konsisten dan predictable</li>
+        <li>Hot reload yang sangat cepat</li>
+        <li>Performance yang mendekati native</li>
+        <li>Satu codebase untuk iOS, Android, dan Web</li>
+      </ul>
+
+      <h2>Contoh Widget Flutter</h2>
+      <pre><code>Widget build(BuildContext context) {
+  return Scaffold(
+    body: Center(
+      child: Text(
+        'Hello, Flutter!',
+        style: TextStyle(fontSize: 24),
+      ),
+    ),
+  );
+}</code></pre>
+
+      <h2>React Native: Kekuatan dan Kelemahan</h2>
+      <p>React Native unggul jika kamu sudah sangat familiar dengan React dan JavaScript ekosistem. Tapi bridge architecture-nya bisa menjadi bottleneck untuk animasi berat.</p>
+
+      <blockquote><p>"The best framework is the one you can ship with."</p></blockquote>
+
+      <h2>Pilihan Saya</h2>
+      <p>Untuk proyek baru di 2026, saya pilih Flutter. Bukan karena lebih populer — tapi karena pengalaman development yang lebih mulus dan performa yang lebih dapat diandalkan untuk aplikasi yang saya kerjakan. Tapi jika tim sudah kuat di React, React Native tetap pilihan yang solid.</p>
+    `
+  },
+  {
+    index: 4,
+    title: "Prinsip Desain yang Saya Pelajari dari Arsitektur",
+    subtitle: "Ternyata banyak prinsip UI/UX modern yang berakar dari teori arsitektur klasik yang sudah berumur ratusan tahun.",
+    cat: "design",
+    catLabel: "🎨 Design",
+    catClass: "cat-design",
+    date: "10 Maret 2026",
+    readTime: "4 menit baca",
+    accent: "linear-gradient(90deg,#16a34a,#b5ff6d)",
+    tags: ["Design", "UI/UX", "Arsitektur", "Teori"],
+    body: `
+      <h2>Proporsi dan Ritme</h2>
+      <p>Dalam arsitektur, proporsi adalah hubungan harmonis antara bagian-bagian sebuah bangunan. Rasio emas (1:1.618) telah digunakan sejak zaman Yunani kuno. Di UI design, prinsip yang sama berlaku — spacing, ukuran font, dan layout yang proporsional menciptakan visual yang nyaman.</p>
+
+      <h2>Hierarchy dan Focal Point</h2>
+      <p>Arsitek menggunakan hierarki untuk memandu mata pengunjung — pintu masuk yang menonjol, koridor yang mengarah, ruang utama yang mendominasi. Di web design, hierarki tipografi dan visual bekerja dengan cara yang identik.</p>
+
+      <ul>
+        <li>Elemen terpenting = paling menonjol</li>
+        <li>Navigasi yang intuitif mengikuti flow alami</li>
+        <li>Whitespace sebagai "ruang bernapas"</li>
+      </ul>
+
+      <h2>Fungsi Mengikuti Bentuk?</h2>
+      <p>Louis Sullivan, arsitek legendaris, berkata: <em>"Form follows function."</em> Di dunia UI/UX, prinsip ini diterjemahkan menjadi: desain yang indah tapi tidak fungsional adalah desain yang gagal.</p>
+
+      <blockquote><p>"Form follows function — that has been misunderstood. Form and function should be one, joined in a spiritual union." — Frank Lloyd Wright</p></blockquote>
+
+      <h2>Material dan Tekstur</h2>
+      <p>Arsitektur menggunakan material untuk menciptakan karakter ruang. Di digital design, "material" berupa warna, tipografi, shadow, dan texture bekerja dengan cara yang sama — menciptakan personality dan mood sebuah interface.</p>
+
+      <h2>Takeaway</h2>
+      <p>Jika kamu belajar arsitektur, kamu sedang belajar design thinking yang sangat transferable. Dan jika kamu UI designer yang belum pernah membaca teori arsitektur — itu bisa jadi investment belajar yang sangat worth it.</p>
+    `
+  },
+  {
+    index: 5,
+    title: "Git Workflow yang Saya Gunakan untuk Proyek Solo",
+    subtitle: "Strategi branching dan commit convention yang membuat kode saya tetap rapi dan maintainable meski bekerja sendiri.",
+    cat: "tech",
+    catLabel: "⚡ Tech & Coding",
+    catClass: "cat-tech",
+    date: "5 Maret 2026",
+    readTime: "5 menit baca",
+    accent: "linear-gradient(90deg,#f97316,#fcd34d)",
+    tags: ["Git", "Version Control", "Workflow", "Tips"],
+    body: `
+      <h2>Kenapa Git Workflow Penting untuk Solo Dev?</h2>
+      <p>Banyak developer solo berpikir: "Saya sendiri, untuk apa repot-repot?" Tapi percayalah — 3 bulan ke depan, "diri kamu di masa lalu" adalah orang asing. Commit yang jelas adalah surat untuk diri sendiri.</p>
+
+      <h2>Branch Strategy Saya</h2>
+      <p>Saya menggunakan model sederhana dengan 3 branch utama:</p>
+      <ul>
+        <li><code>main</code> — production-ready, tidak pernah commit langsung</li>
+        <li><code>develop</code> — working branch untuk development aktif</li>
+        <li><code>feature/nama-fitur</code> — branch per fitur, merge ke develop setelah selesai</li>
+      </ul>
+
+      <h2>Conventional Commits</h2>
+      <p>Format commit yang saya gunakan:</p>
+      <pre><code>feat: tambah fitur login dengan Google OAuth
+fix: perbaiki bug redirect setelah logout
+docs: update README dengan instruksi setup
+style: format ulang CSS pada halaman dashboard
+refactor: pisah logika auth ke AuthService</code></pre>
+
+      <h2>Alias yang Berguna</h2>
+      <pre><code># .gitconfig
+[alias]
+  st = status
+  co = checkout
+  br = branch
+  lg = log --oneline --graph --all</code></pre>
+
+      <blockquote><p>"Always code as if the guy who ends up maintaining your code will be a violent psychopath who knows where you live."</p></blockquote>
+
+      <h2>Tips Tambahan</h2>
+      <p>Beberapa kebiasaan Git yang sangat membantu:</p>
+      <ul>
+        <li>Commit kecil dan sering — bukan satu commit besar di akhir hari</li>
+        <li>Selalu pull sebelum mulai kerja</li>
+        <li>Gunakan <code>.gitignore</code> yang proper dari awal</li>
+        <li>Tag versi rilis dengan <code>git tag v1.0.0</code></li>
+      </ul>
+
+      <h2>Kesimpulan</h2>
+      <p>Git workflow yang baik bukan tentang kompleksitas — tapi tentang konsistensi. Mulai dengan yang sederhana, dan bangun kebiasaan yang akan menguntungkan kamu di masa depan.</p>
+    `
+  }
+];
+
+// CURSOR
+const dot = document.getElementById('cursor-dot');
+const ring = document.getElementById('cursor-ring');
+const label = document.getElementById('cursor-label');
+let mx = -100, my = -100, rx = -100, ry = -100;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+});
+
+function lerp(a, b, t) { return a + (b - a) * t; }
+function animRing() {
+  rx = lerp(rx, mx, 0.12); ry = lerp(ry, my, 0.12);
+  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+  label.style.left = rx + 'px'; label.style.top = ry + 'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+
+document.querySelectorAll('.blog-card').forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+});
+document.querySelectorAll('a, button, .nav-link, .cat-tag').forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('cursor-link'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-link'));
+});
+
+// NAV scroll
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 20);
+});
+
+// OPEN POST
+function openPost(idx) {
+  const p = posts[idx];
+  document.getElementById('modal-accent-bar').style.background = p.accent;
+  document.getElementById('modal-meta').innerHTML = `
+    <span class="font-mono text-xs ${p.catClass} border px-3 py-1 rounded-full">${p.catLabel}</span>
+    <span class="font-mono text-xs text-gray-400">${p.date}</span>
+  `;
+  document.getElementById('modal-title').textContent = p.title;
+  document.getElementById('modal-subtitle').textContent = p.subtitle;
+  document.getElementById('modal-date').textContent = p.date;
+  document.getElementById('modal-readtime').textContent = p.readTime;
+  document.getElementById('modal-body').innerHTML = p.body;
+  document.getElementById('modal-tags').innerHTML = p.tags.map(t =>
+    `<span class="bg-mist border border-mist-dark font-mono text-xs px-3 py-1 rounded-full text-gray-600">${t}</span>`
+  ).join('');
+
+  const overlay = document.getElementById('post-overlay');
+  overlay.classList.add('open');
+  overlay.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+
+function closePost() {
+  document.getElementById('post-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('post-overlay').addEventListener('click', function(e) {
+  if (e.target === this) closePost();
+});
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closePost(); });
+
+// FILTER
+let currentCat = 'all';
+let currentSearch = '';
+
+function filterCat(cat) {
+  currentCat = cat;
+  document.querySelectorAll('.cat-tag').forEach(b => {
+    b.classList.toggle('active', b.dataset.cat === cat);
+  });
+  applyFilter();
+}
+
+function handleSearch(val) {
+  currentSearch = val.toLowerCase().trim();
+  applyFilter();
+}
+
+function resetSearch() {
+  document.getElementById('searchInput').value = '';
+  currentSearch = '';
+  filterCat('all');
+}
+
+function applyFilter() {
+  const items = document.querySelectorAll('.post-item');
+  let visible = 0;
+
+  items.forEach(item => {
+    const cat = item.dataset.cat;
+    const title = item.dataset.title.toLowerCase();
+    const catMatch = currentCat === 'all' || cat === currentCat;
+    const searchMatch = !currentSearch || title.includes(currentSearch);
+    const show = catMatch && searchMatch;
+    item.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+
+  document.getElementById('no-results').classList.toggle('hidden', visible > 0);
+  document.getElementById('posts-grid').classList.toggle('hidden', visible === 0);
+  document.getElementById('count-label').textContent = visible + ' artikel';
+
+  // hide featured if filtered
+  const featuredSection = document.getElementById('featured-section');
+  featuredSection.style.display = (currentCat !== 'all' || currentSearch) ? 'none' : '';
+}
+</script>
+</body>
+</html>
