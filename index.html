@@ -21,19 +21,6 @@
           mono: ['DM Mono', 'monospace'],
         },
         colors: {
-<<<<<<< HEAD
-          ink: '#0c0c14',
-          'ink-soft': '#1a1a2e',
-          accent: '#6c63ff',
-          'accent-light': '#a89dff',
-          spark: '#ff6b6b',
-          lime: '#b5ff6d',
-          mist: '#f0effa',
-          'mist-dark': '#e4e2f8',
-        },
-        animation: {
-          ticker: 'ticker 28s linear infinite',
-=======
           canvas: '#0a0a0b',
           surface: '#151517',
           'surface-2': '#1c1c1f',
@@ -46,25 +33,16 @@
           spark: '#ff2d2d',
         },
         animation: {
->>>>>>> 5c0c105 (update UI)
           floatY: 'floatY 6s ease-in-out infinite',
           fadeUp: 'fadeUp 0.7s ease both',
           scaleIn: 'scaleIn 0.5s ease both',
           glowPulse: 'glowPulse 3s ease-in-out infinite',
         },
         keyframes: {
-<<<<<<< HEAD
-          ticker: { from:{ transform:'translateX(0)' }, to:{ transform:'translateX(-50%)' } },
-          floatY: { '0%,100%':{ transform:'translateY(0) rotate(-3deg)' }, '50%':{ transform:'translateY(-16px) rotate(3deg)' } },
-          fadeUp: { from:{ opacity:'0', transform:'translateY(30px)' }, to:{ opacity:'1', transform:'translateY(0)' } },
-          scaleIn: { from:{ opacity:'0', transform:'scale(0.9)' }, to:{ opacity:'1', transform:'scale(1)' } },
-          glowPulse: { '0%,100%':{ boxShadow:'0 0 20px rgba(108,99,255,0.3)' }, '50%':{ boxShadow:'0 0 50px rgba(108,99,255,0.7)' } },
-=======
           floatY: { '0%,100%':{ transform:'translateY(0) rotate(-3deg)' }, '50%':{ transform:'translateY(-16px) rotate(3deg)' } },
           fadeUp: { from:{ opacity:'0', transform:'translateY(30px)' }, to:{ opacity:'1', transform:'translateY(0)' } },
           scaleIn: { from:{ opacity:'0', transform:'scale(0.9)' }, to:{ opacity:'1', transform:'scale(1)' } },
           glowPulse: { '0%,100%':{ boxShadow:'0 0 20px rgba(220,20,60,0.35)' }, '50%':{ boxShadow:'0 0 55px rgba(220,20,60,0.7)' } },
->>>>>>> 5c0c105 (update UI)
         }
       }
     }
@@ -73,168 +51,6 @@
 <style>
   * { cursor: none !important; }
 
-<<<<<<< HEAD
-  html{
-    scroll-behavior: smooth;
-    overflow-x: hidden;
-  }
-
-  /* CUSTOM CURSOR */
-  #cursor-dot {
-    position: fixed;
-    width: 8px; height: 8px;
-    background: #6c63ff;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: transform 0.1s, background 0.2s, width 0.2s, height 0.2s;
-    mix-blend-mode: normal;
-  }
-  #cursor-ring {
-    position: fixed;
-    width: 36px; height: 36px;
-    border: 1.5px solid rgba(108,99,255,0.6);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9998;
-    transform: translate(-50%, -50%);
-    transition: transform 0.18s ease, width 0.25s ease, height 0.25s ease, border-color 0.2s, opacity 0.2s;
-  }
-  #cursor-label {
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    font-weight: 500;
-    color: white;
-    background: #6c63ff;
-    padding: 4px 10px;
-    border-radius: 100px;
-    white-space: nowrap;
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.8);
-    transition: opacity 0.2s, transform 0.2s;
-    pointer-events: none;
-  }
-  body.cursor-hover #cursor-ring {
-    width: 64px; height: 64px;
-    border-color: rgba(108,99,255,0.3);
-  }
-  body.cursor-hover #cursor-dot {
-    background: #ff6b6b;
-    width: 10px; height: 10px;
-  }
-  body.cursor-link #cursor-label { opacity: 1; transform: translate(-50%, -200%) scale(1); }
-  body.cursor-link #cursor-ring { width: 52px; height: 52px; border-color: rgba(181, 255, 109, 0.7); border-width: 2px; }
-  body.cursor-link #cursor-dot { background: #b5ff6d; }
-
-  /* NOISE overlay */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    z-index: 9990;
-    pointer-events: none;
-    opacity: 0.025;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-
-  body { font-family: 'DM Sans', sans-serif; background: #f0effa; color: #0c0c14; }
-
-  .font-display { font-family: 'Syne', sans-serif; }
-  .font-mono { font-family: 'DM Mono', monospace; }
-
-  /* SCROLLBAR */
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: #e4e2f8; }
-  ::-webkit-scrollbar-thumb { background: #6c63ff; border-radius: 10px; }
-
-  /* Gradient text */
-  .grad-text {
-    background: linear-gradient(135deg, #6c63ff 0%, #ff6b6b 60%, #b5ff6d 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  /* Soft ink bg for sections */
-  .ink-section { background: #0c0c14; }
-
-  /* skill card hover */
-  .skill-card { transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; }
-  .skill-card:hover { transform: translateY(-6px); }
-
-  /* Project top bar */
-  .proj-accent-web { background: linear-gradient(90deg, #ff6b6b, #ffd93d); }
-  .proj-accent-mobile { background: linear-gradient(90deg, #6c63ff, #a89dff); }
-  .proj-accent-backend { background: linear-gradient(90deg, #b5ff6d, #06d6a0); }
-  .proj-accent-multi { background: linear-gradient(90deg, #ff6b6b, #6c63ff); }
-
-  nav { transition: box-shadow 0.3s; }
-  nav.scrolled { box-shadow: 0 4px 40px rgba(0,0,0,0.08); }
-  .nav-logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1rem; }
-  .g-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
-  /* ticker pause on hover */
-  .ticker-inner:hover { animation-play-state: paused; }
-
-  .hero-bg-blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  /* Tab */
-  .tab-btn { transition: all 0.2s; }
-  .tab-content { display: none; }
-  .tab-content.active { display: block; }
-
-  /* Skill status badges */
-  .skill-badge {
-    position: absolute;
-    top: -9px;
-    right: 10px;
-    font-family: 'DM Mono', monospace;
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    padding: 3px 9px;
-    border-radius: 100px;
-    white-space: nowrap;
-    border: 1.5px solid;
-    pointer-events: none;
-  }
-  .badge-expert {
-    background: #edfff0;
-    color: #16a34a;
-    border-color: #86efac;
-  }
-  .badge-ongoing {
-    background: #fff8ed;
-    color: #d97706;
-    border-color: #fcd34d;
-    animation: badgePulse 2.5s ease-in-out infinite;
-  }
-  .badge-new {
-    background: #f3f0ff;
-    color: #7c3aed;
-    border-color: #c4b5fd;
-    animation: badgePulse 2s ease-in-out infinite;
-  }
-  @keyframes badgePulse {
-    0%, 100% { box-shadow: none; }
-    50% { box-shadow: 0 0 8px rgba(124,58,237,0.25); }
-  }
-  .badge-ongoing { animation-name: badgePulseOrange; }
-  @keyframes badgePulseOrange {
-    0%, 100% { box-shadow: none; }
-    50% { box-shadow: 0 0 8px rgba(217,119,6,0.25); }
-  }
-  .skill-card { position: relative; }
-=======
   html { scroll-behavior: smooth; overflow-x: hidden; }
 
   /* CUSTOM CURSOR */
@@ -336,7 +152,6 @@
   @media (max-width: 420px) {
     h1 { letter-spacing: -1px !important; }
   }
->>>>>>> 5c0c105 (update UI)
 </style>
 </head>
 <body class="overflow-x-hidden">
@@ -347,71 +162,6 @@
 <div id="cursor-label">klik</div>
 
 <!-- NAV -->
-<<<<<<< HEAD
-<nav id="mainNav" class="fixed top-0 w-full z-50 px-8 lg:px-14 py-4 flex items-center justify-between bg-mist/90 backdrop-blur-xl border-b border-accent/10">
-  <!-- <div class="flex items-center gap-3">
-    <span class="font-mono text-xs bg-ink text-accent-light px-3 py-1 rounded-md"><i class="fa-solid fa-code"></i></span>
-    <span class="font-display font-800 text-ink text-lg tracking-tight">Ariq's Portfolio</span>
-  </div> -->
-  <div class="nav-logo">
-    <!-- <span class="g-dot" style="background:#4285f4"></span>
-    <span class="g-dot" style="background:#ea4335"></span>
-    <span class="g-dot" style="background:#fbbc04"></span>
-    <span class="g-dot" style="background:#34a853"></span> -->
-    <span class="g-dot" style="background:crimson"></span>
-    <span class="g-dot" style="background:orange"></span>
-    <span class="g-dot" style="background:green"></span>
-    <!-- &nbsp;Portfolio -->
-     <a href="https://ariqspace.my.id/">&nbsp;Portfolio</a>
-  </div>
-  <div class="hidden md:flex gap-8">
-    <a href="/#skills" class="font-body text-sm font-medium text-gray-500 hover:text-accent transition-colors duration-200 nav-link">Skills</a>
-    <a href="/#projects" class="font-body text-sm font-medium text-gray-500 hover:text-accent transition-colors duration-200 nav-link">Projects</a>
-    <a href="/#platforms" class="font-body text-sm font-medium text-gray-500 hover:text-accent transition-colors duration-200 nav-link">Platforms</a>
-    <a href="/#organisasi" class="font-body text-sm font-medium text-gray-500 hover:text-accent transition-colors duration-200 nav-link">Experience</a>
-    <a href="/#connect" class="font-body text-sm font-medium text-gray-500 hover:text-accent transition-colors duration-200 nav-link">Connect</a>
-  </div>
-  <a href="/#connect" class="bg-ink text-mist text-sm font-display font-700 px-5 py-2.5 rounded-full hover:bg-accent transition-all duration-200 hover:-translate-y-0.5 nav-link">Let's Connect →</a>
-</nav>
-
-<!-- HERO -->
-<section class="relative min-h-screen flex flex-col items-center justify-center text-center pt-24 pb-16 px-6 overflow-hidden">
-  <!-- blobs -->
-  <div class="hero-bg-blob w-[600px] h-[600px] bg-accent/15 top-[-100px] left-[-200px]"></div>
-  <div class="hero-bg-blob w-[400px] h-[400px] bg-spark/10 bottom-[0px] right-[-100px]"></div>
-  <div class="hero-bg-blob w-[300px] h-[300px] bg-lime/15 top-[40%] right-[10%]"></div>
-
-  <!-- floating icons -->
-  <span class="absolute top-[20%] left-[8%] text-2xl opacity-20 animate-floatY" style="animation-delay:0s">⚡</span>
-  <span class="absolute top-[30%] right-[10%] text-2xl opacity-15 animate-floatY" style="animation-delay:1.5s">🔧</span>
-  <span class="absolute bottom-[25%] left-[12%] text-xl opacity-15 animate-floatY" style="animation-delay:3s">🚀</span>
-  <span class="absolute top-[15%] right-[25%] text-xl opacity-10 animate-floatY" style="animation-delay:0.8s">💎</span>
-  <span class="absolute bottom-[30%] right-[8%] text-2xl opacity-15 animate-floatY" style="animation-delay:2s">✦</span>
-
-  <div class="relative z-10 flex flex-col items-center">
-    <!-- badge -->
-    <!-- <div class="inline-flex items-center gap-2 bg-accent/10 border border-accent/25 text-accent text-xs font-display font-700 px-5 py-2 rounded-full mb-8 animate-fadeUp" style="animation-delay:0.1s">
-      <span class="w-1.5 h-1.5 bg-lime rounded-full animate-pulse"></span>
-      Tersedia untuk proyek baru
-    </div> -->
-
-    <!-- avatar -->
-    <div class="w-40 h-40 rounded-full border-4 border-white shadow-2xl flex items-center justify-center text-5xl bg-gradient-to-br from-ink to-accent mb-7 animate-scaleIn animate-glowPulse overflow-hidden" style="animation-delay:0.2s">
-      <img src="assets/myfotogwejh.jpg" alt="avatar" class="w-full h-full object-cover rounded-full">
-    </div>
-
-    <!-- headline -->
-    <h1 class="font-display font-800 text-5xl lg:text-7xl xl:text-8xl leading-[1.0] tracking-[-3px] mb-6 animate-fadeUp" style="animation-delay:0.3s">
-      <span class="grad-text">Ariq</span>
-      B. Suwarno
-    </h1>
-
-    <p class="font-body text-gray-500 text-lg max-w-md mb-4 animate-fadeUp" style="animation-delay:0.45s">
-      Architecture Student | Software Engineer | Web App Developer | Tech Enthusiast
-    </p>
-
-    <blockquote class="font-body italic text-gray-400 text-base max-w-sm mb-10 animate-fadeUp" style="animation-delay:0.55s">
-=======
 <nav id="mainNav" class="fixed top-0 w-full z-50 px-4 sm:px-8 lg:px-14 py-4 flex items-center justify-between bg-canvas/90 backdrop-blur-xl border-b border-line">
   <div class="nav-logo text-ink text-sm sm:text-base">
     <span class="g-dot" style="background:crimson"></span>
@@ -461,51 +211,10 @@
     </p>
 
     <blockquote class="font-body italic text-muted/80 text-base max-w-sm mb-10 animate-fadeUp" style="animation-delay:0.55s">
->>>>>>> 5c0c105 (update UI)
       "Declare var, not war"
     </blockquote>
 
     <div class="flex gap-4 flex-wrap justify-center animate-fadeUp" style="animation-delay:0.65s">
-<<<<<<< HEAD
-      <a href="#projects" class="bg-ink text-mist font-display font-700 text-sm px-8 py-4 rounded-full hover:bg-accent transition-all duration-250 hover:-translate-y-1 shadow-lg hover:shadow-accent/30 nav-link">
-        Lihat Proyek
-      </a>
-      <a href="https://ariqspace.my.id/blog" class="bg-white text-ink font-display font-600 text-sm px-8 py-4 rounded-full border-2 border-mist-dark hover:border-accent hover:text-accent transition-all duration-250 nav-link">
-        Blog
-      </a>
-      <a href="#connect" class="bg-white text-ink font-display font-600 text-sm px-8 py-4 rounded-full border-2 border-mist-dark hover:border-accent hover:text-accent transition-all duration-250 nav-link">
-        Hubungi Saya
-      </a>
-    </div>
-  </div>
-
-  <!-- TICKER -->
-  <div class="w-full overflow-hidden mt-16 relative z-10">
-    <div class="ticker-inner flex gap-4 animate-ticker w-max">
-      <!-- first set -->
-      <span class="flex items-center gap-2 bg-white border border-mist-dark rounded-full px-5 py-2.5 text-xs font-display font-700 whitespace-nowrap shadow-sm"><i class="fa-brands fa-html5 text-yellow-500"></i> HTML</span>
-      <span class="flex items-center gap-2 bg-white border border-mist-dark rounded-full px-5 py-2.5 text-xs font-display font-700 whitespace-nowrap shadow-sm"><i class="fa-brands fa-css3 text-blue-500"></i> CSS</span>
-      <span class="flex items-center gap-2 bg-white border border-mist-dark rounded-full px-5 py-2.5 text-xs font-display font-700 whitespace-nowrap shadow-sm"><i class="fa-brands fa-js text-blue-600"></i> JavaScript</span>
-      <!-- <span class="flex items-center gap-2 bg-white border border-mist-dark rounded-full px-5 py-2.5 text-xs font-display font-700 whitespace-nowrap shadow-sm"><i class="bi bi-database text-green-600"></i> PostgreSQL</span> -->
-      <span class="flex items-center gap-2 bg-white border border-mist-dark rounded-full px-5 py-2.5 text-xs font-display font-700 whitespace-nowrap shadow-sm"><i class="bi bi-bootstrap text-orange-500"></i> Bootstrap</span>
-      <span class="flex items-center gap-2 bg-white border border-mist-dark rounded-full px-5 py-2.5 text-xs font-display font-700 whitespace-nowrap shadow-sm"><i class="fa-brands fa-php text-purple-500"></i> PHP</span>
-      <span class="flex items-center gap-2 bg-white border border-mist-dark rounded-full px-5 py-2.5 text-xs font-display font-700 whitespace-nowrap shadow-sm"><i class="fa-brands fa-laravel text-gray-600"></i> Laravel</span>
-      <span class="flex items-center gap-2 bg-white border border-mist-dark rounded-full px-5 py-2.5 text-xs font-display font-700 whitespace-nowrap shadow-sm"><i class="bi bi-database text-blue-500"></i> MySQL</span>
-      <span class="flex items-center gap-2 bg-white border border-mist-dark rounded-full px-5 py-2.5 text-xs font-display font-700 whitespace-nowrap shadow-sm"><i class="bi bi-git text-orange-600"></i> Git</span>
-      <span class="flex items-center gap-2 bg-white border border-mist-dark rounded-full px-5 py-2.5 text-xs font-display font-700 whitespace-nowrap shadow-sm"><i class="fa-brands fa-java text-cyan-400"></i> Java</span>
-      <!-- duplicate for infinite -->
-      <!-- <span class="flex items-center gap-2 bg-white border border-mist-dark rounded-full px-5 py-2.5 text-xs font-display font-700 whitespace-nowrap shadow-sm"><span class="text-cyan-500 font-mono font-bold text-base leading-none">⚛</span> React</span> -->
-      <span class="flex items-center gap-2 bg-white border border-mist-dark rounded-full px-5 py-2.5 text-xs font-display font-700 whitespace-nowrap shadow-sm"><i class="fa-brands fa-html5 text-yellow-500"></i> HTML</span>
-      <span class="flex items-center gap-2 bg-white border border-mist-dark rounded-full px-5 py-2.5 text-xs font-display font-700 whitespace-nowrap shadow-sm"><i class="fa-brands fa-css3 text-blue-500"></i> CSS</span>
-      <span class="flex items-center gap-2 bg-white border border-mist-dark rounded-full px-5 py-2.5 text-xs font-display font-700 whitespace-nowrap shadow-sm"><i class="fa-brands fa-js text-blue-600"></i> JavaScript</span>
-      <!-- <span class="flex items-center gap-2 bg-white border border-mist-dark rounded-full px-5 py-2.5 text-xs font-display font-700 whitespace-nowrap shadow-sm"><i class="bi bi-database text-green-600"></i> PostgreSQL</span> -->
-      <span class="flex items-center gap-2 bg-white border border-mist-dark rounded-full px-5 py-2.5 text-xs font-display font-700 whitespace-nowrap shadow-sm"><i class="bi bi-bootstrap text-orange-500"></i> Bootstrap</span>
-      <span class="flex items-center gap-2 bg-white border border-mist-dark rounded-full px-5 py-2.5 text-xs font-display font-700 whitespace-nowrap shadow-sm"><i class="fa-brands fa-php text-purple-500"></i> PHP</span>
-      <span class="flex items-center gap-2 bg-white border border-mist-dark rounded-full px-5 py-2.5 text-xs font-display font-700 whitespace-nowrap shadow-sm"><i class="fa-brands fa-laravel text-gray-600"></i> Laravel</span>
-      <span class="flex items-center gap-2 bg-white border border-mist-dark rounded-full px-5 py-2.5 text-xs font-display font-700 whitespace-nowrap shadow-sm"><i class="bi bi-database text-blue-500"></i> MySQL</span>
-      <span class="flex items-center gap-2 bg-white border border-mist-dark rounded-full px-5 py-2.5 text-xs font-display font-700 whitespace-nowrap shadow-sm"><i class="bi bi-git text-orange-600"></i> Git</span>
-      <span class="flex items-center gap-2 bg-white border border-mist-dark rounded-full px-5 py-2.5 text-xs font-display font-700 whitespace-nowrap shadow-sm"><i class="fa-brands fa-java text-cyan-400"></i> Java</span>
-=======
       <a href="#connect" class="bg-accent text-white font-display font-700 text-sm px-8 py-4 rounded-full hover:bg-accent-light transition-all duration-250 hover:-translate-y-1 shadow-lg shadow-accent/20 nav-link">
         Let's Connect
       </a>
@@ -515,94 +224,10 @@
       <a href="#business" class="bg-surface text-ink font-display font-600 text-sm px-8 py-4 rounded-full border-2 border-line hover:border-accent hover:text-accent-light transition-all duration-250 nav-link">
         My Businesses
       </a>
->>>>>>> 5c0c105 (update UI)
     </div>
   </div>
 </section>
 
-<<<<<<< HEAD
-<!-- STATS BAR (dark) -->
-<!-- <div class="ink-section py-14 px-6">
-  <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-    <div>
-      <p class="font-display font-800 text-5xl text-accent">3+</p>
-      <p class="font-body text-gray-400 text-sm mt-1">Tahun Pengalaman</p>
-    </div>
-    <div>
-      <p class="font-display font-800 text-5xl text-lime">40+</p>
-      <p class="font-body text-gray-400 text-sm mt-1">Proyek Selesai</p>
-    </div>
-    <div>
-      <p class="font-display font-800 text-5xl text-spark">15+</p>
-      <p class="font-body text-gray-400 text-sm mt-1">Klien Puas</p>
-    </div>
-    <div>
-      <p class="font-display font-800 text-5xl text-accent-light">8</p>
-      <p class="font-body text-gray-400 text-sm mt-1">Tech Stack Utama</p>
-    </div>
-  </div>
-</div> -->
-
-<!-- SKILLS -->
-<section id="skills" class="max-w-5xl mx-auto py-24 px-6">
-  <span class="font-mono text-xs font-500 tracking-widest text-accent uppercase">- Kemampuan</span>
-  <h2 class="font-display font-800 text-4xl lg:text-5xl tracking-tight mt-3 mb-4"><span class="grad-text">Stack </span>& Tools</h2>
-  <p class="font-body text-gray-500 text-base max-w-xl mb-14">Teknologi yang saya gunakan sehari-hari untuk membangun produk yang cepat, scalable, dan indah.</p>
-  
-  <!-- Language -->
-  <div class="mb-10">
-    <div class="flex items-center gap-3 mb-5">
-      <span class="font-mono text-xs font-500 tracking-widest text-gray-400 uppercase">Programming Languages</span>
-      <div class="flex-1 h-px bg-mist-dark"></div>
-    </div>
-    <div class="flex flex-wrap gap-3">
-      <div class="skill-card flex items-center gap-3 bg-white border-2 border-mist-dark rounded-2xl px-5 py-4 shadow-sm hover:border-orange-500 hover:bg-orange-50 hover:shadow-orange-100 hover:shadow-lg">
-        <span class="skill-badge badge-expert">★ Expert</span>
-        <i class="fa-brands fa-html5 text-2xl text-orange-500"></i>
-        <div><p class="font-display font-700 text-sm">HTML</p><p class="font-mono text-xs text-gray-400 mt-0.5">Markup</p></div>
-      </div>
-      <div class="skill-card flex items-center gap-3 bg-white border-2 border-mist-dark rounded-2xl px-5 py-4 shadow-sm hover:border-blue-500 hover:bg-blue-50 hover:shadow-blue-100 hover:shadow-lg">
-        <span class="skill-badge badge-expert">★ Expert</span>
-        <i class="fa-brands fa-css3 text-2xl text-blue-500"></i>
-        <div><p class="font-display font-700 text-sm">CSS</p><p class="font-mono text-xs text-gray-400 mt-0.5">Style Sheet</p></div>
-      </div>
-      <div class="skill-card flex items-center gap-3 bg-white border-2 border-mist-dark rounded-2xl px-5 py-4 shadow-sm hover:border-yellow-500 hover:bg-yellow-50 hover:shadow-yellow-100 hover:shadow-lg">
-        <span class="skill-badge badge-expert">★ Expert</span>
-        <i class="fa-brands fa-js text-2xl text-yellow-500"></i>
-        <div><p class="font-display font-700 text-sm">JavaScript</p><p class="font-mono text-xs text-gray-400 mt-0.5">Language</p></div>
-      </div>
-      <div class="skill-card flex items-center gap-3 bg-white border-2 border-mist-dark rounded-2xl px-5 py-4 shadow-sm hover:border-blue-600 hover:bg-blue-50 hover:shadow-blue-100 hover:shadow-lg">
-        <span class="skill-badge badge-expert">★ Expert</span>
-        <i class="fa-brands fa-php text-2xl text-blue-600"></i>
-        <div><p class="font-display font-700 text-sm">PHP</p><p class="font-mono text-xs text-gray-400 mt-0.5">Language</p></div>
-      </div>
-      <div class="skill-card flex items-center gap-3 bg-white border-2 border-mist-dark rounded-2xl px-5 py-4 shadow-sm hover:border-blue-500 hover:bg-blue-50 hover:shadow-blue-100 hover:shadow-lg">
-        <span class="skill-badge badge-new">✦ New Skill</span>
-        <i class="fa-brands fa-dart-lang text-2xl text-blue-500"></i>
-        <div><p class="font-display font-700 text-sm">Dart</p><p class="font-mono text-xs text-gray-400 mt-0.5">Language</p></div>
-      </div>
-      <div class="skill-card flex items-center gap-3 bg-white border-2 border-mist-dark rounded-2xl px-5 py-4 shadow-sm hover:border-blue-500 hover:bg-blue-50 hover:shadow-blue-100 hover:shadow-lg">
-        <span class="skill-badge badge-new">✦ New Skill</span>
-        <i class="fa-brands fa-java text-2xl text-blue-500"></i>
-        <div><p class="font-display font-700 text-sm">Java</p><p class="font-mono text-xs text-gray-400 mt-0.5">Language</p></div>
-      </div>
-      <div class="skill-card flex items-center gap-3 bg-white border-2 border-mist-dark rounded-2xl px-5 py-4 shadow-sm hover:border-blue-600 hover:bg-blue-50 hover:shadow-blue-100 hover:shadow-lg">
-        <span class="skill-badge badge-ongoing">⏳ On Going</span>
-        <i class="fa-brands fa-python text-2xl text-blue-600"></i>
-        <div><p class="font-display font-700 text-sm">Python</p><p class="font-mono text-xs text-gray-400 mt-0.5">Language</p></div>
-      </div>
-      <div class="skill-card flex items-center gap-3 bg-white border-2 border-mist-dark rounded-2xl px-5 py-4 shadow-sm hover:border-blue-600 hover:bg-blue-50 hover:shadow-blue-100 hover:shadow-lg">
-        <span class="skill-badge badge-ongoing">⏳ On Going</span>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Godot_icon.svg"
-        alt="Godot"
-        class="w-7 h-7 object-contain">
-        <div><p class="font-display font-700 text-sm">Godot</p><p class="font-mono text-xs text-gray-400 mt-0.5">Language</p></div>
-      </div>
-      <div class="skill-card flex items-center gap-3 bg-white border-2 border-mist-dark rounded-2xl px-5 py-4 shadow-sm hover:border-purple-500 hover:bg-purple-50 hover:shadow-purple-100 hover:shadow-lg">
-        <span class="skill-badge badge-expert">★ Expert</span>
-        <i class="bi bi-filetype-sql text-2xl text-purple-500"></i>
-        <div><p class="font-display font-700 text-sm">SQL</p><p class="font-mono text-xs text-gray-400 mt-0.5">Language</p></div>
-=======
 <!-- SKILLS -->
 <section id="skills" class="max-w-5xl mx-auto py-24 px-6">
   <h2 class="font-display font-800 text-3xl sm:text-4xl lg:text-5xl tracking-tight mt-3 mb-4 text-ink">Stack & Tools</h2>
@@ -664,160 +289,10 @@
       <div class="skill-card flex items-center gap-3 bg-surface border-2 border-line rounded-2xl px-5 py-4 hover:border-accent hover:bg-accent/5">
         <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/mysql-icon.png" alt="MySQL" class="w-7 h-7 object-contain">
         <div><p class="font-display font-700 text-sm text-ink">MySQL</p><p class="font-mono text-xs text-muted mt-0.5">Relational DB</p></div>
->>>>>>> 5c0c105 (update UI)
       </div>
     </div>
   </div>
 
-<<<<<<< HEAD
-  <!-- Frameworks -->
-  <div class="mb-10">
-    <div class="flex items-center gap-3 mb-5">
-      <span class="font-mono text-xs font-500 tracking-widest text-gray-400 uppercase">Frameworks</span>
-      <div class="flex-1 h-px bg-mist-dark"></div>
-    </div>
-    <div class="flex flex-wrap gap-3">
-      <!-- <div class="skill-card flex items-center gap-3 bg-white border-2 border-mist-dark rounded-2xl px-5 py-4 shadow-sm hover:border-cyan-500 hover:bg-cyan-50 hover:shadow-cyan-100 hover:shadow-lg">
-        <span class="text-2xl">⚛</span>
-        <div><p class="font-display font-700 text-sm">React</p><p class="font-mono text-xs text-gray-400 mt-0.5">Hooks + Context</p></div>
-      </div> -->
-      <div class="skill-card flex items-center gap-3 bg-white border-2 border-mist-dark rounded-2xl px-5 py-4 shadow-sm hover:border-red-500 hover:bg-red-50 hover:shadow-red-100 hover:shadow-lg">
-        <span class="skill-badge badge-expert">★ Expert</span>
-        <i class="fa-brands fa-laravel text-2xl text-red-600"></i>
-        <div><p class="font-display font-700 text-sm">Laravel</p><p class="font-mono text-xs text-gray-400 mt-0.5">PHP Framework</p></div>
-      </div>
-      <div class="skill-card flex items-center gap-3 bg-white border-2 border-mist-dark rounded-2xl px-5 py-4 shadow-sm hover:border-cyan-400 hover:bg-cyan-50 hover:shadow-cyan-100 hover:shadow-lg">
-        <span class="skill-badge badge-new">✦ New Skill</span>
-        <i class="fa-brands fa-flutter text-2xl text-cyan-500"></i>
-        <div><p class="font-display font-700 text-sm">Flutter</p><p class="font-mono text-xs text-gray-400 mt-0.5">Dart Framework</p></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Frontend -->
-  <!-- <div class="mb-10">
-    <div class="flex items-center gap-3 mb-5">
-      <span class="font-mono text-xs font-500 tracking-widest text-gray-400 uppercase">Frontend</span>
-      <div class="flex-1 h-px bg-mist-dark"></div>
-    </div>
-    <div class="flex flex-wrap gap-3">
-      <div class="skill-card flex items-center gap-3 bg-white border-2 border-mist-dark rounded-2xl px-5 py-4 shadow-sm hover:border-cyan-500 hover:bg-cyan-50 hover:shadow-cyan-100 hover:shadow-lg">
-        <span class="text-2xl">⚛</span>
-        <div><p class="font-display font-700 text-sm">React</p><p class="font-mono text-xs text-gray-400 mt-0.5">Hooks + Context</p></div>
-      </div>
-      <div class="skill-card flex items-center gap-3 bg-white border-2 border-mist-dark rounded-2xl px-5 py-4 shadow-sm hover:border-black hover:bg-gray-50 hover:shadow-gray-200 hover:shadow-lg">
-        <i class="bi bi-lightning-fill text-2xl text-black"></i>
-        <div><p class="font-display font-700 text-sm">Next.js</p><p class="font-mono text-xs text-gray-400 mt-0.5">App Router</p></div>
-      </div>
-      <div class="skill-card flex items-center gap-3 bg-white border-2 border-mist-dark rounded-2xl px-5 py-4 shadow-sm hover:border-cyan-400 hover:bg-cyan-50 hover:shadow-cyan-100 hover:shadow-lg">
-        <i class="bi bi-wind text-2xl text-cyan-500"></i>
-        <div><p class="font-display font-700 text-sm">Tailwind CSS</p><p class="font-mono text-xs text-gray-400 mt-0.5">v3 + Custom</p></div>
-      </div>
-      <div class="skill-card flex items-center gap-3 bg-white border-2 border-mist-dark rounded-2xl px-5 py-4 shadow-sm hover:border-green-500 hover:bg-green-50 hover:shadow-green-100 hover:shadow-lg">
-        <i class="bi bi-circle-fill text-2xl text-green-500"></i>
-        <div><p class="font-display font-700 text-sm">Vue.js</p><p class="font-mono text-xs text-gray-400 mt-0.5">Composition API</p></div>
-      </div>
-    </div>
-  </div> -->
-
-  <!-- Backend -->
-  <!-- <div class="mb-10">
-    <div class="flex items-center gap-3 mb-5">
-      <span class="font-mono text-xs font-500 tracking-widest text-gray-400 uppercase">Backend</span>
-      <div class="flex-1 h-px bg-mist-dark"></div>
-    </div>
-    <div class="flex flex-wrap gap-3">
-      <div class="skill-card flex items-center gap-3 bg-white border-2 border-mist-dark rounded-2xl px-5 py-4 shadow-sm hover:border-green-600 hover:bg-green-50 hover:shadow-green-100 hover:shadow-lg">
-        <i class="bi bi-heptagon-fill text-2xl text-green-600"></i>
-        <div><p class="font-display font-700 text-sm">Node.js</p><p class="font-mono text-xs text-gray-400 mt-0.5">Express / Fastify</p></div>
-      </div>
-      <div class="skill-card flex items-center gap-3 bg-white border-2 border-mist-dark rounded-2xl px-5 py-4 shadow-sm hover:border-emerald-500 hover:bg-emerald-50 hover:shadow-emerald-100 hover:shadow-lg">
-        <i class="bi bi-leaf-fill text-2xl text-emerald-500"></i>
-        <div><p class="font-display font-700 text-sm">Django</p><p class="font-mono text-xs text-gray-400 mt-0.5">REST Framework</p></div>
-      </div>
-      <div class="skill-card flex items-center gap-3 bg-white border-2 border-mist-dark rounded-2xl px-5 py-4 shadow-sm hover:border-blue-500 hover:bg-blue-50 hover:shadow-blue-100 hover:shadow-lg">
-        <i class="bi bi-docker text-2xl text-blue-500"></i>
-        <div><p class="font-display font-700 text-sm">Docker</p><p class="font-mono text-xs text-gray-400 mt-0.5">Compose + K8s</p></div>
-      </div>
-    </div>
-  </div> -->
-
-  <!-- Database -->
-  <div class="mb-10">
-    <div class="flex items-center gap-3 mb-5">
-      <span class="font-mono text-xs font-500 tracking-widest text-gray-400 uppercase">Database</span>
-      <div class="flex-1 h-px bg-mist-dark"></div>
-    </div>
-    <div class="flex flex-wrap gap-3">
-      <div class="skill-card flex items-center gap-3 bg-white border-2 border-mist-dark rounded-2xl px-5 py-4 shadow-sm hover:border-blue-600 hover:bg-blue-50 hover:shadow-blue-100 hover:shadow-lg">
-        <img src="https://wiki.postgresql.org/images/thumb/a/a4/PostgreSQL_logo.3colors.svg/540px-PostgreSQL_logo.3colors.svg.png?20090213191835"
-        alt="PostgreSQL"
-        class="w-7 h-7 object-contain">
-        <div><p class="font-display font-700 text-sm">PostgreSQL</p><p class="font-mono text-xs text-gray-400 mt-0.5">Relational DB</p></div>
-      </div>
-      <div class="skill-card flex items-center gap-3 bg-white border-2 border-mist-dark rounded-2xl px-5 py-4 shadow-sm hover:border-orange-500 hover:bg-orange-50 hover:shadow-orange-100 hover:shadow-lg">
-        <span class="skill-badge badge-expert">★ Expert</span>
-        <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/mysql-icon.png"
-        alt="MySQL"
-        class="w-7 h-7 object-contain">
-        <div><p class="font-display font-700 text-sm">MySQL</p><p class="font-mono text-xs text-gray-400 mt-0.5">Relational DB</p></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Tools -->
-  <div>
-    <div class="flex items-center gap-3 mb-5">
-      <span class="font-mono text-xs font-500 tracking-widest text-gray-400 uppercase">Tools</span>
-      <div class="flex-1 h-px bg-mist-dark"></div>
-    </div>
-    <div class="flex flex-wrap gap-3">
-      <div class="skill-card flex items-center gap-3 bg-white border-2 border-mist-dark rounded-2xl px-5 py-4 shadow-sm hover:border-blue-600 hover:bg-blue-50 hover:shadow-blue-100 hover:shadow-lg">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Apache_NetBeans_Logo.svg/500px-Apache_NetBeans_Logo.svg.png?_=20180920122700"
-        alt="NetBeans"
-        class="w-7 h-7 object-contain">
-      <div><p class="font-display font-700 text-sm">NetBeans</p><p class="font-mono text-xs text-gray-400 mt-0.5">JavaIDE</p></div>
-      </div>
-      <div class="skill-card flex items-center gap-3 bg-white border-2 border-mist-dark rounded-2xl px-5 py-4 shadow-sm hover:border-blue-600 hover:bg-blue-50 hover:shadow-blue-100 hover:shadow-lg">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Android_Studio_icon_%282023%29.svg/1280px-Android_Studio_icon_%282023%29.svg.png"
-        alt="Android Studio"
-        class="w-7 h-7 object-contain">
-      <div><p class="font-display font-700 text-sm">Android Studio</p><p class="font-mono text-xs text-gray-400 mt-0.5">IDE</p></div>
-      </div>
-      <div class="skill-card flex items-center gap-3 bg-white border-2 border-mist-dark rounded-2xl px-5 py-4 shadow-sm hover:border-blue-600 hover:bg-blue-50 hover:shadow-blue-100 hover:shadow-lg">
-        <img src="https://code.visualstudio.com/assets/branding/code-stable.png"
-        alt="VSCode"
-        class="w-7 h-7 object-contain">
-        <div><p class="font-display font-700 text-sm">Visual Studio Code</p><p class="font-mono text-xs text-gray-400 mt-0.5">Code Editor</p></div>
-      </div>
-      <div class="skill-card flex items-center gap-3 bg-white border-2 border-mist-dark rounded-2xl px-5 py-4 shadow-sm hover:border-blue-600 hover:bg-blue-50 hover:shadow-blue-100 hover:shadow-lg">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/DBeaver_logo.svg/330px-DBeaver_logo.svg.png"
-        alt="DBeaver"
-        class="w-7 h-7 object-contain">
-        <div><p class="font-display font-700 text-sm">DBeaver</p><p class="font-mono text-xs text-gray-400 mt-0.5">Tool</p></div>
-      </div>
-      <div class="skill-card flex items-center gap-3 bg-white border-2 border-purple-200 rounded-2xl px-5 py-4 shadow-sm hover:border-purple-500 hover:bg-purple-50 hover:shadow-purple-200 hover:shadow-lg">
-        <i class="fa-brands fa-bootstrap text-2xl text-purple-600"></i>
-      <div><p class="font-display font-700 text-sm">Bootstrap</p><p class="font-mono text-xs text-gray-400 mt-0.5">UI/CSS Tool</p></div>
-      </div>
-      <div class="skill-card flex items-center gap-3 bg-white border-2 border-mist-dark rounded-2xl px-5 py-4 shadow-sm hover:border-cyan-400 hover:bg-cyan-50 hover:shadow-cyan-100 hover:shadow-lg">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Tailwind_CSS_Logo.svg/1280px-Tailwind_CSS_Logo.svg.png"
-        alt="Tailwind"
-        class="w-7 h-7 object-contain">
-        <div><p class="font-display font-700 text-sm">Tailwind CSS</p><p class="font-mono text-xs text-gray-400 mt-0.5">UI/CSS Tool</p></div>
-      </div>
-      <div class="skill-card flex items-center gap-3 bg-white border-2 border-mist-dark rounded-2xl px-5 py-4 shadow-sm hover:border-orange-500 hover:bg-orange-50 hover:shadow-orange-100 hover:shadow-lg">
-        <i class="bi bi-git text-orange text-2xl text-orange-500"></i>
-        <div><p class="font-display font-700 text-sm">Git</p><p class="font-mono text-xs text-gray-400 mt-0.5">Version Control</p></div>
-      </div>
-      <div class="skill-card flex items-center gap-3 bg-white border-2 border-mist-dark rounded-2xl px-5 py-4 shadow-sm hover:border-cyan-400 hover:bg-cyan-50 hover:shadow-cyan-100 hover:shadow-lg">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/3840px-React-icon.svg.png"
-        alt="React"
-        class="w-7 h-7 object-contain">
-        <div><p class="font-display font-700 text-sm">React</p><p class="font-mono text-xs text-gray-400 mt-0.5">JS Library</p></div>
-      </div>
-    </div>
-=======
   <div>
     <div class="flex items-center gap-3 mb-5">
       <span class="font-mono text-xs font-500 tracking-widest text-muted uppercase">Software</span>
@@ -848,307 +323,10 @@
         <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Godot_icon.svg" alt="Godot" class="w-7 h-7 object-contain">
         <div><p class="font-display font-700 text-sm text-ink">Godot</p><p class="font-mono text-xs text-muted mt-0.5">Engine</p></div>
       </div>
->>>>>>> 5c0c105 (update UI)
     </div>
   </div>
 </section>
 
-<<<<<<< HEAD
-<hr class="border-mist-dark max-w-5xl mx-auto" />
-
-<!-- PLATFORMS (dark) -->
-<div id="platforms" class="ink-section py-24 px-6">
-  <div class="max-w-5xl mx-auto">
-    <span class="font-mono text-xs font-500 tracking-widest text-accent/70 uppercase">— Platform</span>
-    <h2 class="font-display font-800 text-4xl lg:text-5xl tracking-tight mt-3 mb-4 text-white">Apa yang <span class="grad-text">Saya Buat</span></h2>
-    <!-- <p class="font-body text-gray-400 text-base max-w-xl mb-14">test</p> -->
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-      <!-- Web -->
-      <div class="group bg-white/5 border border-white/10 rounded-3xl p-8 text-center hover:bg-white/10 hover:-translate-y-2 transition-all duration-300 backdrop-blur-sm">
-        <div class="text-5xl mb-5">🌐</div>
-        <h3 class="font-display font-700 text-white text-xl mb-3">Web App</h3>
-        <p class="font-body text-gray-400 text-sm leading-relaxed mb-5">Membangun aplikasi web yang responsif, mulai dari tampilan hingga logika server dan database.</p>
-        <div class="flex flex-wrap gap-2 justify-center">
-          <span class="bg-white/15 text-white/80 font-mono text-xs px-3 py-1 rounded-full">HTML</span>
-          <span class="bg-white/15 text-white/80 font-mono text-xs px-3 py-1 rounded-full">CSS</span>
-          <span class="bg-white/15 text-white/80 font-mono text-xs px-3 py-1 rounded-full">PHP</span>
-          <span class="bg-white/15 text-white/80 font-mono text-xs px-3 py-1 rounded-full">Laravel</span>
-          <span class="bg-white/15 text-white/80 font-mono text-xs px-3 py-1 rounded-full">MySQL</span>
-          <span class="bg-white/15 text-white/80 font-mono text-xs px-3 py-1 rounded-full">Bootstrap</span>
-          <span class="bg-white/15 text-white/80 font-mono text-xs px-3 py-1 rounded-full">Tailwind</span>
-        </div>
-      </div>
-      <!-- Mobile -->
-      <div class="group bg-white/5 border border-white/10 rounded-3xl p-8 text-center hover:bg-white/10 hover:-translate-y-2 transition-all duration-300 backdrop-blur-sm">
-        <div class="text-5xl mb-5">📱</div>
-        <h3 class="font-display font-700 text-white text-xl mb-3">Mobile App</h3>
-        <p class="font-body text-gray-400 text-sm leading-relaxed mb-5">Mengembangkan aplikasi Android native maupun cross-platform yang performa tinggi dan user-friendly.</p>
-        <div class="flex flex-wrap gap-2 justify-center">
-          <span class="bg-white/15 text-white/80 font-mono text-xs px-3 py-1 rounded-full">Flutter</span>
-          <span class="bg-white/15 text-white/80 font-mono text-xs px-3 py-1 rounded-full">Dart</span>
-          <span class="bg-white/15 text-white/80 font-mono text-xs px-3 py-1 rounded-full">Java</span>
-          <span class="bg-white/15 text-white/80 font-mono text-xs px-3 py-1 rounded-full">NetBeans</span>
-          <span class="bg-white/15 text-white/80 font-mono text-xs px-3 py-1 rounded-full">Android Studio</span>
-        </div>
-      </div>
-      <!-- Backend -->
-      <!-- <div class="group bg-white/5 border border-white/10 rounded-3xl p-8 text-center hover:bg-white/10 hover:-translate-y-2 transition-all duration-300 backdrop-blur-sm">
-        <div class="text-5xl mb-5">⚙️</div>
-        <h3 class="font-display font-700 text-white text-xl mb-3">Backend & API</h3>
-        <p class="font-body text-gray-400 text-sm leading-relaxed mb-5">REST & GraphQL API yang aman, scalable, dan terdokumentasi dengan baik.</p>
-        <div class="flex flex-wrap gap-2 justify-center">
-          <span class="bg-white/15 text-white/80 font-mono text-xs px-3 py-1 rounded-full">Node.js</span>
-          <span class="bg-white/15 text-white/80 font-mono text-xs px-3 py-1 rounded-full">Django</span>
-          <span class="bg-white/15 text-white/80 font-mono text-xs px-3 py-1 rounded-full">AWS</span>
-        </div> -->
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- WORKFLOW -->
-<!-- <section class="max-w-5xl mx-auto py-24 px-6">
-  <span class="font-mono text-xs font-500 tracking-widest text-accent uppercase">— Workflow</span>
-  <h2 class="font-display font-800 text-4xl lg:text-5xl tracking-tight mt-3 mb-4">Dev <span class="grad-text">Process</span></h2>
-  <p class="font-body text-gray-500 text-base max-w-xl mb-10">Cara saya bekerja dari ideasi sampai deploy.</p>
-
-  <div class="flex gap-3 mb-8 flex-wrap" id="tabs">
-    <button class="tab-btn active font-display font-700 text-sm px-5 py-2.5 rounded-full bg-ink text-white border-2 border-ink" data-tab="web">Web</button>
-    <button class="tab-btn font-display font-700 text-sm px-5 py-2.5 rounded-full bg-white text-gray-500 border-2 border-mist-dark hover:border-accent hover:text-accent" data-tab="mobile">Mobile</button>
-    <button class="tab-btn font-display font-700 text-sm px-5 py-2.5 rounded-full bg-white text-gray-500 border-2 border-mist-dark hover:border-accent hover:text-accent" data-tab="backend">Backend</button>
-  </div>
-
-  <div id="tab-web" class="tab-content active bg-white rounded-3xl p-8 border border-mist-dark shadow-sm">
-    <p class="font-display font-700 text-lg mb-6">Full-Stack Web Workflow</p>
-    <div class="flex items-center flex-wrap gap-3">
-      <div class="flex items-center gap-2 bg-mist rounded-xl px-4 py-3 font-display font-700 text-sm"><span>📐</span> Design (Figma)</div>
-      <span class="text-accent text-xl">→</span>
-      <div class="flex items-center gap-2 bg-mist rounded-xl px-4 py-3 font-display font-700 text-sm"><span>⚛</span> Next.js</div>
-      <span class="text-accent text-xl">→</span>
-      <div class="flex items-center gap-2 bg-mist rounded-xl px-4 py-3 font-display font-700 text-sm"><span>🌊</span> Tailwind CSS</div>
-      <span class="text-accent text-xl">→</span>
-      <div class="flex items-center gap-2 bg-mist rounded-xl px-4 py-3 font-display font-700 text-sm"><span>⚙️</span> Node API</div>
-      <span class="text-accent text-xl">→</span>
-      <div class="flex items-center gap-2 bg-mist rounded-xl px-4 py-3 font-display font-700 text-sm"><span>🐳</span> Docker</div>
-      <span class="text-accent text-xl">→</span>
-      <div class="flex items-center gap-2 bg-lime/30 border border-lime/50 rounded-xl px-4 py-3 font-display font-700 text-sm"><span>🚀</span> Deploy (Vercel/AWS)</div>
-    </div>
-  </div>
-
-  <div id="tab-mobile" class="tab-content bg-white rounded-3xl p-8 border border-mist-dark shadow-sm">
-    <p class="font-display font-700 text-lg mb-6">Mobile Development Workflow</p>
-    <div class="flex items-center flex-wrap gap-3">
-      <div class="flex items-center gap-2 bg-mist rounded-xl px-4 py-3 font-display font-700 text-sm"><span>📐</span> Wireframe</div>
-      <span class="text-accent text-xl">→</span>
-      <div class="flex items-center gap-2 bg-mist rounded-xl px-4 py-3 font-display font-700 text-sm"><span>📱</span> React Native</div>
-      <span class="text-accent text-xl">→</span>
-      <div class="flex items-center gap-2 bg-mist rounded-xl px-4 py-3 font-display font-700 text-sm"><span>🔥</span> Expo</div>
-      <span class="text-accent text-xl">→</span>
-      <div class="flex items-center gap-2 bg-mist rounded-xl px-4 py-3 font-display font-700 text-sm"><span>☁️</span> Firebase</div>
-      <span class="text-accent text-xl">→</span>
-      <div class="flex items-center gap-2 bg-lime/30 border border-lime/50 rounded-xl px-4 py-3 font-display font-700 text-sm"><span>🏪</span> App Store / Play</div>
-    </div>
-  </div>
-
-  <div id="tab-backend" class="tab-content bg-white rounded-3xl p-8 border border-mist-dark shadow-sm">
-    <p class="font-display font-700 text-lg mb-6">Backend Architecture Workflow</p>
-    <div class="flex items-center flex-wrap gap-3">
-      <div class="flex items-center gap-2 bg-mist rounded-xl px-4 py-3 font-display font-700 text-sm"><span>📋</span> API Design</div>
-      <span class="text-accent text-xl">→</span>
-      <div class="flex items-center gap-2 bg-mist rounded-xl px-4 py-3 font-display font-700 text-sm"><span>🟢</span> Node / Django</div>
-      <span class="text-accent text-xl">→</span>
-      <div class="flex items-center gap-2 bg-mist rounded-xl px-4 py-3 font-display font-700 text-sm"><span>🗄</span> PostgreSQL</div>
-      <span class="text-accent text-xl">→</span>
-      <div class="flex items-center gap-2 bg-mist rounded-xl px-4 py-3 font-display font-700 text-sm"><span>⚡</span> Redis Cache</div>
-      <span class="text-accent text-xl">→</span>
-      <div class="flex items-center gap-2 bg-lime/30 border border-lime/50 rounded-xl px-4 py-3 font-display font-700 text-sm"><span>☁️</span> AWS EC2/ECS</div>
-    </div>
-  </div>
-</section> -->
-
-<hr class="border-mist-dark max-w-5xl mx-auto" />
-
-<!-- PROJECTS -->
-<section id="projects" class="max-w-5xl mx-auto py-24 px-6">
-  <span class="font-mono text-xs font-500 tracking-widest text-accent uppercase">— Portofolio</span>
-  <h2 class="font-display font-800 text-4xl lg:text-5xl tracking-tight mt-3 mb-4">Proyek <span class="grad-text">Pilihan</span></h2>
-  <p class="font-body text-gray-500 text-base max-w-xl mb-14">Beberapa karya yang saya banggakan dari konsep sampai produksi.</p>
-
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-    <!-- card 1 -->
-    <div class="relative bg-white rounded-3xl p-7 border border-mist-dark shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden group">
-      <div class="proj-accent-web absolute top-0 left-0 right-0 h-1 rounded-t-3xl"></div>
-      <p class="font-mono text-xs text-gray-400 uppercase tracking-widest mb-3">Web App</p>
-      <div class="text-3xl mb-4">🔌</div>
-      <h4 class="font-display font-700 text-base mb-2">Electronic Repair Service Web App</h4>
-      <p class="font-body text-sm text-gray-500 leading-relaxed">Platform perbaikan alat elektronik fullstack dengan cart, payment gateway, dan admin dashboard.</p>
-      <div class="flex flex-wrap gap-2 mt-4">
-        <a 
-          href="https://github.com/RikuTetsuya/VolTech-Service-App-Laravel"
-          target="_blank"
-          class="inline-flex items-center gap-2 bg-black text-white font-mono text-xs px-4 py-2 rounded-xl hover:bg-gray-800 active:scale-95 transition-all duration-200 shadow-sm hover:shadow-md">
-          
-          🔗 Click to Repository
-        </a>
-      </div>
-      <div class="flex flex-wrap gap-2 mt-4">
-        <span class="bg-mist border border-mist-dark font-mono text-xs px-3 py-1 rounded-full text-gray-600">PHP</span>
-        <span class="bg-mist border border-mist-dark font-mono text-xs px-3 py-1 rounded-full text-gray-600">Laravel</span>
-        <span class="bg-mist border border-mist-dark font-mono text-xs px-3 py-1 rounded-full text-gray-600">Laravel</span>
-        <span class="bg-mist border border-mist-dark font-mono text-xs px-3 py-1 rounded-full text-gray-600">MySQL</span>
-      </div>
-    </div>
-    <!-- card 2 -->
-    <div class="relative bg-white rounded-3xl p-7 border border-mist-dark shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden group">
-      <div class="proj-accent-mobile absolute top-0 left-0 right-0 h-1 rounded-t-3xl"></div>
-      <p class="font-mono text-xs text-gray-400 uppercase tracking-widest mb-3">Mobile</p>
-      <div class="text-3xl mb-4">💊</div>
-      <h4 class="font-display font-700 text-base mb-2">Pharmacy Management App</h4>
-      <p class="font-body text-sm text-gray-500 leading-relaxed">Aplikasi manajemen keuangan apotek dengan fitur pengolahan data laporan dan ekspor.</p>
-      <div class="flex flex-wrap gap-2 mt-4">
-        <a 
-          href="https://github.com/RikuTetsuya/NetBeans-Pharmacy-Management-App-CRUD"
-          target="_blank"
-          class="inline-flex items-center gap-2 bg-black text-white font-mono text-xs px-4 py-2 rounded-xl hover:bg-gray-800 active:scale-95 transition-all duration-200 shadow-sm hover:shadow-md">
-          
-          🔗 Click to Repository
-        </a>
-      </div>
-      <div class="flex flex-wrap gap-2 mt-4">
-        <span class="bg-mist border border-mist-dark font-mono text-xs px-3 py-1 rounded-full text-gray-600">Java</span>
-        <span class="bg-mist border border-mist-dark font-mono text-xs px-3 py-1 rounded-full text-gray-600">MySQL</span>
-        <!-- <span class="bg-mist border border-mist-dark font-mono text-xs px-3 py-1 rounded-full text-gray-600">SQLite</span> -->
-      </div>
-    </div>
-    <!-- card 3 -->
-    <div class="relative bg-white rounded-3xl p-7 border border-mist-dark shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden group">
-      <div class="proj-accent-game absolute top-0 left-0 right-0 h-1 rounded-t-3xl"></div>
-      <p class="font-mono text-xs text-gray-400 uppercase tracking-widest mb-3">Game</p>
-      <div class="text-3xl mb-4">🎮</div>
-      <h4 class="font-display font-700 text-base mb-2">Endless Runner Game</h4>
-      <p class="font-body text-sm text-gray-500 leading-relaxed">Sebuah endless game yang digabungkan dengan elemen fighting.</p>
-      <div class="flex flex-wrap gap-2 mt-4">
-        <a 
-          href="https://github.com/RikuTetsuya/"
-          target="_blank"
-          class="inline-flex items-center gap-2 bg-black text-white font-mono text-xs px-4 py-2 rounded-xl hover:bg-gray-800 active:scale-95 transition-all duration-200 shadow-sm hover:shadow-md">
-          
-          🔗 Click to Repository
-        </a>
-      </div>
-      <div class="flex flex-wrap gap-2 mt-4">
-        <span class="bg-mist border border-mist-dark font-mono text-xs px-3 py-1 rounded-full text-gray-600">Godot</span>
-      </div>
-    </div>
-
-    <!-- <div class="relative bg-white rounded-3xl p-7 border border-mist-dark shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden group">
-      <div class="proj-accent-backend absolute top-0 left-0 right-0 h-1 rounded-t-3xl"></div>
-      <p class="font-mono text-xs text-gray-400 uppercase tracking-widest mb-3">Backend</p>
-      <div class="text-3xl mb-4">📡</div>
-      <h4 class="font-display font-700 text-base mb-2">Real-time API Gateway</h4>
-      <p class="font-body text-sm text-gray-500 leading-relaxed">Microservices gateway dengan WebSocket, rate limiting, autentikasi JWT, dan monitoring.</p>
-      <div class="flex flex-wrap gap-2 mt-4">
-        <span class="bg-mist border border-mist-dark font-mono text-xs px-3 py-1 rounded-full text-gray-600">Node.js</span>
-        <span class="bg-mist border border-mist-dark font-mono text-xs px-3 py-1 rounded-full text-gray-600">Redis</span>
-        <span class="bg-mist border border-mist-dark font-mono text-xs px-3 py-1 rounded-full text-gray-600">Docker</span>
-      </div>
-    </div> -->
-    <!-- card 4 -->
-    <!-- <div class="relative bg-white rounded-3xl p-7 border border-mist-dark shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden group">
-      <div class="proj-accent-multi absolute top-0 left-0 right-0 h-1 rounded-t-3xl"></div>
-      <p class="font-mono text-xs text-gray-400 uppercase tracking-widest mb-3">Fullstack</p>
-      <div class="text-3xl mb-4">📊</div>
-      <h4 class="font-display font-700 text-base mb-2">Analytics Dashboard</h4>
-      <p class="font-body text-sm text-gray-500 leading-relaxed">Dashboard visualisasi data dengan chart interaktif, export PDF, dan role-based access.</p>
-      <div class="flex flex-wrap gap-2 mt-4">
-        <span class="bg-mist border border-mist-dark font-mono text-xs px-3 py-1 rounded-full text-gray-600">React</span>
-        <span class="bg-mist border border-mist-dark font-mono text-xs px-3 py-1 rounded-full text-gray-600">D3.js</span>
-        <span class="bg-mist border border-mist-dark font-mono text-xs px-3 py-1 rounded-full text-gray-600">FastAPI</span>
-      </div>
-    </div> -->
-    <!-- card 5 -->
-    <!-- <div class="relative bg-white rounded-3xl p-7 border border-mist-dark shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden group">
-      <div class="proj-accent-web absolute top-0 left-0 right-0 h-1 rounded-t-3xl"></div>
-      <p class="font-mono text-xs text-gray-400 uppercase tracking-widest mb-3">Web App</p>
-      <div class="text-3xl mb-4">🤖</div>
-      <h4 class="font-display font-700 text-base mb-2">AI Content Tool</h4>
-      <p class="font-body text-sm text-gray-500 leading-relaxed">Platform generasi konten berbasis AI dengan editor kolaboratif dan template kustom.</p>
-      <div class="flex flex-wrap gap-2 mt-4">
-        <span class="bg-mist border border-mist-dark font-mono text-xs px-3 py-1 rounded-full text-gray-600">Next.js</span>
-        <span class="bg-mist border border-mist-dark font-mono text-xs px-3 py-1 rounded-full text-gray-600">OpenAI</span>
-        <span class="bg-mist border border-mist-dark font-mono text-xs px-3 py-1 rounded-full text-gray-600">Tiptap</span>
-      </div>
-    </div> -->
-    <!-- card 6 -->
-    <!-- <div class="relative bg-white rounded-3xl p-7 border border-mist-dark shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden group">
-      <div class="proj-accent-mobile absolute top-0 left-0 right-0 h-1 rounded-t-3xl"></div>
-      <p class="font-mono text-xs text-gray-400 uppercase tracking-widest mb-3">Mobile</p>
-      <div class="text-3xl mb-4">🏋️</div>
-      <h4 class="font-display font-700 text-base mb-2">Fitness & Health App</h4>
-      <p class="font-body text-sm text-gray-500 leading-relaxed">Tracker olahraga dengan AI coach, kalori counter, dan social challenge antar pengguna.</p>
-      <div class="flex flex-wrap gap-2 mt-4">
-        <span class="bg-mist border border-mist-dark font-mono text-xs px-3 py-1 rounded-full text-gray-600">Flutter</span>
-        <span class="bg-mist border border-mist-dark font-mono text-xs px-3 py-1 rounded-full text-gray-600">Firebase</span>
-        <span class="bg-mist border border-mist-dark font-mono text-xs px-3 py-1 rounded-full text-gray-600">ML Kit</span>
-      </div>
-    </div> -->
-  </div>
-</section>
-
-<hr class="border-mist-dark max-w-5xl mx-auto" />
-
-<!-- ORGANISASI -->
-<section id="organisasi" class="max-w-5xl mx-auto py-24 px-6">
-  <span class="font-mono text-xs font-500 tracking-widest text-accent uppercase">— Organisasi</span>
-  <h2 class="font-display font-800 text-4xl lg:text-5xl tracking-tight mt-3 mb-4">Pengalaman <span class="grad-text">Organisasi</span></h2>
-  <p class="font-body text-gray-500 text-base max-w-xl mb-6">Perjalanan saya belajar, berkompetisi, dan mengikuti organisasi maupun bootcamp/course di bidang teknologi.</p>
- 
-  <!-- LAYOUT SWITCHER -->
-  <div class="flex gap-3 mb-10 flex-wrap" id="org-tabs">
-    <button class="org-tab-btn active font-display font-700 text-sm px-5 py-2.5 rounded-full bg-ink text-white border-2 border-ink" data-org="timeline">
-      <i class="bi bi-calendar3 mr-1.5"></i>Organisasi & Bootcamp
-    </button>
-    <button disabled class="org-tab-btn font-display font-700 text-sm px-5 py-2.5 rounded-full bg-white text-gray-500 border-2 border-mist-dark hover:border-accent hover:text-accent" data-org="grid">
-      <i class="bi bi-grid-3x3-gap mr-1.5"></i>Kompetisi
-    </button>
-    <button disabled class="org-tab-btn font-display font-700 text-sm px-5 py-2.5 rounded-full bg-white text-gray-500 border-2 border-mist-dark hover:border-accent hover:text-accent" data-org="accordion">
-      <i class="bi bi-chevron-bar-expand mr-1.5"></i>Lainnya
-    </button>
-  </div>
- 
-  <!-- ═══════════════════════════════ TIMELINE ═══════════════════════════════ -->
-  <div id="org-timeline" class="org-content">
-    <div class="relative pl-8 border-l-2 border-mist-dark space-y-0">
- 
-      <!-- item 1 -->
-      <div class="org-tl-item relative pb-12">
-        <!-- dot -->
-        <div class="absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-accent border-4 border-mist flex items-center justify-center"></div>
-        <!-- year pill -->
-        <span class="inline-block font-mono text-xs bg-accent/10 text-accent border border-accent/25 px-3 py-1 rounded-full mb-3">2026</span>
-        <div class="bg-white rounded-3xl p-7 border border-mist-dark shadow-sm hover:shadow-lg hover:border-accent/30 transition-all duration-300 group">
-          <div class="flex items-start gap-4">
-            <div class="w-12 h-12 rounded-2xl bg-blue-100 overflow-hidden flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-              <img 
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvKSX9oa8sAn0a_PcYT0MpJMtKD1pVnYjxRQ&s"
-                alt="gdgoc"
-                class="w-full h-full object-cover">
-            </div>
-            <div class="flex-1 min-w-0">
-              <div class="flex flex-wrap items-center gap-2 mb-1">
-                <h4 class="font-display font-700 text-base">GDGoC Unair</h4>
-                <span class="font-mono text-xs bg-purple-100 text-purple-700 border border-purple-200 px-2.5 py-0.5 rounded-full">Member</span>
-              </div>
-              <p class="font-body text-sm text-accent font-500 mb-3">Google Developer Groups on Campus · Universitas Airlangga</p>
-              <p class="font-body text-sm text-gray-500 leading-relaxed mb-4">Komunitas untuk mempelajari dan mengembangkan teknologi berbasis software yang diselenggarakan oleh Google di Universitas Airlangga.</p>
-              <!-- highlights -->
-              <div class="flex flex-wrap gap-2">
-                <span class="flex items-center gap-1.5 bg-lime/20 border border-lime/40 text-green-800 font-mono text-xs px-3 py-1.5 rounded-xl">Web Development</span>
-                <span class="flex items-center gap-1.5 bg-blue-50 border border-blue-200 text-blue-800 font-mono text-xs px-3 py-1.5 rounded-xl">Data Analyst</span>
-                <span class="flex items-center gap-1.5 bg-orange-50 border border-orange-200 text-orange-800 font-mono text-xs px-3 py-1.5 rounded-xl">UI/UX</span>
-              </div>
-=======
 <hr class="border-line max-w-5xl mx-auto" />
 
 <!-- PROJECTS -->
@@ -1240,48 +418,10 @@
               </div>
               <p class="font-body text-sm text-accent-light font-500 mb-3">AIESEC Surabaya</p>
               <p class="font-body text-sm text-muted leading-relaxed mb-4">Participated as a delegate in AFL (AIESEC Future Leader) Summer Peak 2026, an intensive leadership program by AIESEC in Surabaya focused on developing youth leaders capable of driving real-world impact aligned with the UN Sustainable Development Goals.</p>
->>>>>>> 5c0c105 (update UI)
             </div>
           </div>
         </div>
       </div>
-<<<<<<< HEAD
- 
-      <!-- item 2 -->
-      <div class="org-tl-item relative pb-12">
-        <div class="absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-spark border-4 border-mist"></div>
-        <span class="inline-block font-mono text-xs bg-spark/10 text-spark border border-spark/25 px-3 py-1 rounded-full mb-3">2026</span>
-        <div class="bg-white rounded-3xl p-7 border border-mist-dark shadow-sm hover:shadow-lg hover:border-spark/30 transition-all duration-300 group">
-          <div class="flex items-start gap-4">
-            <div class="flex flex-col items-center gap-2 flex-shrink-0">
-                <!-- Logo Dicoding -->
-                <div class="w-12 h-12 rounded-2xl bg-blue-100 overflow-hidden flex items-center justify-center">
-                  <img 
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzGNYX6M4X-BfBpM_Fhl0UCoFIZ_dOeo19IA&s"
-                    alt="dicoding"
-                    class="w-full h-full object-cover">
-                </div>
-
-                <!-- Logo DBS -->
-                <div class="w-12 h-12 rounded-xl bg-white overflow-hidden flex items-center justify-center border border-mist-dark">
-                  <img 
-                    src="https://icons.veryicon.com/png/o/business/bank-logo-collection/dbs-logo.png"
-                    alt="dbs"
-                    class="w-full h-full object-cover">
-                </div>
-              </div>
-            <div class="flex-1 min-w-0">
-              <div class="flex flex-wrap items-center gap-2 mb-1">
-                <h4 class="font-display font-700 text-base">Dicoding Bootcamp</h4>
-                <span class="font-mono text-xs bg-orange-100 text-orange-700 border border-orange-200 px-2.5 py-0.5 rounded-full">Student</span>
-              </div>
-              <p class="font-body text-sm text-spark font-500 mb-3">Coding Camp 2026 Powered by DBS Foundation</p>
-              <p class="font-body text-sm text-gray-500 leading-relaxed mb-4">Program pelatihan coding secara online untuk meningkatkan kompetensi masyarakat Indonesia di bidang teknologi informasi yang diselenggarakan oleh DBS Foundation bersama dengan Dicoding Indonesia.</p>
-              <div class="flex flex-wrap gap-2">
-                <!-- <span class="flex items-center gap-1.5 bg-lime/20 border border-lime/40 text-green-800 font-mono text-xs px-3 py-1.5 rounded-xl">👥 200+ peserta program</span>
-                <span class="flex items-center gap-1.5 bg-blue-50 border border-blue-200 text-blue-800 font-mono text-xs px-3 py-1.5 rounded-xl">📋 8 program kerja</span> -->
-              </div>
-=======
 
       <div class="org-tl-item relative pb-12">
         <div class="absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-accent-light border-4 border-canvas"></div>
@@ -1303,123 +443,10 @@
               </div>
               <p class="font-body text-sm text-accent-light font-500 mb-3">Coding Camp 2026 Powered by DBS Foundation | Full-Stack Web Development</p>
               <p class="font-body text-sm text-muted leading-relaxed mb-4">An online coding training program designed to enhance the information technology skills of the Indonesian public, organized by the DBS Foundation in collaboration with Dicoding Indonesia.</p>
->>>>>>> 5c0c105 (update UI)
             </div>
           </div>
         </div>
       </div>
-<<<<<<< HEAD
- 
-      <!-- item 3 -->
-      <!-- <div class="org-tl-item relative pb-0">
-        <div class="absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-lime border-4 border-mist"></div>
-        <span class="inline-block font-mono text-xs bg-lime/20 text-green-700 border border-lime/40 px-3 py-1 rounded-full mb-3">2025</span>
-        <div class="bg-white rounded-3xl p-7 border border-mist-dark shadow-sm hover:shadow-lg hover:border-lime/50 transition-all duration-300 group">
-          <div class="flex items-start gap-4">
-            <div class="w-12 h-12 rounded-2xl bg-green-100 flex items-center justify-center text-2xl flex-shrink-0 group-hover:scale-110 transition-transform duration-300">🌱</div>
-            <div class="flex-1 min-w-0">
-              <div class="flex flex-wrap items-center gap-2 mb-1">
-                <h4 class="font-display font-700 text-base">Anggota Aktif</h4>
-                <span class="font-mono text-xs bg-green-100 text-green-700 border border-green-200 px-2.5 py-0.5 rounded-full">Anggota</span>
-              </div>
-              <p class="font-body text-sm text-green-600 font-500 mb-3">UKM Robotika · Universitas ABC</p>
-              <p class="font-body text-sm text-gray-500 leading-relaxed mb-4">Aktif mengembangkan robot line follower dan berpartisipasi dalam kompetisi robotik tingkat nasional. Belajar dasar elektronika dan embedded systems.</p>
-              <div class="flex flex-wrap gap-2">
-                <span class="flex items-center gap-1.5 bg-lime/20 border border-lime/40 text-green-800 font-mono text-xs px-3 py-1.5 rounded-xl">🥈 Juara 2 Kontes Robot Nasional</span>
-                <span class="flex items-center gap-1.5 bg-blue-50 border border-blue-200 text-blue-800 font-mono text-xs px-3 py-1.5 rounded-xl">🤖 3 robot dikembangkan</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
- 
-    </div>
-  </div>
- 
-  <!-- ═══════════════════════════════ CARD GRID ═══════════════════════════════ -->
-  <div id="org-grid" class="org-content hidden">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
- 
-      <!-- card 1 -->
-      <div class="relative bg-white rounded-3xl p-7 border-2 border-mist-dark shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden group">
-        <div class="absolute top-0 left-0 right-0 h-1 rounded-t-3xl bg-gradient-to-r from-accent to-accent-light"></div>
-        <div class="flex items-center justify-between mb-5">
-          <div class="w-14 h-14 rounded-2xl bg-blue-100 flex items-center justify-center text-3xl group-hover:scale-110 transition-transform duration-300">🏛️</div>
-          <span class="font-mono text-xs bg-purple-100 text-purple-700 border border-purple-200 px-2.5 py-1 rounded-full">Ketua Divisi</span>
-        </div>
-        <h4 class="font-display font-700 text-base mb-1">Div. Teknologi — HMTI</h4>
-        <p class="font-body text-xs text-accent font-500 mb-3">Universitas ABC</p>
-        <span class="font-mono text-xs text-gray-400">📅 2022 — 2024</span>
-        <p class="font-body text-sm text-gray-500 leading-relaxed mt-3 mb-4">Memimpin tim 12 orang, membangun platform digital, dan rutin mengadakan workshop teknologi.</p>
-        <div class="space-y-2">
-          <div class="flex items-center gap-2 text-xs font-mono text-gray-600 bg-mist px-3 py-2 rounded-xl">🏆 Best Division Award 2023</div>
-          <div class="flex items-center gap-2 text-xs font-mono text-gray-600 bg-mist px-3 py-2 rounded-xl">📈 +300% website engagement</div>
-          <div class="flex items-center gap-2 text-xs font-mono text-gray-600 bg-mist px-3 py-2 rounded-xl">🎓 5 workshop diselenggarakan</div>
-        </div>
-      </div>
- 
-      <!-- card 2 -->
-      <div class="relative bg-white rounded-3xl p-7 border-2 border-mist-dark shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden group">
-        <div class="absolute top-0 left-0 right-0 h-1 rounded-t-3xl bg-gradient-to-r from-spark to-orange-400"></div>
-        <div class="flex items-center justify-between mb-5">
-          <div class="w-14 h-14 rounded-2xl bg-red-100 flex items-center justify-center text-3xl group-hover:scale-110 transition-transform duration-300">💡</div>
-          <span class="font-mono text-xs bg-orange-100 text-orange-700 border border-orange-200 px-2.5 py-1 rounded-full">Staff</span>
-        </div>
-        <h4 class="font-display font-700 text-base mb-1">Pengembangan SDM — BEM FT</h4>
-        <p class="font-body text-xs text-spark font-500 mb-3">Universitas ABC</p>
-        <span class="font-mono text-xs text-gray-400">📅 2021 — 2022</span>
-        <p class="font-body text-sm text-gray-500 leading-relaxed mt-3 mb-4">Merancang program pelatihan, mentoring mahasiswa baru, dan koordinasi lintas UKM.</p>
-        <div class="space-y-2">
-          <div class="flex items-center gap-2 text-xs font-mono text-gray-600 bg-mist px-3 py-2 rounded-xl">👥 200+ peserta program</div>
-          <div class="flex items-center gap-2 text-xs font-mono text-gray-600 bg-mist px-3 py-2 rounded-xl">📋 8 program kerja terlaksana</div>
-        </div>
-      </div>
- 
-      <!-- card 3 -->
-      <div class="relative bg-white rounded-3xl p-7 border-2 border-mist-dark shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden group">
-        <div class="absolute top-0 left-0 right-0 h-1 rounded-t-3xl bg-gradient-to-r from-lime to-green-400"></div>
-        <div class="flex items-center justify-between mb-5">
-          <div class="w-14 h-14 rounded-2xl bg-green-100 flex items-center justify-center text-3xl group-hover:scale-110 transition-transform duration-300">🌱</div>
-          <span class="font-mono text-xs bg-green-100 text-green-700 border border-green-200 px-2.5 py-1 rounded-full">Anggota</span>
-        </div>
-        <h4 class="font-display font-700 text-base mb-1">UKM Robotika</h4>
-        <p class="font-body text-xs text-green-600 font-500 mb-3">Universitas ABC</p>
-        <span class="font-mono text-xs text-gray-400">📅 2020 — 2021</span>
-        <p class="font-body text-sm text-gray-500 leading-relaxed mt-3 mb-4">Mengembangkan robot line follower dan kompetisi robotik nasional.</p>
-        <div class="space-y-2">
-          <div class="flex items-center gap-2 text-xs font-mono text-gray-600 bg-mist px-3 py-2 rounded-xl">🥈 Juara 2 Kontes Robot Nasional</div>
-          <div class="flex items-center gap-2 text-xs font-mono text-gray-600 bg-mist px-3 py-2 rounded-xl">🤖 3 robot dikembangkan</div>
-        </div>
-      </div>
- 
-    </div>
-  </div>
- 
-  <!-- ═══════════════════════════════ ACCORDION ═══════════════════════════════ -->
-  <div id="org-accordion" class="org-content hidden space-y-3">
- 
-    <!-- item 1 -->
-    <div class="acc-item bg-white rounded-2xl border-2 border-mist-dark overflow-hidden transition-all duration-300 hover:border-accent/30">
-      <button class="acc-trigger w-full flex items-center gap-4 px-6 py-5 text-left" onclick="toggleAcc(this)">
-        <div class="w-11 h-11 rounded-xl bg-blue-100 flex items-center justify-center text-xl flex-shrink-0">🏛️</div>
-        <div class="flex-1 min-w-0">
-          <div class="flex flex-wrap items-center gap-2">
-            <p class="font-display font-700 text-sm">Ketua Divisi Teknologi</p>
-            <span class="font-mono text-xs bg-purple-100 text-purple-700 border border-purple-200 px-2 py-0.5 rounded-full">Ketua Divisi</span>
-          </div>
-          <p class="font-body text-xs text-gray-400 mt-0.5">HMTI Universitas ABC · <span class="text-accent">2022 — 2024</span></p>
-        </div>
-        <i class="bi bi-chevron-down acc-icon text-gray-400 text-lg flex-shrink-0 transition-transform duration-300"></i>
-      </button>
-      <div class="acc-body hidden px-6 pb-6">
-        <div class="border-t border-mist-dark pt-5">
-          <p class="font-body text-sm text-gray-500 leading-relaxed mb-4">Memimpin tim 12 orang untuk mengembangkan platform digital organisasi, mengelola infrastruktur website, dan mengadakan workshop teknologi rutin bagi anggota himpunan.</p>
-          <p class="font-mono text-xs text-gray-400 uppercase tracking-widest mb-3">✦ Pencapaian</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="flex items-center gap-1.5 bg-lime/20 border border-lime/40 text-green-800 font-mono text-xs px-3 py-1.5 rounded-xl">🏆 Best Division Award 2023</span>
-            <span class="flex items-center gap-1.5 bg-blue-50 border border-blue-200 text-blue-800 font-mono text-xs px-3 py-1.5 rounded-xl">📈 +300% website engagement</span>
-            <span class="flex items-center gap-1.5 bg-orange-50 border border-orange-200 text-orange-800 font-mono text-xs px-3 py-1.5 rounded-xl">🎓 5 workshop diselenggarakan</span>
-=======
     </div>
   </div>
 
@@ -1502,34 +529,10 @@
               <i class="bi bi-link-45deg"></i>
               Certificate
             </a>
->>>>>>> 5c0c105 (update UI)
           </div>
         </div>
       </div>
     </div>
-<<<<<<< HEAD
- 
-    <!-- item 2 -->
-    <div class="acc-item bg-white rounded-2xl border-2 border-mist-dark overflow-hidden transition-all duration-300 hover:border-spark/30">
-      <button class="acc-trigger w-full flex items-center gap-4 px-6 py-5 text-left" onclick="toggleAcc(this)">
-        <div class="w-11 h-11 rounded-xl bg-red-100 flex items-center justify-center text-xl flex-shrink-0">💡</div>
-        <div class="flex-1 min-w-0">
-          <div class="flex flex-wrap items-center gap-2">
-            <p class="font-display font-700 text-sm">Staff Pengembangan SDM</p>
-            <span class="font-mono text-xs bg-orange-100 text-orange-700 border border-orange-200 px-2 py-0.5 rounded-full">Staff</span>
-          </div>
-          <p class="font-body text-xs text-gray-400 mt-0.5">BEM FT Universitas ABC · <span class="text-spark">2021 — 2022</span></p>
-        </div>
-        <i class="bi bi-chevron-down acc-icon text-gray-400 text-lg flex-shrink-0 transition-transform duration-300"></i>
-      </button>
-      <div class="acc-body hidden px-6 pb-6">
-        <div class="border-t border-mist-dark pt-5">
-          <p class="font-body text-sm text-gray-500 leading-relaxed mb-4">Bertanggung jawab merancang program pelatihan soft skill dan mentoring mahasiswa baru. Berkoordinasi dengan berbagai UKM dan komunitas kampus untuk sinergi program kerja.</p>
-          <p class="font-mono text-xs text-gray-400 uppercase tracking-widest mb-3">✦ Pencapaian</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="flex items-center gap-1.5 bg-lime/20 border border-lime/40 text-green-800 font-mono text-xs px-3 py-1.5 rounded-xl">👥 200+ peserta program</span>
-            <span class="flex items-center gap-1.5 bg-blue-50 border border-blue-200 text-blue-800 font-mono text-xs px-3 py-1.5 rounded-xl">📋 8 program kerja terlaksana</span>
-=======
     <!-- <div class="acc-item bg-surface rounded-2xl border border-line overflow-hidden transition-all duration-300 hover:border-accent/30">
       <button class="acc-trigger w-full flex items-center gap-4 px-6 py-5 text-left" onclick="toggleAcc(this)">
         <div class="w-11 h-11 rounded-xl bg-accent/10 flex items-center justify-center text-xl flex-shrink-0">💡</div>
@@ -1556,34 +559,10 @@
           <div class="flex flex-wrap gap-2">
             <span class="flex items-center gap-1.5 bg-accent/10 border border-accent/25 text-accent-light font-mono text-xs px-3 py-1.5 rounded-xl">👥 200+ peserta program</span>
             <span class="flex items-center gap-1.5 bg-accent/10 border border-accent/25 text-accent-light font-mono text-xs px-3 py-1.5 rounded-xl">📋 8 program kerja terlaksana</span>
->>>>>>> 5c0c105 (update UI)
           </div>
         </div>
       </div>
     </div>
-<<<<<<< HEAD
- 
-    <!-- item 3 -->
-    <div class="acc-item bg-white rounded-2xl border-2 border-mist-dark overflow-hidden transition-all duration-300 hover:border-lime/50">
-      <button class="acc-trigger w-full flex items-center gap-4 px-6 py-5 text-left" onclick="toggleAcc(this)">
-        <div class="w-11 h-11 rounded-xl bg-green-100 flex items-center justify-center text-xl flex-shrink-0">🌱</div>
-        <div class="flex-1 min-w-0">
-          <div class="flex flex-wrap items-center gap-2">
-            <p class="font-display font-700 text-sm">Anggota Aktif UKM Robotika</p>
-            <span class="font-mono text-xs bg-green-100 text-green-700 border border-green-200 px-2 py-0.5 rounded-full">Anggota</span>
-          </div>
-          <p class="font-body text-xs text-gray-400 mt-0.5">UKM Robotika Universitas ABC · <span class="text-green-600">2020 — 2021</span></p>
-        </div>
-        <i class="bi bi-chevron-down acc-icon text-gray-400 text-lg flex-shrink-0 transition-transform duration-300"></i>
-      </button>
-      <div class="acc-body hidden px-6 pb-6">
-        <div class="border-t border-mist-dark pt-5">
-          <p class="font-body text-sm text-gray-500 leading-relaxed mb-4">Aktif mengembangkan robot line follower dan berpartisipasi dalam kompetisi robotik tingkat nasional. Belajar dasar elektronika, pemrograman mikrokontroler, dan embedded systems.</p>
-          <p class="font-mono text-xs text-gray-400 uppercase tracking-widest mb-3">✦ Pencapaian</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="flex items-center gap-1.5 bg-lime/20 border border-lime/40 text-green-800 font-mono text-xs px-3 py-1.5 rounded-xl">🥈 Juara 2 Kontes Robot Nasional</span>
-            <span class="flex items-center gap-1.5 bg-blue-50 border border-blue-200 text-blue-800 font-mono text-xs px-3 py-1.5 rounded-xl">🤖 3 robot dikembangkan</span>
-=======
     <div class="acc-item bg-surface rounded-2xl border border-line overflow-hidden transition-all duration-300 hover:border-accent/30">
       <button class="acc-trigger w-full flex items-center gap-4 px-6 py-5 text-left" onclick="toggleAcc(this)">
         <div class="w-11 h-11 rounded-xl bg-accent/10 flex items-center justify-center text-xl flex-shrink-0">🌱</div>
@@ -1603,97 +582,10 @@
           <div class="flex flex-wrap gap-2">
             <span class="flex items-center gap-1.5 bg-accent/10 border border-accent/25 text-accent-light font-mono text-xs px-3 py-1.5 rounded-xl">🥈 Juara 2 Kontes Robot Nasional</span>
             <span class="flex items-center gap-1.5 bg-accent/10 border border-accent/25 text-accent-light font-mono text-xs px-3 py-1.5 rounded-xl">🤖 3 robot dikembangkan</span>
->>>>>>> 5c0c105 (update UI)
           </div>
         </div>
       </div>
     </div>
-<<<<<<< HEAD
- 
-  </div>
-</section>
- 
-<hr class="border-mist-dark max-w-5xl mx-auto" />
- 
-
-<!-- LEARNING (dark) -->
-<div class="ink-section py-24 px-6">
-  <div class="max-w-5xl mx-auto">
-    <span class="font-mono text-xs font-500 tracking-widest text-accent/70 uppercase">— Growth</span>
-    <h2 class="font-display font-800 text-4xl lg:text-5xl tracking-tight mt-3 mb-4 text-white">Selalu <span class="grad-text">Belajar</span></h2>
-    <p class="font-body text-gray-400 text-base max-w-xl mb-14">Teknologi terus berkembang, saya pun ikut berkembang.</p>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-      <div class="bg-white/5 border border-white/10 rounded-3xl p-7 hover:bg-white/10 hover:-translate-y-2 transition-all duration-300">
-        <div class="text-3xl mb-4">🧠</div>
-        <h4 class="font-display font-700 text-white text-base mb-3">AI & Machine Learning</h4>
-        <p class="font-body text-sm text-gray-400 leading-relaxed">Eksplorasi LLM integration, RAG pipelines, dan AI-powered features dalam produk modern.</p>
-      </div>
-      <div class="bg-white/5 border border-white/10 rounded-3xl p-7 hover:bg-white/10 hover:-translate-y-2 transition-all duration-300">
-        <div class="text-3xl mb-4">☁️</div>
-        <h4 class="font-display font-700 text-white text-base mb-3">Cloud Architecture</h4>
-        <p class="font-body text-sm text-gray-400 leading-relaxed">Belajar AWS Solutions Architect, serverless patterns, dan infrastruktur as code dengan Terraform.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- CONNECT -->
-<section id="connect" class="max-w-5xl mx-auto py-24 px-6">
-  <div class="bg-gradient-to-br from-ink to-ink-soft rounded-[40px] p-12 lg:p-20 text-center relative overflow-hidden">
-    <!-- decorative blobs inside card -->
-    <div class="absolute top-[-60px] right-[-60px] w-72 h-72 bg-accent/20 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute bottom-[-40px] left-[-40px] w-56 h-56 bg-spark/15 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-lime/5 rounded-full blur-3xl pointer-events-none"></div>
-
-    <span class="relative font-mono text-xs text-accent/70 tracking-widest uppercase">— Let's Talk</span>
-    <h2 class="relative font-display font-800 text-4xl lg:text-5xl tracking-tight mt-4 mb-4 text-white">Punya <span class="grad-text">Proyek</span> Keren?</h2>
-    <p class="relative font-body text-gray-400 max-w-md mx-auto mb-12 text-base leading-relaxed">Saya senang berkolaborasi. Mari berdiskusi untuk membangun sesuatu yang luar biasa bersama.</p>
-    <div class="relative grid grid-cols-2 sm:grid-cols-2 md:flex gap-3 md:gap-4 justify-center">
-      <a href="mailto:ariqburhanuddins2007@gmail.com" target="_blank"
-        class="flex items-center justify-center gap-2.5 
-        bg-accent text-white font-display font-700 
-        text-xs sm:text-sm
-        px-5 sm:px-8 py-3 sm:py-4 
-        rounded-full hover:bg-accent/90 hover:-translate-y-1 
-        transition-all duration-200 shadow-lg shadow-accent/30 nav-link">
-        <i class="bi bi-envelope-fill"></i> 
-        <span class="hidden sm:inline">Email Saya</span>
-        <span class="sm:hidden">Email</span>
-      </a>
-
-      <a href="https://www.linkedin.com/in/ariq-burhanuddin-suwarno-9501b22b4?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank"
-        class="flex items-center justify-center gap-2.5 
-        bg-white/10 border border-white/20 text-white font-display font-700 
-        text-xs sm:text-sm
-        px-5 sm:px-8 py-3 sm:py-4 
-        rounded-full hover:bg-accent/90 hover:-translate-y-1 
-        transition-all duration-200 shadow-lg shadow-accent/30 nav-link">
-        <i class="bi bi-linkedin"></i> 
-        <span class="hidden sm:inline">LinkedIn</span>
-        <span class="sm:hidden">LinkedIn</span>
-      </a>
-      
-      <a href="https://github.com/RikuTetsuya" target="_blank"
-        class="flex items-center justify-center gap-2.5 
-        bg-white/10 border border-white/20 text-white font-display font-700 
-        text-xs sm:text-sm
-        px-5 sm:px-8 py-3 sm:py-4 
-        rounded-full hover:bg-accent/90 hover:-translate-y-1 
-        transition-all duration-200 shadow-lg shadow-accent/30 nav-link">
-        <i class="bi bi-github"></i> 
-        <span class="hidden sm:inline">GitHub</span>
-        <span class="sm:hidden">GitHub</span>
-      </a>
-
-      <a href="https://instagram.com/dr.ariq" target="_blank"
-        class="flex items-center justify-center gap-2.5 
-        bg-white/10 border border-white/20 text-white font-display font-700 
-        text-xs sm:text-sm
-        px-5 sm:px-8 py-3 sm:py-4 
-        rounded-full hover:bg-accent/90 hover:-translate-y-1 
-        transition-all duration-200 shadow-lg shadow-accent/30 nav-link">
-        <i class="bi bi-instagram"></i> 
-=======
   </div> -->
 </section>
 
@@ -1757,7 +649,6 @@
       <a href="https://instagram.com/dr.ariq" target="_blank"
         class="flex items-center justify-center gap-2.5 bg-surface-2 border border-line text-ink font-display font-700 text-xs sm:text-sm px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:border-accent hover:-translate-y-1 transition-all duration-200 nav-link">
         <i class="bi bi-instagram"></i>
->>>>>>> 5c0c105 (update UI)
         <span class="hidden sm:inline">Instagram</span>
         <span class="sm:hidden">Instagram</span>
       </a>
@@ -1766,15 +657,6 @@
 </section>
 
 <!-- FOOTER -->
-<<<<<<< HEAD
-<footer class="text-center py-10 px-6 text-sm font-body text-gray-400 border-t border-mist-dark">
-  <p>© 2026 Dr.Ar.iq - All rights reserved</p>
-  <!-- <p class="mt-1 font-mono text-xs text-gray-300">© 2026 Dr.Ar.iq — All rights reserved</p> -->
-</footer>
-
-<script>
-  // CURSOR
-=======
 <footer class="border-t border-line px-6 pt-16 pb-8">
   <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
     <div class="md:col-span-1">
@@ -1816,7 +698,6 @@
 </footer>
 
 <script>
->>>>>>> 5c0c105 (update UI)
   const dot = document.getElementById('cursor-dot');
   const ring = document.getElementById('cursor-ring');
   const label = document.getElementById('cursor-label');
@@ -1824,40 +705,22 @@
 
   document.addEventListener('mousemove', e => {
     mx = e.clientX; my = e.clientY;
-<<<<<<< HEAD
-    dot.style.left = mx + 'px';
-    dot.style.top = my + 'px';
-  });
-=======
     dot.style.transform = `translate3d(${mx}px, ${my}px, 0) translate(-50%, -50%)`;
   }, { passive: true });
->>>>>>> 5c0c105 (update UI)
 
   function lerp(a, b, t) { return a + (b - a) * t; }
   function animRing() {
     rx = lerp(rx, mx, 0.12);
     ry = lerp(ry, my, 0.12);
-<<<<<<< HEAD
-    ring.style.left = rx + 'px';
-    ring.style.top = ry + 'px';
-    label.style.left = rx + 'px';
-    label.style.top = ry + 'px';
-=======
     ring.style.transform = `translate3d(${rx}px, ${ry}px, 0) translate(-50%, -50%)`;
     label.style.transform = document.body.classList.contains('cursor-link')
       ? `translate3d(${rx}px, ${ry}px, 0) translate(-50%, -200%) scale(1)`
       : `translate3d(${rx}px, ${ry}px, 0) translate(-50%, -200%) scale(0.8)`;
->>>>>>> 5c0c105 (update UI)
     requestAnimationFrame(animRing);
   }
   animRing();
 
-<<<<<<< HEAD
-  // hover states
-  document.querySelectorAll('.skill-card, .platform-card, .project-card, .learning-card').forEach(el => {
-=======
   document.querySelectorAll('.skill-card, .project-card').forEach(el => {
->>>>>>> 5c0c105 (update UI)
     el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
     el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
   });
@@ -1866,30 +729,10 @@
     el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-link'));
   });
 
-<<<<<<< HEAD
-  // nav scroll
-=======
->>>>>>> 5c0c105 (update UI)
   window.addEventListener('scroll', () => {
     document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 20);
   });
 
-<<<<<<< HEAD
-  // tabs
-  document.getElementById('tabs').addEventListener('click', e => {
-    const btn = e.target.closest('.tab-btn');
-    if (!btn) return;
-    document.querySelectorAll('.tab-btn').forEach(b => {
-      b.classList.remove('active', 'bg-ink', 'text-white', 'border-ink');
-      b.classList.add('bg-white', 'text-gray-500', 'border-mist-dark');
-    });
-    btn.classList.add('active', 'bg-ink', 'text-white', 'border-ink');
-    btn.classList.remove('bg-white', 'text-gray-500', 'border-mist-dark');
-    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
-  });
-  //organisasi
-=======
   /* MOBILE MENU */
   const menuToggle = document.getElementById('menuToggle');
   const menuIcon = document.getElementById('menuIcon');
@@ -1923,29 +766,11 @@
     if (window.innerWidth >= 768) closeMobileMenu();
   });
 
->>>>>>> 5c0c105 (update UI)
   const orgTabs = document.querySelectorAll(".org-tab-btn");
   const orgContents = document.querySelectorAll(".org-content");
 
   orgTabs.forEach(tab => {
     tab.addEventListener("click", () => {
-<<<<<<< HEAD
-
-      // remove active button
-      orgTabs.forEach(btn => {
-        btn.classList.remove("active","bg-ink","text-white","border-ink");
-        btn.classList.add("bg-white","text-gray-500","border-mist-dark");
-      });
-
-      // set active button
-      tab.classList.add("active","bg-ink","text-white","border-ink");
-      tab.classList.remove("bg-white","text-gray-500","border-mist-dark");
-
-      // hide all content
-      orgContents.forEach(content => content.classList.add("hidden"));
-
-      // show selected content
-=======
       orgTabs.forEach(btn => {
         btn.classList.remove("active", "bg-accent", "text-white", "border-accent");
         btn.classList.add("bg-surface", "text-muted", "border-line");
@@ -1953,45 +778,10 @@
       tab.classList.add("active", "bg-accent", "text-white", "border-accent");
       tab.classList.remove("bg-surface", "text-muted", "border-line");
       orgContents.forEach(content => content.classList.add("hidden"));
->>>>>>> 5c0c105 (update UI)
       const selected = tab.dataset.org;
       document.getElementById("org-" + selected).classList.remove("hidden");
     });
   });
-<<<<<<< HEAD
-  
-  // Blokir keyboard shortcut
-  document.addEventListener('keydown', function(e) {
-    // Ctrl+U (view source)
-    if (e.ctrlKey && e.key === 'u') {
-      e.preventDefault();
-      return false;
-    }
-    // Ctrl+Shift+I / Ctrl+Shift+J (DevTools)
-    if (e.ctrlKey && e.shiftKey && 
-        (e.key === 'i' || e.key === 'I' || 
-        e.key === 'j' || e.key === 'J')) {
-      e.preventDefault();
-      return false;
-    }
-    // F12
-    if (e.key === 'F12') {
-      e.preventDefault();
-      return false;
-    }
-    // Ctrl+S (save page)
-    if (e.ctrlKey && e.key === 's') {
-      e.preventDefault();
-      return false;
-    }
-  });
-
-  // Blokir klik kanan
-  document.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
-    return false;
-  });
-=======
 
   function toggleAcc(btn) {
     const item = btn.parentElement;
@@ -2014,7 +804,6 @@
   });
 
   document.addEventListener('contextmenu', function(e) { e.preventDefault(); return false; });
->>>>>>> 5c0c105 (update UI)
 </script>
 </body>
 </html>
