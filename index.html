@@ -21,6 +21,7 @@
           mono: ['DM Mono', 'monospace'],
         },
         colors: {
+<<<<<<< HEAD
           ink: '#0c0c14',
           'ink-soft': '#1a1a2e',
           accent: '#6c63ff',
@@ -32,17 +33,38 @@
         },
         animation: {
           ticker: 'ticker 28s linear infinite',
+=======
+          canvas: '#0a0a0b',
+          surface: '#151517',
+          'surface-2': '#1c1c1f',
+          line: 'rgba(255,255,255,0.08)',
+          'line-strong': 'rgba(255,255,255,0.16)',
+          ink: '#f5f4f2',
+          muted: '#9a9aa2',
+          accent: '#dc143c',
+          'accent-light': '#ff4757',
+          spark: '#ff2d2d',
+        },
+        animation: {
+>>>>>>> 5c0c105 (update UI)
           floatY: 'floatY 6s ease-in-out infinite',
           fadeUp: 'fadeUp 0.7s ease both',
           scaleIn: 'scaleIn 0.5s ease both',
           glowPulse: 'glowPulse 3s ease-in-out infinite',
         },
         keyframes: {
+<<<<<<< HEAD
           ticker: { from:{ transform:'translateX(0)' }, to:{ transform:'translateX(-50%)' } },
           floatY: { '0%,100%':{ transform:'translateY(0) rotate(-3deg)' }, '50%':{ transform:'translateY(-16px) rotate(3deg)' } },
           fadeUp: { from:{ opacity:'0', transform:'translateY(30px)' }, to:{ opacity:'1', transform:'translateY(0)' } },
           scaleIn: { from:{ opacity:'0', transform:'scale(0.9)' }, to:{ opacity:'1', transform:'scale(1)' } },
           glowPulse: { '0%,100%':{ boxShadow:'0 0 20px rgba(108,99,255,0.3)' }, '50%':{ boxShadow:'0 0 50px rgba(108,99,255,0.7)' } },
+=======
+          floatY: { '0%,100%':{ transform:'translateY(0) rotate(-3deg)' }, '50%':{ transform:'translateY(-16px) rotate(3deg)' } },
+          fadeUp: { from:{ opacity:'0', transform:'translateY(30px)' }, to:{ opacity:'1', transform:'translateY(0)' } },
+          scaleIn: { from:{ opacity:'0', transform:'scale(0.9)' }, to:{ opacity:'1', transform:'scale(1)' } },
+          glowPulse: { '0%,100%':{ boxShadow:'0 0 20px rgba(220,20,60,0.35)' }, '50%':{ boxShadow:'0 0 55px rgba(220,20,60,0.7)' } },
+>>>>>>> 5c0c105 (update UI)
         }
       }
     }
@@ -51,6 +73,7 @@
 <style>
   * { cursor: none !important; }
 
+<<<<<<< HEAD
   html{
     scroll-behavior: smooth;
     overflow-x: hidden;
@@ -211,6 +234,109 @@
     50% { box-shadow: 0 0 8px rgba(217,119,6,0.25); }
   }
   .skill-card { position: relative; }
+=======
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+
+  /* CUSTOM CURSOR */
+  #cursor-dot {
+    position: fixed; top: 0; left: 0; width: 8px; height: 8px;
+    background: #dc143c; border-radius: 50%; pointer-events: none; z-index: 9999;
+    transform: translate3d(-100px, -100px, 0) translate(-50%, -50%);
+    transition: background 0.2s, width 0.2s, height 0.2s; will-change: transform;
+  }
+  #cursor-ring {
+    position: fixed; top: 0; left: 0; width: 36px; height: 36px;
+    border: 1.5px solid rgba(220,20,60,0.6); border-radius: 50%; pointer-events: none; z-index: 9998;
+    transform: translate3d(-100px, -100px, 0) translate(-50%, -50%);
+    transition: width 0.25s ease, height 0.25s ease, border-color 0.2s, opacity 0.2s; will-change: transform;
+  }
+  #cursor-label {
+    position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
+    font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 500; color: white;
+    background: #dc143c; padding: 4px 10px; border-radius: 100px; white-space: nowrap; opacity: 0;
+    transform: translate3d(-100px, -100px, 0) translate(-50%, -200%) scale(0.8);
+    transition: opacity 0.2s, transform 0.2s; will-change: transform;
+  }
+  body.cursor-hover #cursor-ring { width: 64px; height: 64px; border-color: rgba(220,20,60,0.35); }
+  body.cursor-hover #cursor-dot { background: #ff4757; width: 10px; height: 10px; }
+  body.cursor-link #cursor-label { opacity: 1; transform: translate(-50%, -200%) scale(1); }
+  body.cursor-link #cursor-ring { width: 52px; height: 52px; border-color: rgba(220,20,60,0.8); border-width: 2px; }
+  body.cursor-link #cursor-dot { background: #ffffff; }
+
+  body::before {
+    content: ''; position: fixed; inset: 0; z-index: 9990; pointer-events: none; opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  body { font-family: 'DM Sans', sans-serif; background: #0a0a0b; color: #f5f4f2; }
+  .font-display { font-family: 'Syne', sans-serif; }
+  .font-mono { font-family: 'DM Mono', monospace; }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #151517; }
+  ::-webkit-scrollbar-thumb { background: #dc143c; border-radius: 10px; }
+
+  .crimson-text {
+    background: linear-gradient(135deg, crimson 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+
+  .skill-card { transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; position: relative; flex-shrink: 0; }
+  .skill-card:hover { transform: translateY(-6px); }
+
+  .skills-row {
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .skills-row::-webkit-scrollbar { display: none; }
+  .skills-row .skill-card { scroll-snap-align: start; }
+
+  .proj-accent-web { background: linear-gradient(90deg, #dc143c, #ff4757); }
+  .proj-accent-mobile { background: linear-gradient(90deg, #8b0000, #dc143c); }
+  .proj-accent-game { background: linear-gradient(90deg, #b22222, #ff4757); }
+
+  nav { transition: box-shadow 0.3s, background 0.3s; }
+  nav.scrolled { box-shadow: 0 4px 40px rgba(0,0,0,0.5); }
+  .nav-logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1rem; }
+  .g-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+
+  .hero-bg-blob { position: absolute; border-radius: 50%; filter: blur(90px); pointer-events: none; z-index: 0; }
+
+  .org-tab-btn { transition: all 0.2s; }
+
+  .skill-badge {
+    position: absolute; top: -9px; right: 10px; font-family: 'DM Mono', monospace; font-size: 9px;
+    font-weight: 500; letter-spacing: 0.04em; padding: 3px 9px; border-radius: 100px; white-space: nowrap;
+    border: 1.5px solid; pointer-events: none;
+  }
+  .badge-expert { background: #151517; color: #f5f4f2; border-color: rgba(255,255,255,0.25); }
+  .badge-ongoing { background: rgba(220,20,60,0.12); color: #ff4757; border-color: rgba(220,20,60,0.4); animation: badgePulse 2.5s ease-in-out infinite; }
+  .badge-new { background: rgba(255,45,45,0.12); color: #ff4757; border-color: rgba(255,45,45,0.4); animation: badgePulse 2s ease-in-out infinite; }
+  @keyframes badgePulse { 0%, 100% { box-shadow: none; } 50% { box-shadow: 0 0 8px rgba(220,20,60,0.35); } }
+
+  /* MOBILE NAV */
+  .menu-toggle {
+    width: 42px; height: 42px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: #151517; border: 1px solid rgba(255,255,255,0.08);
+    color: #f5f4f2; flex-shrink: 0;
+  }
+  #mobileMenu {
+    position: fixed; inset: 0; z-index: 60;
+    background: rgba(10,10,11,0.98);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.75rem;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+  #mobileMenu.open { opacity: 1; pointer-events: auto; }
+  #mobileMenu a { font-size: 1.5rem; }
+
+  @media (max-width: 420px) {
+    h1 { letter-spacing: -1px !important; }
+  }
+>>>>>>> 5c0c105 (update UI)
 </style>
 </head>
 <body class="overflow-x-hidden">
@@ -221,6 +347,7 @@
 <div id="cursor-label">klik</div>
 
 <!-- NAV -->
+<<<<<<< HEAD
 <nav id="mainNav" class="fixed top-0 w-full z-50 px-8 lg:px-14 py-4 flex items-center justify-between bg-mist/90 backdrop-blur-xl border-b border-accent/10">
   <!-- <div class="flex items-center gap-3">
     <span class="font-mono text-xs bg-ink text-accent-light px-3 py-1 rounded-md"><i class="fa-solid fa-code"></i></span>
@@ -284,10 +411,62 @@
     </p>
 
     <blockquote class="font-body italic text-gray-400 text-base max-w-sm mb-10 animate-fadeUp" style="animation-delay:0.55s">
+=======
+<nav id="mainNav" class="fixed top-0 w-full z-50 px-4 sm:px-8 lg:px-14 py-4 flex items-center justify-between bg-canvas/90 backdrop-blur-xl border-b border-line">
+  <div class="nav-logo text-ink text-sm sm:text-base">
+    <span class="g-dot" style="background:crimson"></span>
+    <span class="g-dot" style="background:crimson"></span>
+    <span class="g-dot" style="background:crimson"></span>
+    <a href="https://ariqspace.my.id/">&nbsp;Ariq's Space</a>
+  </div>
+  <div class="hidden md:flex gap-8">
+    <a href="/" class="font-body text-sm font-medium text-muted hover:text-accent-light transition-colors duration-200 nav-link">Main</a>
+    <a href="/#skills" class="font-body text-sm font-medium text-muted hover:text-accent-light transition-colors duration-200 nav-link">Skills</a>
+    <a href="/#projects" class="font-body text-sm font-medium text-muted hover:text-accent-light transition-colors duration-200 nav-link">Projects</a>
+    <a href="/#organisasi" class="font-body text-sm font-medium text-muted hover:text-accent-light transition-colors duration-200 nav-link">Experience</a>
+    <a href="/#business" class="font-body text-sm font-medium text-muted hover:text-accent-light transition-colors duration-200 nav-link">Businesses</a>
+    <a href="/#connect" class="font-body text-sm font-medium text-muted hover:text-accent-light transition-colors duration-200 nav-link">Connect</a>
+  </div>
+  <a href="/#connect" class="hidden md:inline-block bg-accent text-white text-sm font-display font-700 px-5 py-2.5 rounded-full hover:bg-accent-light transition-all duration-200 hover:-translate-y-0.5 nav-link">Let's Connect</a>
+  <button id="menuToggle" class="menu-toggle md:hidden nav-link" aria-label="Buka menu" aria-expanded="false">
+    <i class="bi bi-list text-2xl" id="menuIcon"></i>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div id="mobileMenu">
+  <a href="/" class="font-display font-700 text-ink hover:text-accent-light nav-link mobile-link">Main</a>
+  <a href="/#skills" class="font-display font-700 text-ink hover:text-accent-light nav-link mobile-link">Skills</a>
+  <a href="/#projects" class="font-display font-700 text-ink hover:text-accent-light nav-link mobile-link">Projects</a>
+  <a href="/#organisasi" class="font-display font-700 text-ink hover:text-accent-light nav-link mobile-link">Experience</a>
+  <a href="/#business" class="font-display font-700 text-ink hover:text-accent-light nav-link mobile-link">Businesses</a>
+  <a href="/#connect" class="bg-accent text-white font-display font-700 text-base px-8 py-3 rounded-full mt-3 nav-link mobile-link">Let's Connect</a>
+</div>
+
+<!-- HERO -->
+<section class="relative min-h-screen flex flex-col items-center justify-center text-center pt-24 pb-16 px-6 overflow-hidden">
+
+  <div class="relative z-10 flex flex-col items-center">
+    <div class="w-40 h-40 rounded-full border-4 border-surface shadow-2xl flex items-center justify-center text-5xl bg-gradient-to-br from-canvas to-accent mb-7 animate-scaleIn animate-glowPulse overflow-hidden" style="animation-delay:0.2s">
+      <img src="assets/myfotogwejh.jpg" alt="avatar" class="w-full h-full object-cover rounded-full">
+    </div>
+
+    <h1 class="font-display font-800 text-4xl sm:text-5xl lg:text-7xl xl:text-8xl leading-[1.05] sm:leading-[1.0] tracking-[-1.5px] sm:tracking-[-3px] mb-6 text-ink animate-fadeUp" style="animation-delay:0.3s">
+      <span class="crimson-text">Ariq</span>
+      B. Suwarno
+    </h1>
+
+    <p class="font-body text-muted text-base sm:text-lg max-w-md mb-4 animate-fadeUp px-2" style="animation-delay:0.45s">
+      Architecture Student | Web App Developer | Tech Enthusiast
+    </p>
+
+    <blockquote class="font-body italic text-muted/80 text-base max-w-sm mb-10 animate-fadeUp" style="animation-delay:0.55s">
+>>>>>>> 5c0c105 (update UI)
       "Declare var, not war"
     </blockquote>
 
     <div class="flex gap-4 flex-wrap justify-center animate-fadeUp" style="animation-delay:0.65s">
+<<<<<<< HEAD
       <a href="#projects" class="bg-ink text-mist font-display font-700 text-sm px-8 py-4 rounded-full hover:bg-accent transition-all duration-250 hover:-translate-y-1 shadow-lg hover:shadow-accent/30 nav-link">
         Lihat Proyek
       </a>
@@ -326,10 +505,22 @@
       <span class="flex items-center gap-2 bg-white border border-mist-dark rounded-full px-5 py-2.5 text-xs font-display font-700 whitespace-nowrap shadow-sm"><i class="bi bi-database text-blue-500"></i> MySQL</span>
       <span class="flex items-center gap-2 bg-white border border-mist-dark rounded-full px-5 py-2.5 text-xs font-display font-700 whitespace-nowrap shadow-sm"><i class="bi bi-git text-orange-600"></i> Git</span>
       <span class="flex items-center gap-2 bg-white border border-mist-dark rounded-full px-5 py-2.5 text-xs font-display font-700 whitespace-nowrap shadow-sm"><i class="fa-brands fa-java text-cyan-400"></i> Java</span>
+=======
+      <a href="#connect" class="bg-accent text-white font-display font-700 text-sm px-8 py-4 rounded-full hover:bg-accent-light transition-all duration-250 hover:-translate-y-1 shadow-lg shadow-accent/20 nav-link">
+        Let's Connect
+      </a>
+      <!-- <a href="https://ariqspace.my.id/blog" class="bg-surface text-ink font-display font-600 text-sm px-8 py-4 rounded-full border-2 border-line hover:border-accent hover:text-accent-light transition-all duration-250 nav-link">
+        Blog
+      </a> -->
+      <a href="#business" class="bg-surface text-ink font-display font-600 text-sm px-8 py-4 rounded-full border-2 border-line hover:border-accent hover:text-accent-light transition-all duration-250 nav-link">
+        My Businesses
+      </a>
+>>>>>>> 5c0c105 (update UI)
     </div>
   </div>
 </section>
 
+<<<<<<< HEAD
 <!-- STATS BAR (dark) -->
 <!-- <div class="ink-section py-14 px-6">
   <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
@@ -411,10 +602,74 @@
         <span class="skill-badge badge-expert">★ Expert</span>
         <i class="bi bi-filetype-sql text-2xl text-purple-500"></i>
         <div><p class="font-display font-700 text-sm">SQL</p><p class="font-mono text-xs text-gray-400 mt-0.5">Language</p></div>
+=======
+<!-- SKILLS -->
+<section id="skills" class="max-w-5xl mx-auto py-24 px-6">
+  <h2 class="font-display font-800 text-3xl sm:text-4xl lg:text-5xl tracking-tight mt-3 mb-4 text-ink">Stack & Tools</h2>
+  <br>
+  <div class="mb-10">
+    <div class="flex items-center gap-3 mb-5">
+      <span class="font-mono text-xs font-500 tracking-widest text-muted uppercase">Tech Stack</span>
+      <div class="flex-1 h-px bg-line"></div>
+    </div>
+    <div class="flex flex-nowrap overflow-x-auto sm:flex-wrap sm:overflow-visible gap-3 skills-row -mx-6 px-6 sm:mx-0 sm:px-0">
+      <div class="skill-card flex items-center gap-3 bg-surface border-2 border-line rounded-2xl px-5 py-4 hover:border-accent hover:bg-accent/5">
+        <i class="fa-brands fa-html5 text-2xl text-accent-light"></i>
+        <div><p class="font-display font-700 text-sm text-ink">HTML</p><p class="font-mono text-xs text-muted mt-0.5">Markup</p></div>
+      </div>
+      <div class="skill-card flex items-center gap-3 bg-surface border-2 border-line rounded-2xl px-5 py-4 hover:border-accent hover:bg-accent/5">
+        <i class="fa-brands fa-css3 text-2xl text-accent-light"></i>
+        <div><p class="font-display font-700 text-sm text-ink">CSS</p><p class="font-mono text-xs text-muted mt-0.5">Style Sheet</p></div>
+      </div>
+      <div class="skill-card flex items-center gap-3 bg-surface border-2 border-line rounded-2xl px-5 py-4 hover:border-accent hover:bg-accent/5">
+        <i class="fa-brands fa-js text-2xl text-accent-light"></i>
+        <div><p class="font-display font-700 text-sm text-ink">JavaScript</p><p class="font-mono text-xs text-muted mt-0.5">Language</p></div>
+      </div>
+      <div class="skill-card flex items-center gap-3 bg-surface border-2 border-line rounded-2xl px-5 py-4 hover:border-accent hover:bg-accent/5">
+        <i class="fa-brands fa-php text-2xl text-accent-light"></i>
+        <div><p class="font-display font-700 text-sm text-ink">PHP</p><p class="font-mono text-xs text-muted mt-0.5">Language</p></div>
+      </div>
+      <div class="skill-card flex items-center gap-3 bg-surface border-2 border-line rounded-2xl px-5 py-4 hover:border-accent hover:bg-accent/5">
+        <i class="fa-brands fa-dart-lang text-2xl text-accent-light"></i>
+        <div><p class="font-display font-700 text-sm text-ink">Dart</p><p class="font-mono text-xs text-muted mt-0.5">Language</p></div>
+      </div>
+      <div class="skill-card flex items-center gap-3 bg-surface border-2 border-line rounded-2xl px-5 py-4 hover:border-accent hover:bg-accent/5">
+        <i class="fa-brands fa-java text-2xl text-accent-light"></i>
+        <div><p class="font-display font-700 text-sm text-ink">Java</p><p class="font-mono text-xs text-muted mt-0.5">Language</p></div>
+      </div>
+      <div class="skill-card flex items-center gap-3 bg-surface border-2 border-line rounded-2xl px-5 py-4 hover:border-accent hover:bg-accent/5">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/3840px-React-icon.svg.png" alt="React" class="w-7 h-7 object-contain">
+        <div><p class="font-display font-700 text-sm text-ink">React</p><p class="font-mono text-xs text-muted mt-0.5">JS Library</p></div>
+      </div>
+      <div class="skill-card flex items-center gap-3 bg-surface border-2 border-line rounded-2xl px-5 py-4 hover:border-accent hover:bg-accent/5">
+        <i class="fa-brands fa-laravel text-2xl text-accent-light"></i>
+        <div><p class="font-display font-700 text-sm text-ink">Laravel</p><p class="font-mono text-xs text-muted mt-0.5">PHP Framework</p></div>
+      </div>
+      <div class="skill-card flex items-center gap-3 bg-surface border-2 border-line rounded-2xl px-5 py-4 hover:border-accent hover:bg-accent/5">
+        <i class="fa-brands fa-flutter text-2xl text-accent-light"></i>
+        <div><p class="font-display font-700 text-sm text-ink">Flutter</p><p class="font-mono text-xs text-muted mt-0.5">Dart Framework</p></div>
+      </div>
+      <div class="skill-card flex items-center gap-3 bg-surface border-2 border-accent/30 rounded-2xl px-5 py-4 hover:border-accent hover:bg-accent/5">
+        <i class="fa-brands fa-bootstrap text-2xl text-accent-light"></i>
+        <div><p class="font-display font-700 text-sm text-ink">Bootstrap</p><p class="font-mono text-xs text-muted mt-0.5">UI/CSS Tool</p></div>
+      </div>
+      <div class="skill-card flex items-center gap-3 bg-surface border-2 border-line rounded-2xl px-5 py-4 hover:border-accent hover:bg-accent/5">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Tailwind_CSS_Logo.svg/1280px-Tailwind_CSS_Logo.svg.png" alt="Tailwind" class="w-7 h-7 object-contain">
+        <div><p class="font-display font-700 text-sm text-ink">Tailwind CSS</p><p class="font-mono text-xs text-muted mt-0.5">UI/CSS Tool</p></div>
+      </div>
+      <div class="skill-card flex items-center gap-3 bg-surface border-2 border-line rounded-2xl px-5 py-4 hover:border-accent hover:bg-accent/5">
+        <img src="https://wiki.postgresql.org/images/thumb/a/a4/PostgreSQL_logo.3colors.svg/540px-PostgreSQL_logo.3colors.svg.png?20090213191835" alt="PostgreSQL" class="w-7 h-7 object-contain">
+        <div><p class="font-display font-700 text-sm text-ink">PostgreSQL</p><p class="font-mono text-xs text-muted mt-0.5">Relational DB</p></div>
+      </div>
+      <div class="skill-card flex items-center gap-3 bg-surface border-2 border-line rounded-2xl px-5 py-4 hover:border-accent hover:bg-accent/5">
+        <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/mysql-icon.png" alt="MySQL" class="w-7 h-7 object-contain">
+        <div><p class="font-display font-700 text-sm text-ink">MySQL</p><p class="font-mono text-xs text-muted mt-0.5">Relational DB</p></div>
+>>>>>>> 5c0c105 (update UI)
       </div>
     </div>
   </div>
 
+<<<<<<< HEAD
   <!-- Frameworks -->
   <div class="mb-10">
     <div class="flex items-center gap-3 mb-5">
@@ -562,10 +817,43 @@
         <div><p class="font-display font-700 text-sm">React</p><p class="font-mono text-xs text-gray-400 mt-0.5">JS Library</p></div>
       </div>
     </div>
+=======
+  <div>
+    <div class="flex items-center gap-3 mb-5">
+      <span class="font-mono text-xs font-500 tracking-widest text-muted uppercase">Software</span>
+      <div class="flex-1 h-px bg-line"></div>
+    </div>
+    <div class="flex flex-nowrap overflow-x-auto sm:flex-wrap sm:overflow-visible gap-3 skills-row -mx-6 px-6 sm:mx-0 sm:px-0">
+      <div class="skill-card flex items-center gap-3 bg-surface border-2 border-line rounded-2xl px-5 py-4 hover:border-accent hover:bg-accent/5">
+        <img src="https://code.visualstudio.com/assets/branding/code-stable.png" alt="VSCode" class="w-7 h-7 object-contain">
+        <div><p class="font-display font-700 text-sm text-ink">Visual Studio Code</p><p class="font-mono text-xs text-muted mt-0.5">Code Editor</p></div>
+      </div>
+      <div class="skill-card flex items-center gap-3 bg-surface border-2 border-line rounded-2xl px-5 py-4 hover:border-accent hover:bg-accent/5">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Apache_NetBeans_Logo.svg/500px-Apache_NetBeans_Logo.svg.png?_=20180920122700" alt="NetBeans" class="w-7 h-7 object-contain">
+        <div><p class="font-display font-700 text-sm text-ink">NetBeans</p><p class="font-mono text-xs text-muted mt-0.5">Java IDE</p></div>
+      </div>
+      <div class="skill-card flex items-center gap-3 bg-surface border-2 border-line rounded-2xl px-5 py-4 hover:border-accent hover:bg-accent/5">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Android_Studio_icon_%282023%29.svg/1280px-Android_Studio_icon_%282023%29.svg.png" alt="Android Studio" class="w-7 h-7 object-contain">
+        <div><p class="font-display font-700 text-sm text-ink">Android Studio</p><p class="font-mono text-xs text-muted mt-0.5">IDE</p></div>
+      </div>
+      <div class="skill-card flex items-center gap-3 bg-surface border-2 border-line rounded-2xl px-5 py-4 hover:border-accent hover:bg-accent/5">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/DBeaver_logo.svg/330px-DBeaver_logo.svg.png" alt="DBeaver" class="w-7 h-7 object-contain">
+        <div><p class="font-display font-700 text-sm text-ink">DBeaver</p><p class="font-mono text-xs text-muted mt-0.5">Tool</p></div>
+      </div>
+      <div class="skill-card flex items-center gap-3 bg-surface border-2 border-line rounded-2xl px-5 py-4 hover:border-accent hover:bg-accent/5">
+        <i class="bi bi-git text-2xl text-accent-light"></i>
+        <div><p class="font-display font-700 text-sm text-ink">Git</p><p class="font-mono text-xs text-muted mt-0.5">Version Control</p></div>
+      </div>
+      <div class="skill-card flex items-center gap-3 bg-surface border-2 border-line rounded-2xl px-5 py-4 hover:border-accent hover:bg-accent/5">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Godot_icon.svg" alt="Godot" class="w-7 h-7 object-contain">
+        <div><p class="font-display font-700 text-sm text-ink">Godot</p><p class="font-mono text-xs text-muted mt-0.5">Engine</p></div>
+      </div>
+>>>>>>> 5c0c105 (update UI)
     </div>
   </div>
 </section>
 
+<<<<<<< HEAD
 <hr class="border-mist-dark max-w-5xl mx-auto" />
 
 <!-- PLATFORMS (dark) -->
@@ -860,10 +1148,104 @@
                 <span class="flex items-center gap-1.5 bg-blue-50 border border-blue-200 text-blue-800 font-mono text-xs px-3 py-1.5 rounded-xl">Data Analyst</span>
                 <span class="flex items-center gap-1.5 bg-orange-50 border border-orange-200 text-orange-800 font-mono text-xs px-3 py-1.5 rounded-xl">UI/UX</span>
               </div>
+=======
+<hr class="border-line max-w-5xl mx-auto" />
+
+<!-- PROJECTS -->
+<section id="projects" class="max-w-5xl mx-auto py-24 px-6">
+  <h2 class="font-display font-800 text-3xl sm:text-4xl lg:text-5xl tracking-tight mt-3 mb-4 text-ink">Projects & Portfolio</h2>
+  <br>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+    <div class="relative bg-surface rounded-3xl p-7 border border-line hover:border-accent/40 hover:-translate-y-2 transition-all duration-300 overflow-hidden group">
+      <div class="proj-accent-web absolute top-0 left-0 right-0 h-1 rounded-t-3xl"></div>
+      <h4 class="font-display font-700 text-base mb-2 text-ink">Electronic Repair Service Web App</h4>
+      <p class="font-body text-sm text-muted leading-relaxed">An electronics repair platform featuring service booking, a payment gateway, and an admin dashboard.</p>
+      <div class="flex flex-wrap gap-2 mt-4">
+        <a href="https://github.com/RikuTetsuya/VolTech-Service-App-Laravel" target="_blank"
+          class="inline-flex items-center gap-2 bg-accent text-white font-mono text-xs px-4 py-2 rounded-full hover:bg-accent-light active:scale-95 transition-all duration-200 nav-link">
+          <i class="bi bi-link-45deg"></i> Repository
+        </a>
+      </div>
+      <div class="flex flex-wrap gap-2 mt-4">
+        <span class="bg-canvas border border-line font-mono text-xs px-3 py-1 rounded-full text-muted">PHP</span>
+        <span class="bg-canvas border border-line font-mono text-xs px-3 py-1 rounded-full text-muted">Laravel</span>
+        <span class="bg-canvas border border-line font-mono text-xs px-3 py-1 rounded-full text-muted">MySQL</span>
+      </div>
+    </div>
+    <div class="relative bg-surface rounded-3xl p-7 border border-line hover:border-accent/40 hover:-translate-y-2 transition-all duration-300 overflow-hidden group">
+      <div class="proj-accent-mobile absolute top-0 left-0 right-0 h-1 rounded-t-3xl"></div>
+      <h4 class="font-display font-700 text-base mb-2 text-ink">Pharmacy Management App</h4>
+      <p class="font-body text-sm text-muted leading-relaxed">A pharmacy management application with features for processing financial reports and exporting data.</p>
+      <div class="flex flex-wrap gap-2 mt-4">
+        <a href="https://github.com/RikuTetsuya/NetBeans-Pharmacy-Management-App-CRUD" target="_blank"
+          class="inline-flex items-center gap-2 bg-accent text-white font-mono text-xs px-4 py-2 rounded-full hover:bg-accent-light active:scale-95 transition-all duration-200 nav-link">
+          <i class="bi bi-link-45deg"></i> Repository
+        </a>
+      </div>
+      <div class="flex flex-wrap gap-2 mt-4">
+        <span class="bg-canvas border border-line font-mono text-xs px-3 py-1 rounded-full text-muted">Java</span>
+        <span class="bg-canvas border border-line font-mono text-xs px-3 py-1 rounded-full text-muted">MySQL</span>
+      </div>
+    </div>
+    <div class="relative bg-surface rounded-3xl p-7 border border-line hover:border-accent/40 hover:-translate-y-2 transition-all duration-300 overflow-hidden group">
+      <div class="proj-accent-game absolute top-0 left-0 right-0 h-1 rounded-t-3xl"></div>
+      <h4 class="font-display font-700 text-base mb-2 text-ink">Endless Runner Game</h4>
+      <p class="font-body text-sm text-muted leading-relaxed">An endless game combined with fighting elements.</p>
+      <div class="flex flex-wrap gap-2 mt-4">
+        <a href="https://github.com/RikuTetsuya/" target="_blank"
+          class="inline-flex items-center gap-2 bg-accent text-white font-mono text-xs px-4 py-2 rounded-full hover:bg-accent-light active:scale-95 transition-all duration-200 nav-link">
+          <i class="bi bi-link-45deg"></i> Repository
+        </a>
+      </div>
+      <div class="flex flex-wrap gap-2 mt-4">
+        <span class="bg-canvas border border-line font-mono text-xs px-3 py-1 rounded-full text-muted">Godot</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="border-line max-w-5xl mx-auto" />
+
+<!-- ORGANISASI -->
+<section id="organisasi" class="max-w-5xl mx-auto py-24 px-6">
+  <h2 class="font-display font-800 text-3xl sm:text-4xl lg:text-5xl tracking-tight mt-3 mb-4 text-ink">Experience</h2>
+  <br>
+  <div class="flex gap-3 mb-10 flex-wrap" id="org-tabs">
+    <button class="org-tab-btn active font-display font-700 text-sm px-5 py-2.5 rounded-full bg-accent text-white border-2 border-accent" data-org="timeline">
+      <i class=""></i>Leadership & Bootcamp
+    </button>
+    <button class="org-tab-btn font-display font-700 text-sm px-5 py-2.5 rounded-full bg-surface text-muted border-2 border-line hover:border-accent hover:text-accent-light" data-org="grid">
+      <i class=""></i>Organization
+    </button>
+    <button class="org-tab-btn font-display font-700 text-sm px-5 py-2.5 rounded-full bg-surface text-muted border-2 border-line hover:border-accent hover:text-accent-light" data-org="accordion">
+      <i class=""></i>Certifications
+    </button>
+  </div>
+
+  <div id="org-timeline" class="org-content">
+    <div class="relative pl-8 border-l-2 border-line space-y-0">
+
+      <div class="org-tl-item relative pb-12">
+        <div class="absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-accent border-4 border-canvas"></div>
+        <span class="inline-block font-mono text-xs bg-accent/10 text-accent-light border border-accent/25 px-3 py-1 rounded-full mb-3">2026</span>
+        <div class="bg-surface rounded-3xl p-7 border border-line hover:border-accent/30 transition-all duration-300 group">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-2xl bg-accent/10 overflow-hidden flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+              <img src="https://pbs.twimg.com/media/Ey1upKsU8AAFAem.jpg" alt="aiesec" class="w-full h-full object-cover">
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex flex-wrap items-center gap-2 mb-1">
+                <h4 class="font-display font-700 text-base text-ink">AIESEC Future Leaders Summer Peak 2026</h4>
+                <span class="font-mono text-xs bg-accent/10 text-accent-light border border-accent/25 px-2.5 py-0.5 rounded-full">Delegate</span>
+              </div>
+              <p class="font-body text-sm text-accent-light font-500 mb-3">AIESEC Surabaya</p>
+              <p class="font-body text-sm text-muted leading-relaxed mb-4">Participated as a delegate in AFL (AIESEC Future Leader) Summer Peak 2026, an intensive leadership program by AIESEC in Surabaya focused on developing youth leaders capable of driving real-world impact aligned with the UN Sustainable Development Goals.</p>
+>>>>>>> 5c0c105 (update UI)
             </div>
           </div>
         </div>
       </div>
+<<<<<<< HEAD
  
       <!-- item 2 -->
       <div class="org-tl-item relative pb-12">
@@ -899,10 +1281,34 @@
                 <!-- <span class="flex items-center gap-1.5 bg-lime/20 border border-lime/40 text-green-800 font-mono text-xs px-3 py-1.5 rounded-xl">👥 200+ peserta program</span>
                 <span class="flex items-center gap-1.5 bg-blue-50 border border-blue-200 text-blue-800 font-mono text-xs px-3 py-1.5 rounded-xl">📋 8 program kerja</span> -->
               </div>
+=======
+
+      <div class="org-tl-item relative pb-12">
+        <div class="absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-accent-light border-4 border-canvas"></div>
+        <span class="inline-block font-mono text-xs bg-accent/10 text-accent-light border border-accent/25 px-3 py-1 rounded-full mb-3">2026</span>
+        <div class="bg-surface rounded-3xl p-7 border border-line hover:border-accent/30 transition-all duration-300 group">
+          <div class="flex items-start gap-4">
+            <div class="flex flex-col items-center gap-2 flex-shrink-0">
+              <div class="w-12 h-12 rounded-2xl bg-accent/10 overflow-hidden flex items-center justify-center">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzGNYX6M4X-BfBpM_Fhl0UCoFIZ_dOeo19IA&s" alt="dicoding" class="w-full h-full object-cover">
+              </div>
+              <div class="w-12 h-12 rounded-xl bg-surface-2 overflow-hidden flex items-center justify-center border border-line">
+                <img src="https://icons.veryicon.com/png/o/business/bank-logo-collection/dbs-logo.png" alt="dbs" class="w-full h-full object-cover">
+              </div>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex flex-wrap items-center gap-2 mb-1">
+                <h4 class="font-display font-700 text-base text-ink">Dicoding Bootcamp</h4>
+                <span class="font-mono text-xs bg-accent/10 text-accent-light border border-accent/25 px-2.5 py-0.5 rounded-full">Student</span>
+              </div>
+              <p class="font-body text-sm text-accent-light font-500 mb-3">Coding Camp 2026 Powered by DBS Foundation | Full-Stack Web Development</p>
+              <p class="font-body text-sm text-muted leading-relaxed mb-4">An online coding training program designed to enhance the information technology skills of the Indonesian public, organized by the DBS Foundation in collaboration with Dicoding Indonesia.</p>
+>>>>>>> 5c0c105 (update UI)
             </div>
           </div>
         </div>
       </div>
+<<<<<<< HEAD
  
       <!-- item 3 -->
       <!-- <div class="org-tl-item relative pb-0">
@@ -1013,10 +1419,95 @@
             <span class="flex items-center gap-1.5 bg-lime/20 border border-lime/40 text-green-800 font-mono text-xs px-3 py-1.5 rounded-xl">🏆 Best Division Award 2023</span>
             <span class="flex items-center gap-1.5 bg-blue-50 border border-blue-200 text-blue-800 font-mono text-xs px-3 py-1.5 rounded-xl">📈 +300% website engagement</span>
             <span class="flex items-center gap-1.5 bg-orange-50 border border-orange-200 text-orange-800 font-mono text-xs px-3 py-1.5 rounded-xl">🎓 5 workshop diselenggarakan</span>
+=======
+    </div>
+  </div>
+
+  <div id="org-grid" class="org-content hidden">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div class="relative bg-surface rounded-3xl p-7 border border-line hover:border-accent/30 hover:-translate-y-2 transition-all duration-300 overflow-hidden group">
+        <div class="absolute top-0 left-0 right-0 h-1 rounded-t-3xl bg-gradient-to-r from-accent to-accent-light"></div>
+        <div class="flex items-center justify-between mb-5">
+          <div class="w-12 h-12 rounded-xl bg-surface-2 overflow-hidden flex items-center justify-center border border-line">
+            <img src="assets/biwastu.jpg" alt="biwastu" class="w-full h-full object-cover">
+          </div>
+          <span class="font-mono text-xs bg-accent/10 text-accent-light border border-accent/25 px-2.5 py-1 rounded-full">Layouter</span>
+        </div>
+        <h4 class="font-display font-700 text-base mb-1 text-ink">Biwastu Magazine Crew 9th Edition</h4>
+        <p class="font-body text-xs text-accent-light font-500 mb-3">Himarstek Widyastana - UPNVJT</p>
+        <span class="font-mono text-xs text-muted">2026 - Present</span>
+        <p class="font-body text-sm text-muted leading-relaxed mt-3 mb-4">A student editorial team responsible for compiling, writing, designing, and publishing a magazine and creative content focused on the world of architecture.</p>
+        <div class="space-y-2">
+          <div class="flex items-center gap-2 text-xs font-mono text-muted bg-canvas px-3 py-2 rounded-xl">null</div>
+        </div>
+      </div>
+      <div class="relative bg-surface rounded-3xl p-7 border border-line hover:border-accent/30 hover:-translate-y-2 transition-all duration-300 overflow-hidden group">
+        <div class="absolute top-0 left-0 right-0 h-1 rounded-t-3xl bg-gradient-to-r from-accent to-accent-light"></div>
+        <div class="flex items-center justify-between mb-5">
+          <div class="w-12 h-12 rounded-xl bg-surface-2 overflow-hidden flex items-center justify-center border border-line">
+            <img src="assets/biwastu.jpg" alt="biwastu" class="w-full h-full object-cover">
+          </div>
+          <span class="font-mono text-xs bg-accent/10 text-accent-light border border-accent/25 px-2.5 py-1 rounded-full">Member</span>
+        </div>
+        <h4 class="font-display font-700 text-base mb-1 text-ink">Google Developer Group</h4>
+        <p class="font-body text-xs text-accent-light font-500 mb-3">Google Developer Group - Unair</p>
+        <span class="font-mono text-xs text-muted">2025 - Present</span>
+        <p class="font-body text-sm text-muted leading-relaxed mt-3 mb-4">An official Google-supported community for university students interested in exploring technology, building real-world solutions, and developing programming skills.</p>
+        <div class="space-y-2">
+          <div class="flex items-center gap-2 text-xs font-mono text-muted bg-canvas px-3 py-2 rounded-xl">null</div>
+        </div>
+      </div>
+      <div class="relative bg-surface rounded-3xl p-7 border border-line hover:border-accent/30 hover:-translate-y-2 transition-all duration-300 overflow-hidden group">
+        <div class="absolute top-0 left-0 right-0 h-1 rounded-t-3xl bg-gradient-to-r from-accent to-accent-light"></div>
+        <div class="flex items-center justify-between mb-5">
+          <div class="w-12 h-12 rounded-xl bg-surface-2 overflow-hidden flex items-center justify-center border border-line">
+            <img src="assets/itclub.jpg" alt="biwastu" class="w-full h-full object-cover">
+          </div>
+          <span class="font-mono text-xs bg-accent/10 text-accent-light border border-accent/25 px-2.5 py-1 rounded-full">Teaching Staff</span>
+        </div>
+        <h4 class="font-display font-700 text-base mb-1 text-ink">IT Club</h4>
+        <p class="font-body text-xs text-accent-light font-500 mb-3">SMK Negeri 2 Surabaya</p>
+        <span class="font-mono text-xs text-muted">2024 - 2025</span>
+        <p class="font-body text-sm text-muted leading-relaxed mt-3 mb-4">A vocational highschool student group or extracurricular club that serves as a platform for students to learn, share knowledge, and develop skills in the fields of computing and technology.</p>
+        <div class="space-y-2">
+          <div class="flex items-center gap-2 text-xs font-mono text-muted bg-canvas px-3 py-2 rounded-xl">null</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="org-accordion" class="org-content hidden space-y-3">
+    <div class="acc-item bg-surface rounded-2xl border border-line overflow-hidden transition-all duration-300 hover:border-accent/30">
+      <button class="acc-trigger w-full flex items-center gap-4 px-6 py-5 text-left" onclick="toggleAcc(this)">
+        <div class="w-12 h-12 rounded-2xl bg-accent/10 overflow-hidden flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+          <img src="https://pbs.twimg.com/media/Ey1upKsU8AAFAem.jpg" alt="aiesec" class="w-full h-full object-cover">
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex flex-wrap items-center gap-2">
+            <p class="font-display font-700 text-sm text-ink">AIESEC Future Leaders Summer Peak 2026</p>
+            <span class="font-mono text-xs bg-accent/10 text-accent-light border border-accent/25 px-2 py-0.5 rounded-full">Delegate</span>
+          </div>
+          <p class="font-body text-xs text-muted mt-0.5">AIESEC Surabaya</p>
+        </div>
+        <i class="bi bi-chevron-down acc-icon text-muted text-lg flex-shrink-0 transition-transform duration-300"></i>
+      </button>
+      <div class="acc-body hidden px-6 pb-6">
+        <div class="border-t border-line pt-5">
+          <p class="font-body text-sm text-muted leading-relaxed mb-4">Participated as a delegate in AFL (AIESEC Future Leader) Summer Peak 2026, an intensive leadership program by AIESEC in Surabaya focused on developing youth leaders capable of driving real-world impact aligned with the UN Sustainable Development Goals.</p>
+          <p class="font-body text-sm text-muted leading-relaxed mb-4">Joined a cohort of young leaders to complete 4 Capacity Building sessions, Global Leadership, Problem Solving & Decision Making, Strategic Project Design, and Persuasive Pitching, while engaging in cross-cultural exchange with peers from Tunisia, South Korea, Thailand, Poland, Vietnam, and India. Applied frameworks including the Johari Window, Golden Circle, Problem Tree Analysis, 5 Whys, 5W1H, stakeholder mapping, risk management, and TCREI AI prompting to develop a structured, SDG-aligned project from concept to pitch, culminating in the Final Project Defense of Empowering Syrian Refugee Children in Turkey through Global Volunteering, addressing the education crisis faced by Syrian refugee children in Turkiye, aligned with SDG 4.</p>
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+            <p class="font-mono text-xs text-muted uppercase tracking-widest"></p>
+            <a href="https://www.linkedin.com/in/ariq-burhanuddin-suwarno-9501b22b4/overlay/Certifications/457316084/treasury/?profileId=ACoAAEt92cwBFNyjue7g8lZkFFeTqSZedm6tAGg" target="_blank"
+              class="inline-flex items-center gap-2 bg-accent text-white font-mono text-xs px-4 py-2 rounded-full hover:bg-accent-light hover:-translate-y-0.5 active:scale-95 transition-all duration-200 nav-link">
+              <i class="bi bi-link-45deg"></i>
+              Certificate
+            </a>
+>>>>>>> 5c0c105 (update UI)
           </div>
         </div>
       </div>
     </div>
+<<<<<<< HEAD
  
     <!-- item 2 -->
     <div class="acc-item bg-white rounded-2xl border-2 border-mist-dark overflow-hidden transition-all duration-300 hover:border-spark/30">
@@ -1038,10 +1529,39 @@
           <div class="flex flex-wrap gap-2">
             <span class="flex items-center gap-1.5 bg-lime/20 border border-lime/40 text-green-800 font-mono text-xs px-3 py-1.5 rounded-xl">👥 200+ peserta program</span>
             <span class="flex items-center gap-1.5 bg-blue-50 border border-blue-200 text-blue-800 font-mono text-xs px-3 py-1.5 rounded-xl">📋 8 program kerja terlaksana</span>
+=======
+    <!-- <div class="acc-item bg-surface rounded-2xl border border-line overflow-hidden transition-all duration-300 hover:border-accent/30">
+      <button class="acc-trigger w-full flex items-center gap-4 px-6 py-5 text-left" onclick="toggleAcc(this)">
+        <div class="w-11 h-11 rounded-xl bg-accent/10 flex items-center justify-center text-xl flex-shrink-0">💡</div>
+        <div class="flex-1 min-w-0">
+          <div class="flex flex-wrap items-center gap-2">
+            <p class="font-display font-700 text-sm text-ink">Staff Pengembangan SDM</p>
+            <span class="font-mono text-xs bg-accent/10 text-accent-light border border-accent/25 px-2 py-0.5 rounded-full">Staff</span>
+          </div>
+          <p class="font-body text-xs text-muted mt-0.5">BEM FT Universitas ABC · <span class="text-accent-light">2021 — 2022</span></p>
+        </div>
+        <i class="bi bi-chevron-down acc-icon text-muted text-lg flex-shrink-0 transition-transform duration-300"></i>
+      </button>
+      <div class="acc-body hidden px-6 pb-6">
+        <div class="border-t border-line pt-5">
+          <p class="font-body text-sm text-muted leading-relaxed mb-4">Bertanggung jawab merancang program pelatihan soft skill dan mentoring mahasiswa baru. Berkoordinasi dengan berbagai UKM dan komunitas kampus untuk sinergi program kerja.</p>
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+            <p class="font-mono text-xs text-muted uppercase tracking-widest">Certificate</p>
+            <a href="assets/certifications/staff-pengembangan-sdm.pdf" download
+              class="inline-flex items-center gap-2 bg-accent text-white font-mono text-xs px-4 py-2 rounded-full hover:bg-accent-light hover:-translate-y-0.5 active:scale-95 transition-all duration-200 nav-link">
+              <i class="bi bi-download"></i>
+              Download Certificate
+            </a>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="flex items-center gap-1.5 bg-accent/10 border border-accent/25 text-accent-light font-mono text-xs px-3 py-1.5 rounded-xl">👥 200+ peserta program</span>
+            <span class="flex items-center gap-1.5 bg-accent/10 border border-accent/25 text-accent-light font-mono text-xs px-3 py-1.5 rounded-xl">📋 8 program kerja terlaksana</span>
+>>>>>>> 5c0c105 (update UI)
           </div>
         </div>
       </div>
     </div>
+<<<<<<< HEAD
  
     <!-- item 3 -->
     <div class="acc-item bg-white rounded-2xl border-2 border-mist-dark overflow-hidden transition-all duration-300 hover:border-lime/50">
@@ -1063,10 +1583,32 @@
           <div class="flex flex-wrap gap-2">
             <span class="flex items-center gap-1.5 bg-lime/20 border border-lime/40 text-green-800 font-mono text-xs px-3 py-1.5 rounded-xl">🥈 Juara 2 Kontes Robot Nasional</span>
             <span class="flex items-center gap-1.5 bg-blue-50 border border-blue-200 text-blue-800 font-mono text-xs px-3 py-1.5 rounded-xl">🤖 3 robot dikembangkan</span>
+=======
+    <div class="acc-item bg-surface rounded-2xl border border-line overflow-hidden transition-all duration-300 hover:border-accent/30">
+      <button class="acc-trigger w-full flex items-center gap-4 px-6 py-5 text-left" onclick="toggleAcc(this)">
+        <div class="w-11 h-11 rounded-xl bg-accent/10 flex items-center justify-center text-xl flex-shrink-0">🌱</div>
+        <div class="flex-1 min-w-0">
+          <div class="flex flex-wrap items-center gap-2">
+            <p class="font-display font-700 text-sm text-ink">Anggota Aktif UKM Robotika</p>
+            <span class="font-mono text-xs bg-accent/10 text-accent-light border border-accent/25 px-2 py-0.5 rounded-full">Anggota</span>
+          </div>
+          <p class="font-body text-xs text-muted mt-0.5">UKM Robotika Universitas ABC · <span class="text-accent-light">2020 — 2021</span></p>
+        </div>
+        <i class="bi bi-chevron-down acc-icon text-muted text-lg flex-shrink-0 transition-transform duration-300"></i>
+      </button>
+      <div class="acc-body hidden px-6 pb-6">
+        <div class="border-t border-line pt-5">
+          <p class="font-body text-sm text-muted leading-relaxed mb-4">Aktif mengembangkan robot line follower dan berpartisipasi dalam kompetisi robotik tingkat nasional. Belajar dasar elektronika, pemrograman mikrokontroler, dan embedded systems.</p>
+          <p class="font-mono text-xs text-muted uppercase tracking-widest mb-3">✦ Pencapaian</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="flex items-center gap-1.5 bg-accent/10 border border-accent/25 text-accent-light font-mono text-xs px-3 py-1.5 rounded-xl">🥈 Juara 2 Kontes Robot Nasional</span>
+            <span class="flex items-center gap-1.5 bg-accent/10 border border-accent/25 text-accent-light font-mono text-xs px-3 py-1.5 rounded-xl">🤖 3 robot dikembangkan</span>
+>>>>>>> 5c0c105 (update UI)
           </div>
         </div>
       </div>
     </div>
+<<<<<<< HEAD
  
   </div>
 </section>
@@ -1151,6 +1693,71 @@
         rounded-full hover:bg-accent/90 hover:-translate-y-1 
         transition-all duration-200 shadow-lg shadow-accent/30 nav-link">
         <i class="bi bi-instagram"></i> 
+=======
+  </div> -->
+</section>
+
+<hr class="border-line max-w-5xl mx-auto" />
+
+<!-- LEARNING -->
+<section id="business" class="max-w-5xl mx-auto py-24 px-6">
+  <div class="py-24 px-6">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="font-display font-800 text-3xl sm:text-4xl lg:text-5xl tracking-tight mt-3 mb-4 text-ink">Get to Know What I Build</h2>
+      <br>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div class="bg-surface border border-line rounded-3xl p-7 hover:border-accent/30 hover:-translate-y-2 transition-all duration-300">
+          <div class="mb-4 w-10 h-10 rounded-2xl overflow-hidden flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                <img src="assets/company_logo.png" alt="antaruang" class="w-full h-full object-cover">
+          </div>
+          <h4 class="font-display font-700 text-ink text-base mb-3"><span class="crimson-text">Co-Founder of</span> ANTARUANG STUDIO</h4>
+          <p class="font-body text-sm text-muted leading-relaxed">An architecture design & build studio startup in Surabaya offering exterior design, interior design, and full design & build services, guided by a human-centered, context-driven design philosophy.</p>
+          <br/>
+          <a href="https://antaruangstudio.my.id" target="_blank"
+            class="inline-flex items-center gap-2 bg-accent text-white font-mono text-xs px-4 py-2 rounded-full hover:bg-accent-light hover:-translate-y-0.5 active:scale-95 transition-all duration-200 nav-link">
+              <i class="bi bi-link-45deg"></i>
+                Visit Our Website
+          </a>
+        </div>
+        <div class="bg-surface border border-line rounded-3xl p-7 hover:border-accent/30 hover:-translate-y-2 transition-all duration-300">
+          <div class="text-3xl mb-4">Σ</div>
+          <h4 class="font-display font-700 text-ink text-base mb-3"><span class="crimson-text">Founder of</span> el-Meric Dev.</h4>
+          <p class="font-body text-sm text-muted leading-relaxed">A web app development service offering custom website design and e-commerce solutions. <span class="crimson-text">UNDER DEVELOPMENT</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONNECT -->
+<section id="connect" class="max-w-5xl mx-auto py-24 px-6">
+  <div class="bg-surface border border-line rounded-[28px] sm:rounded-[40px] p-7 sm:p-12 lg:p-20 text-center relative overflow-hidden">
+    <h2 class="relative font-display font-800 text-3xl sm:text-4xl lg:text-5xl tracking-tight mt-4 mb-4 text-ink">Let's Connect & Talk</h2>
+    <!-- <p class="relative font-body text-muted max-w-md mx-auto mb-12 text-base leading-relaxed">Get to know me better!</p> -->
+     <br>
+    <div class="relative grid grid-cols-2 sm:grid-cols-2 md:flex gap-3 md:gap-4 justify-center">
+      <a href="mailto:ariqburhanuddins2007@gmail.com" target="_blank"
+        class="flex items-center justify-center gap-2.5 bg-accent text-white font-display font-700 text-xs sm:text-sm px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-accent-light hover:-translate-y-1 transition-all duration-200 shadow-lg shadow-accent/20 nav-link">
+        <i class="bi bi-envelope-fill"></i>
+        <span class="hidden sm:inline">Email</span>
+        <span class="sm:hidden">Email</span>
+      </a>
+      <a href="https://www.linkedin.com/in/ariq-burhanuddin-suwarno-9501b22b4?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank"
+        class="flex items-center justify-center gap-2.5 bg-surface-2 border border-line text-ink font-display font-700 text-xs sm:text-sm px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:border-accent hover:-translate-y-1 transition-all duration-200 nav-link">
+        <i class="bi bi-linkedin"></i>
+        <span class="hidden sm:inline">LinkedIn</span>
+        <span class="sm:hidden">LinkedIn</span>
+      </a>
+      <a href="https://github.com/RikuTetsuya" target="_blank"
+        class="flex items-center justify-center gap-2.5 bg-surface-2 border border-line text-ink font-display font-700 text-xs sm:text-sm px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:border-accent hover:-translate-y-1 transition-all duration-200 nav-link">
+        <i class="bi bi-github"></i>
+        <span class="hidden sm:inline">GitHub</span>
+        <span class="sm:hidden">GitHub</span>
+      </a>
+      <a href="https://instagram.com/dr.ariq" target="_blank"
+        class="flex items-center justify-center gap-2.5 bg-surface-2 border border-line text-ink font-display font-700 text-xs sm:text-sm px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:border-accent hover:-translate-y-1 transition-all duration-200 nav-link">
+        <i class="bi bi-instagram"></i>
+>>>>>>> 5c0c105 (update UI)
         <span class="hidden sm:inline">Instagram</span>
         <span class="sm:hidden">Instagram</span>
       </a>
@@ -1159,6 +1766,7 @@
 </section>
 
 <!-- FOOTER -->
+<<<<<<< HEAD
 <footer class="text-center py-10 px-6 text-sm font-body text-gray-400 border-t border-mist-dark">
   <p>© 2026 Dr.Ar.iq - All rights reserved</p>
   <!-- <p class="mt-1 font-mono text-xs text-gray-300">© 2026 Dr.Ar.iq — All rights reserved</p> -->
@@ -1166,6 +1774,49 @@
 
 <script>
   // CURSOR
+=======
+<footer class="border-t border-line px-6 pt-16 pb-8">
+  <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
+    <div class="md:col-span-1">
+      <div class="nav-logo text-ink mb-3">
+        <span class="g-dot" style="background:crimson"></span>
+        <span class="g-dot" style="background:crimson"></span>
+        <span class="g-dot" style="background:crimson"></span>
+        <span>Ariq B. Suwarno</span>
+      </div>
+      <!-- <p class="font-body text-sm text-muted leading-relaxed mb-4">Architecture student and web app developer.</p> -->
+       <br>
+      <div class="flex gap-3">
+        <a href="https://github.com/RikuTetsuya" target="_blank" class="w-9 h-9 rounded-full bg-surface border border-line flex items-center justify-center text-muted hover:text-accent-light hover:border-accent nav-link"><i class="bi bi-github"></i></a>
+        <a href="https://www.linkedin.com/in/ariq-burhanuddin-suwarno-9501b22b4?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" class="w-9 h-9 rounded-full bg-surface border border-line flex items-center justify-center text-muted hover:text-accent-light hover:border-accent nav-link"><i class="bi bi-linkedin"></i></a>
+        <a href="https://instagram.com/dr.ariq" target="_blank" class="w-9 h-9 rounded-full bg-surface border border-line flex items-center justify-center text-muted hover:text-accent-light hover:border-accent nav-link"><i class="bi bi-instagram"></i></a>
+      </div>
+    </div>
+    <div>
+      <p class="font-display font-700 text-sm text-ink mb-4">Links</p>
+      <ul class="space-y-2.5 font-body text-sm text-muted">
+        <li><a href="/#skills" class="hover:text-accent-light nav-link">Skills</a></li>
+        <li><a href="/#projects" class="hover:text-accent-light nav-link">Projects</a></li>
+        <li><a href="/#organisasi" class="hover:text-accent-light nav-link">Experience</a></li>
+        <li><a href="/#connect" class="hover:text-accent-light nav-link">Connect</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="font-display font-700 text-sm text-ink mb-4">Contact</p>
+      <ul class="space-y-2.5 font-body text-sm text-muted">
+        <li><i class="bi bi-geo-alt mr-1.5"></i>Surabaya, Indonesia</li>
+        <li><i class="bi bi-envelope mr-1.5"></i>ariqburhanuddins2007@gmail.com</li>
+        <li><i class="bi bi-instagram mr-1.5"></i>@dr.ariq</li>
+      </ul>
+    </div>
+  </div>
+  <div class="max-w-5xl mx-auto pt-6 border-t border-line text-center">
+    <p class="font-body text-sm text-muted">© 2026 Ariq B. Suwarno. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+>>>>>>> 5c0c105 (update UI)
   const dot = document.getElementById('cursor-dot');
   const ring = document.getElementById('cursor-ring');
   const label = document.getElementById('cursor-label');
@@ -1173,24 +1824,40 @@
 
   document.addEventListener('mousemove', e => {
     mx = e.clientX; my = e.clientY;
+<<<<<<< HEAD
     dot.style.left = mx + 'px';
     dot.style.top = my + 'px';
   });
+=======
+    dot.style.transform = `translate3d(${mx}px, ${my}px, 0) translate(-50%, -50%)`;
+  }, { passive: true });
+>>>>>>> 5c0c105 (update UI)
 
   function lerp(a, b, t) { return a + (b - a) * t; }
   function animRing() {
     rx = lerp(rx, mx, 0.12);
     ry = lerp(ry, my, 0.12);
+<<<<<<< HEAD
     ring.style.left = rx + 'px';
     ring.style.top = ry + 'px';
     label.style.left = rx + 'px';
     label.style.top = ry + 'px';
+=======
+    ring.style.transform = `translate3d(${rx}px, ${ry}px, 0) translate(-50%, -50%)`;
+    label.style.transform = document.body.classList.contains('cursor-link')
+      ? `translate3d(${rx}px, ${ry}px, 0) translate(-50%, -200%) scale(1)`
+      : `translate3d(${rx}px, ${ry}px, 0) translate(-50%, -200%) scale(0.8)`;
+>>>>>>> 5c0c105 (update UI)
     requestAnimationFrame(animRing);
   }
   animRing();
 
+<<<<<<< HEAD
   // hover states
   document.querySelectorAll('.skill-card, .platform-card, .project-card, .learning-card').forEach(el => {
+=======
+  document.querySelectorAll('.skill-card, .project-card').forEach(el => {
+>>>>>>> 5c0c105 (update UI)
     el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
     el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
   });
@@ -1199,11 +1866,15 @@
     el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-link'));
   });
 
+<<<<<<< HEAD
   // nav scroll
+=======
+>>>>>>> 5c0c105 (update UI)
   window.addEventListener('scroll', () => {
     document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 20);
   });
 
+<<<<<<< HEAD
   // tabs
   document.getElementById('tabs').addEventListener('click', e => {
     const btn = e.target.closest('.tab-btn');
@@ -1218,11 +1889,47 @@
     document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
   });
   //organisasi
+=======
+  /* MOBILE MENU */
+  const menuToggle = document.getElementById('menuToggle');
+  const menuIcon = document.getElementById('menuIcon');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  function closeMobileMenu() {
+    mobileMenu.classList.remove('open');
+    menuIcon.classList.remove('bi-x-lg');
+    menuIcon.classList.add('bi-list');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  function openMobileMenu() {
+    mobileMenu.classList.add('open');
+    menuIcon.classList.remove('bi-list');
+    menuIcon.classList.add('bi-x-lg');
+    menuToggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+
+  menuToggle.addEventListener('click', () => {
+    mobileMenu.classList.contains('open') ? closeMobileMenu() : openMobileMenu();
+  });
+
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', closeMobileMenu);
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 768) closeMobileMenu();
+  });
+
+>>>>>>> 5c0c105 (update UI)
   const orgTabs = document.querySelectorAll(".org-tab-btn");
   const orgContents = document.querySelectorAll(".org-content");
 
   orgTabs.forEach(tab => {
     tab.addEventListener("click", () => {
+<<<<<<< HEAD
 
       // remove active button
       orgTabs.forEach(btn => {
@@ -1238,10 +1945,20 @@
       orgContents.forEach(content => content.classList.add("hidden"));
 
       // show selected content
+=======
+      orgTabs.forEach(btn => {
+        btn.classList.remove("active", "bg-accent", "text-white", "border-accent");
+        btn.classList.add("bg-surface", "text-muted", "border-line");
+      });
+      tab.classList.add("active", "bg-accent", "text-white", "border-accent");
+      tab.classList.remove("bg-surface", "text-muted", "border-line");
+      orgContents.forEach(content => content.classList.add("hidden"));
+>>>>>>> 5c0c105 (update UI)
       const selected = tab.dataset.org;
       document.getElementById("org-" + selected).classList.remove("hidden");
     });
   });
+<<<<<<< HEAD
   
   // Blokir keyboard shortcut
   document.addEventListener('keydown', function(e) {
@@ -1274,6 +1991,30 @@
     e.preventDefault();
     return false;
   });
+=======
+
+  function toggleAcc(btn) {
+    const item = btn.parentElement;
+    const body = item.querySelector('.acc-body');
+    const icon = item.querySelector('.acc-icon');
+    const isOpen = !body.classList.contains('hidden');
+    document.querySelectorAll('.acc-body').forEach(b => b.classList.add('hidden'));
+    document.querySelectorAll('.acc-icon').forEach(i => i.style.transform = 'rotate(0deg)');
+    if (!isOpen) {
+      body.classList.remove('hidden');
+      icon.style.transform = 'rotate(180deg)';
+    }
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && e.key === 'u') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.shiftKey && (e.key === 'i' || e.key === 'I' || e.key === 'j' || e.key === 'J')) { e.preventDefault(); return false; }
+    if (e.key === 'F12') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.key === 's') { e.preventDefault(); return false; }
+  });
+
+  document.addEventListener('contextmenu', function(e) { e.preventDefault(); return false; });
+>>>>>>> 5c0c105 (update UI)
 </script>
 </body>
 </html>

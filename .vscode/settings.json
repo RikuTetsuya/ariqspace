@@ -2,5 +2,10 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
+<<<<<<< HEAD
   }
+=======
+  },
+  "liveServer.settings.port": 5501
+>>>>>>> 5c0c105 (update UI)
 }
